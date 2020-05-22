@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spiritgarage.www.reservation.mapper.ReservationMapper">
+	
+	<insert id="insertReservation" parameterType="com.spiritgarage.www.reservation.vo.ReservationVO">
+		INSERT INTO TB_RESERVATION
+		(
+			RESERVATION_SEQ,
+			RESERVATION_DATE,
+			RESERVATION_NAME,
+			PHONE,
+			CHOOSE_AREA,
+			RESERVATION_CONTENT,
+			USE_YN,
+			REG_DATE,
+			UPT_DATE
+		)VALUES(
+			#{reservationSeq},
+			STR_TO_DATE(#{reservationDate},'%Y-%m-%d %H:%i'),
+			#{reservationName},
+			#{phone},
+			#{chooseArea},
+			#{reservationContent},
+			#{useYn},
+			NOW(),
+			NULL
+		)
+	</insert>
+	
+	<select id="selectMyResCnt" parameterType="com.spiritgarage.www.reservation.vo.ReservationVO" resultType="int">
+		SELECT COUNT(*) FROM TB_RESERVATION WHERE RESERVATION_NAME = #{reservationName} AND PHONE = #{phone} AND USE_YN = 'Y'
+	</select>
+	
+	<select id="selectMyResList" parameterType="com.spiritgarage.www.reservation.vo.ReservationVO" resultType="com.spiritgarage.www.reservation.vo.ReservationVO">
+		SELECT
+			T.RNUM,
+			T.RESERVATION_SEQ,
+			T.RESERVATION_DATE,
+			T.RESERVATION_NAME,
+			T.PHONE,
+			T.CHOOSE_AREA,
+			T.RESERVATION_CONTENT,
+			T.USE_YN,
+			T.REG_DATE,
+			T.UPT_DATE
+		FROM
+			(SELECT
+				@rownum:=@rownum+1 RNUM,
+				R.RESERVATION_SEQ,
+				DATE_FORMAT(R.RESERVATION_DATE,'%Y-%m-%d %H:%i') RESERVATION_DATE,
+				R.RESERVATION_NAME,
+				R.PHONE,
+				R.CHOOSE_AREA,
+				R.RESERVATION_CONTENT,
+				R.USE_YN,
+				DATE_FORMAT(R.REG_DATE,'%Y-%m-%d %H:%i') REG_DATE,
+				DATE_FORMAT(R.UPT_DATE,'%Y-%m-%d %H:%i') UPT_DATE
+			FROM
+				TB_RESERVATION R INNER JOIN (SELECT @ROWNUM := 0) C
+			WHERE
+				R.RESERVATION_NAME = #{reservationName}
+				AND
+				R.PHONE = #{phone}
+				AND
+				R.USE_YN = 'Y'
+			ORDER BY R.RESERVATION_DATE DESC) T
+		LIMIT #{startPostNumber} , #{blockPostCnt}
+	</select>
+	
+	<select id="selectReservation" parameterType="com.spiritgarage.www.reservation.vo.ReservationVO" resultType="com.spiritgarage.www.reservation.vo.ReservationVO">
+		SELECT
+			RESERVATION_SEQ,
+			RESERVATION_DATE,
+			RESERVATION_NAME,
+			PHONE,
+			CHOOSE_AREA,
+			RESERVATION_CONTENT,
+			USE_YN,
+			REG_DATE,
+			UPT_DATE
+		FROM
+			TB_RESERVATION
+		WHERE
+			RESERVATION_SEQ = #{reservationSeq}
+	</select>
+	
+	<update id="updateMyResCancel" parameterType="com.spiritgarage.www.reservation.vo.ReservationVO">
+		UPDATE TB_RESERVATION SET USE_YN = 'N' WHERE RESERVATION_SEQ = #{reservationSeq}
+	</update>
+	
+	<select id="selectMaintenanceAreaList" resultType="com.spiritgarage.www.reservation.vo.MaintenanceAreaVO">
+		SELECT
+			MAINTENANCE_AREA_SEQ,
+			MAINTENANCE_NAME,
+			DATE_FORMAT(REG_DATE,'%Y-%m-%d %H:%i') REG_DATE
+		FROM
+			TB_MAINTENANCE_AREA
+		ORDER BY REG_DATE DESC
+	</select>
+</mapper>

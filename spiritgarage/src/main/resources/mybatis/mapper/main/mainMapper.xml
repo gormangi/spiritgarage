@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spiritgarage.www.main.mapper.MainMapper">
+	
+	<select id="selectBlogInfoList" resultType="com.spiritgarage.www.main.vo.BlogRssVO">
+		SELECT
+			BLOG_RSS_SEQ,
+			AUTHOR,
+			CATEGORY,
+			TITLE,
+			LINK,
+			DESCRIPTION,
+			USE_YN,
+			REG_DATE,
+			UPT_DATE
+		FROM
+			TB_BLOG_RSS
+	</select>
+	
+</mapper>
