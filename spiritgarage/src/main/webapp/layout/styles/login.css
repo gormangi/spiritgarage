@@ -79,7 +79,7 @@ input[type=text],
 input[type=password] {
  	width:100%;
   padding:8px 5px;
-  background:linear-gradient(#1f2124, #27292c);
+  /* background:linear-gradient(#1f2124, #27292c); */
   border:1px solid #222;
   box-shadow:
     0 1px 0 rgba(255,255,255,0.1);
@@ -139,9 +139,9 @@ input[type=button]:hover {
     inset 0 -10px 10px rgba(255,255,255,0.1);
 }
 
-input[type=text]:hover,
+/* input[type=text]:hover,
 input[type=password]:hover,
 label:hover ~ input[type=text],
 label:hover ~ input[type=password] {
  	background:#27292c;
-}
+} */

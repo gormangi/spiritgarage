@@ -5,7 +5,7 @@
 <head>
 	<title>SPIRIT GARAGE</title>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="viewport" content="width=device-width, initial-scale=0.8, user-scalable=no">
 	<link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
 	<link href="layout/styles/jquery.datetimepicker.min.css" rel="stylesheet" type="text/css" media="all">
 	<script src="/js/library/jquery/jquery.min.js"></script>
