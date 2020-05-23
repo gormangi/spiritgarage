@@ -5,7 +5,10 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.spiritgarage.www.admin.vo.MngrVO;
+import com.spiritgarage.www.admin.vo.NoticeVO;
 import com.spiritgarage.www.reservation.vo.MaintenanceAreaVO;
 import com.spiritgarage.www.reservation.vo.ReservationVO;
 
@@ -42,5 +45,11 @@ public interface AdminService {
 	boolean reservationCancel(ReservationVO vo) throws Exception;
 	
 	boolean reservationRep(ReservationVO vo) throws Exception;
+	
+	Map<String, Object> getNoticeManagementList(NoticeVO vo) throws Exception;
+	
+	Map<String, Object> noticeImageUpload(MultipartFile upload , String folderName , String imageUploadPath , String baseUrl) throws Exception;
+	
+	Map<String, Object> noticeWrite(NoticeVO vo) throws Exception;
 	
 }

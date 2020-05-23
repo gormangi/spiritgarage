@@ -229,4 +229,42 @@
 	<update id="updateReservationRep" parameterType="com.spiritgarage.www.reservation.vo.ReservationVO">
 		UPDATE TB_RESERVATION SET USE_YN = 'Y' WHERE RESERVATION_SEQ = #{reservationSeq}
 	</update>
+	
+	<select id="selectNoticeManagementCnt" parameterType="com.spiritgarage.www.admin.vo.NoticeVO" resultType="int">
+		SELECT COUNT(*) FROM TB_NOTICE
+	</select>
+	
+	<select id="selectNoticeManagementList" parameterType="com.spiritgarage.www.admin.vo.NoticeVO" resultType="com.spiritgarage.www.admin.vo.NoticeVO">
+		SELECT
+			T.RNUM,
+			T.NOTICE_SEQ,
+			T.THUMB_NAIL_URL,
+			T.TITLE,
+			T.CONTENT,
+			T.MAIN_VIEW_YN,
+			T.REG_MNGR_ID,
+			T.REG_MNGR_NAME,
+			T.REG_DATE,
+			T.UPT_MNGR_ID,
+			T.UPT_MNGR_NAME,
+			T.UPT_DATE
+		FROM
+			(SELECT
+				@rownum:=@rownum+1 RNUM,
+				R.NOTICE_SEQ,
+				(SELECT FILE_URL FROM TB_FILE WHERE POST_SEQ = R.NOTICE_SEQ AND FILE_KIND = 'thumbnail') THUMB_NAIL_URL,
+				R.TITLE,
+				R.CONTENT,
+				R.MAIN_VIEW_YN,
+				R.REG_MNGR_ID,
+				(SELECT NAME FROM TB_MNGR WHERE ID = R.REG_MNGR_ID) REG_MNGR_NAME,
+				DATE_FORMAT(R.REG_DATE,'%Y-%m-%d %H:%i') REG_DATE,
+				R.UPT_MNGR_ID,
+				(SELECT NAME FROM TB_MNGR WHERE ID = R.UPT_MNGR_ID) UPT_MNGR_NAME,
+				DATE_FORMAT(R.UPT_DATE,'%Y-%m-%d %H:%i') UPT_DATE
+			FROM
+				TB_NOTICE R INNER JOIN (SELECT @ROWNUM := 0) C
+			ORDER BY R.REG_DATE DESC) T
+		LIMIT #{startPostNumber} , #{blockPostCnt}
+	</select>
 </mapper>

@@ -34,6 +34,12 @@
 						<p>예약 관리</p>
 					</a>
 				</li>
+				<li class="nav-item" id="menu_noticeManagement">
+					<a href="/admin/noticeManagement" class="nav-link">
+						<i class="nav-icon fas fa-table"></i>
+						<p>공지사항 관리</p>
+					</a>
+				</li>
 			</ul>
 		</nav>
 		

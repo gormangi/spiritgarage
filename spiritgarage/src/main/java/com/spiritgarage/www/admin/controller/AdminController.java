@@ -1,5 +1,6 @@
 package com.spiritgarage.www.admin.controller;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -10,10 +11,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.spiritgarage.www.admin.service.AdminService;
 import com.spiritgarage.www.admin.vo.MngrVO;
+import com.spiritgarage.www.admin.vo.NoticeVO;
 import com.spiritgarage.www.reservation.vo.MaintenanceAreaVO;
 import com.spiritgarage.www.reservation.vo.ReservationVO;
 
@@ -126,7 +130,6 @@ public class AdminController {
 	@RequestMapping(value = "/admin/getCalendarReservationList")
 	@ResponseBody
 	public List<Map<String, Object>> getCalendarReservationList(ReservationVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
-		System.out.println("search::"+vo.getSearchWord());
 		return service.getCalendarReservationList(vo);
 	}
 	
@@ -146,6 +149,40 @@ public class AdminController {
 	@ResponseBody
 	public boolean reservationRep(ReservationVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
 		return service.reservationRep(vo);
+	}
+	
+	@RequestMapping(value = "/admin/noticeManagement")
+	public String noticeManagement(HttpServletRequest request , HttpServletResponse response) throws Exception{
+		return "admin/notice_management";
+	}
+	
+	@RequestMapping(value = "/admin/getNoticeManagementList")
+	@ResponseBody
+	public Map<String, Object> getNoticeManagementList(NoticeVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
+		return service.getNoticeManagementList(vo);
+	}
+	
+	@RequestMapping(value = "/admin/noticeReg")
+	public String noticeReg(HttpServletRequest request , HttpServletResponse response) throws Exception{
+		return "admin/notice_reg";
+	}
+	
+	@RequestMapping(value = "/admin/noticeImageUpload")
+	@ResponseBody
+	public Map<String, Object> noticeImageUpload(HttpServletRequest request , HttpServletResponse response , @RequestParam MultipartFile upload) throws Exception{
+		String folderName = "user_images";
+		String imageUploadPath = request.getSession().getServletContext().getRealPath("/") + folderName + File.separator;
+		String baseUrl = request.getRequestURL().toString().replace(request.getRequestURI().toString(),"");
+		return service.noticeImageUpload(upload , folderName , imageUploadPath , baseUrl);
+	}
+	
+	@RequestMapping(value = "/admin/noticeWrite")
+	@ResponseBody
+	public Map<String, Object> noticeWrite(NoticeVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
+		HttpSession session = request.getSession();
+		MngrVO mngrInfo = (MngrVO)session.getAttribute("mngrInfo");
+		vo.setRegMngrId(mngrInfo.getId());
+		return service.noticeWrite(vo);
 	}
 	
 }

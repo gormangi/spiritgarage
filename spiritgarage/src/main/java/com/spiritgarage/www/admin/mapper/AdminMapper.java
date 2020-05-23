@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.spiritgarage.www.admin.vo.MngrVO;
+import com.spiritgarage.www.admin.vo.NoticeVO;
 import com.spiritgarage.www.reservation.vo.MaintenanceAreaVO;
 import com.spiritgarage.www.reservation.vo.ReservationVO;
 
@@ -48,5 +49,9 @@ public interface AdminMapper {
 	int updateReservationCancel(ReservationVO vo) throws Exception;
 	
 	int updateReservationRep(ReservationVO vo) throws Exception;
+	
+	int selectNoticeManagementCnt(NoticeVO vo) throws Exception;
+	
+	List<NoticeVO> selectNoticeManagementList(NoticeVO vo) throws Exception;
 	
 }

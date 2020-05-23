@@ -9,12 +9,15 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.spiritgarage.www.admin.mapper.AdminMapper;
 import com.spiritgarage.www.admin.service.AdminService;
 import com.spiritgarage.www.admin.vo.MngrVO;
+import com.spiritgarage.www.admin.vo.NoticeVO;
 import com.spiritgarage.www.reservation.vo.MaintenanceAreaVO;
 import com.spiritgarage.www.reservation.vo.ReservationVO;
+import com.spiritgarage.www.util.ImageUploadUtil;
 import com.spiritgarage.www.util.SHA256;
 
 @Service
@@ -252,6 +255,32 @@ public class AdminServiceImpl implements AdminService{
 		}else {
 			return false;
 		}
+	}
+
+	@Override
+	public Map<String, Object> getNoticeManagementList(NoticeVO vo) throws Exception {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		vo.setTotCnt(mapper.selectNoticeManagementCnt(vo));
+		
+		result.put("list", mapper.selectNoticeManagementList(vo));
+		result.put("paging", vo);
+		
+		return result;
+	}
+
+	@Override
+	public Map<String, Object> noticeImageUpload(MultipartFile upload , String folderName , String imageUploadPath, String baseUrl) throws Exception {
+		return ImageUploadUtil.imageUpload(upload, folderName, imageUploadPath, baseUrl);
+	}
+
+	@Override
+	public Map<String, Object> noticeWrite(NoticeVO vo) throws Exception {
+		
+		vo.setNoticeSeq(UUID.randomUUID().toString());
+		
+		return null;
 	}
 	
 }

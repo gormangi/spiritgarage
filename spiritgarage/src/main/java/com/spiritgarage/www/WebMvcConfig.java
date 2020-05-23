@@ -11,6 +11,8 @@ public class WebMvcConfig  implements WebMvcConfigurer{
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new Interceptor()).addPathPatterns("/admin/mngrManagement");
 		registry.addInterceptor(new Interceptor()).addPathPatterns("/admin/reservationManagement");
+		registry.addInterceptor(new Interceptor()).addPathPatterns("/admin/noticeManagement");
+		registry.addInterceptor(new Interceptor()).addPathPatterns("/admin/noticeReg");
 		WebMvcConfigurer.super.addInterceptors(registry);
 	}
 	

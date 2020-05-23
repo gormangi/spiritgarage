@@ -24,6 +24,10 @@ var leftFn = {
 				$("#menu_mngrManagement a").addClass('active');
 			}else if(activeUrl == 'reservationManagement'){
 				$("#menu_reservationManagement a").addClass('active');
+			}else if(activeUrl == 'noticeManagement'){
+				$("#menu_noticeManagement a").addClass('active');
+			}else if(activeUrl == 'noticeReg'){
+				$("#menu_noticeManagement a").addClass('active');
 			}
 			
 		}
