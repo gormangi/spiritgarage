@@ -10,11 +10,31 @@
 			TITLE,
 			LINK,
 			DESCRIPTION,
+			PUB_DATE,
 			USE_YN,
 			REG_DATE,
 			UPT_DATE
 		FROM
 			TB_BLOG_RSS
+		ORDER BY PUB_DATE DESC
+	</select>
+	
+	<select id="selectMainNoticeList" resultType="hashmap">
+		SELECT
+			N.NOTICE_SEQ noticeSeq,
+			N.TITLE title,
+			N.CONTENT content,
+			N.MAIN_VIEW_YN mainViewYn,
+			N.REG_MNGR_ID regMngrId,
+			N.REG_DATE regDate,
+			N.UPT_MNGR_ID uptMngrId,
+			N.UPT_DATE uptDate,
+			F.FILE_URL fileUrl
+		FROM
+			TB_NOTICE N INNER JOIN TB_FILE F ON N.NOTICE_SEQ = F.POST_SEQ AND F.FILE_KIND = 'thumbnail'
+		WHERE
+			MAIN_VIEW_YN = 'Y'
+		ORDER BY UPT_DATE DESC
 	</select>
 	
 </mapper>

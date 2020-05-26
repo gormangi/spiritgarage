@@ -3,6 +3,7 @@ package com.spiritgarage.www.util;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +39,9 @@ public class RSSUtil {
 			
 			List<Entry> entrys = new ArrayList<Entry>();
 			for(SyndEntry entry : feed.getEntries()) {
+				
+				SimpleDateFormat new_format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				
 				Entry e = new Entry();
 				e.setAuthor(entry.getAuthor());
 				for(SyndCategory category : entry.getCategories()) {
@@ -46,6 +50,7 @@ public class RSSUtil {
 				e.setTitle(entry.getTitle());
 				e.setLink(entry.getLink());
 				e.setDescription(entry.getDescription().getValue());
+				e.setPubDate(new_format.format(entry.getPublishedDate()));
 				entrys.add(e);
 			}
 			

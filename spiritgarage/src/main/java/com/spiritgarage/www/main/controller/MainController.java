@@ -38,4 +38,10 @@ public class MainController {
 		return service.getBlogInfoList();
 	}
 	
+	@RequestMapping(value = "/main/getMainNoticeList")
+	@ResponseBody
+	public Map<String, Object> getMainNoticeList(HttpServletRequest request , HttpServletResponse respones) throws Exception{
+		return service.getMainNoticeList();
+	}
+	
 }

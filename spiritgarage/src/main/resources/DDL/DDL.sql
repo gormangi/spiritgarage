@@ -5,6 +5,7 @@ CREATE TABLE `TB_BLOG_RSS` (
   `TITLE` varchar(2000) NOT NULL,
   `LINK` varchar(300) NOT NULL,
   `DESCRIPTION` varchar(3000) NOT NULL,
+  `PUB_DATE` datetime NOT NULL,
   `USE_YN` char(1) NOT NULL,
   `REG_DATE` datetime NOT NULL,
   `UPT_DATE` datetime DEFAULT NULL,

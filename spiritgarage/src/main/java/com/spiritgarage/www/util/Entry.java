@@ -11,6 +11,16 @@ public class Entry {
 	private String link;
 	
 	private String description;
+	
+	private String pubDate;
+
+	public String getPubDate() {
+		return pubDate;
+	}
+
+	public void setPubDate(String pubDate) {
+		this.pubDate = pubDate;
+	}
 
 	public String getAuthor() {
 		return author;

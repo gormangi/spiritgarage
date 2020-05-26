@@ -6,7 +6,7 @@
 		<header id="header" class="hoc clear">
 			<div id="logo" class="fl_left">
 				<h1>
-					<img src="images/user/spiritgarage.gif" style="width:40px;"/>&nbsp;&nbsp;&nbsp;SPIRIT GARAGE
+					<a href="/"><img src="images/user/spiritgarage.gif" style="width:40px;"/>&nbsp;&nbsp;&nbsp;SPIRIT GARAGE</a>
 				</h1>
 			</div>
 			<nav id="mainav" class="fl_right">

@@ -75,7 +75,7 @@
 		<tr data-notice-seq="\${item.noticeSeq}">
 			<td>\${item.rnum}.</td>
 			<td>
-				<div class="custom-control custom-switch">
+				<div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
 					<input type="checkbox" class="custom-control-input" name="mainViewYn" {{if mainViewYn == 'Y'}}checked{{/if}} {{if mainViewYCnt >= 4}}{{if mainViewYn != 'Y'}}disabled="disabled"{{/if}}{{/if}} id="mainViewYn\${i}">
 					<label class="custom-control-label" for="mainViewYn\${i}"></label>
 				</div>

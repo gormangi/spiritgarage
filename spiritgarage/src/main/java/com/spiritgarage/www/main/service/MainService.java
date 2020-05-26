@@ -10,4 +10,6 @@ public interface MainService {
 	
 	Map<String, Object> getBlogInfoList();
 	
+	Map<String, Object> getMainNoticeList();
+	
 }

@@ -14,9 +14,19 @@ public class BlogRssVO {
 	
 	private String description;
 	
+	private String pubDate;
+	
 	private String useYn;
 	
 	private String regDate;
+
+	public String getPubDate() {
+		return pubDate;
+	}
+
+	public void setPubDate(String pubDate) {
+		this.pubDate = pubDate;
+	}
 
 	public String getRegDate() {
 		return regDate;

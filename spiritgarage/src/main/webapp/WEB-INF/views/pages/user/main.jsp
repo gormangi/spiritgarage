@@ -17,67 +17,32 @@
 <div id="blog_area">
 </div>
 
-<div class="wrapper bgded overlay" style="background-image: url('images/common/auto-repair-1954636_1920.jpg');">
-	<section class="hoc container clear">
-		<div class="btmspace-80 center">
-			<h2 class="heading nospace">공지사항</h2>
-		</div>
-		<ul class="nospace group">
-			<li class="one_quarter first">
-				<article class="excerpt">
-					<a href="#"><img src="images/demo/320x320.png" alt=""></a>
-					<div class="excerpttxt">
-						<h6 class="heading font-x1">Egestas consectetur</h6>
-						<p>Rhoncus lectus sed sagittis dictum phasellus
-							tristique&hellip;</p>
-						<footer>
-							<a class="btn" href="#">Read More &raquo;</a>
-						</footer>
-					</div>
-				</article>
-			</li>
-			<li class="one_quarter">
-				<article class="excerpt">
-					<a href="#"><img src="images/demo/320x320.png" alt=""></a>
-					<div class="excerpttxt">
-						<h6 class="heading font-x1">Aenean efficitur</h6>
-						<p>Eu fringilla maximus purus orci faucibus metus
-							faucibus&hellip;</p>
-						<footer>
-							<a class="btn" href="#">Read More &raquo;</a>
-						</footer>
-					</div>
-				</article>
-			</li>
-			<li class="one_quarter">
-				<article class="excerpt">
-					<a href="#"><img src="images/demo/320x320.png" alt=""></a>
-					<div class="excerpttxt">
-						<h6 class="heading font-x1">Blandit massa</h6>
-						<p>Lectus eu varius curabitur vestibulum vehicula
-							massa&hellip;</p>
-						<footer>
-							<a class="btn" href="#">Read More &raquo;</a>
-						</footer>
-					</div>
-				</article>
-			</li>
-			<li class="one_quarter">
-				<article class="excerpt">
-					<a href="#"><img src="images/demo/320x320.png" alt=""></a>
-					<div class="excerpttxt">
-						<h6 class="heading font-x1">Sagittis curabitur</h6>
-						<p>Et eros eget ligula efficitur pulvinar et tortor
-							morbi&hellip;</p>
-						<footer>
-							<a class="btn" href="#">Read More &raquo;</a>
-						</footer>
-					</div>
-				</article>
-			</li>
-		</ul>
-	</section>
+<div class="wrapper bgded overlay" id="notice_area" style="background-image: url('images/common/auto-repair-1954636_1920.jpg');">
 </div>
+
+<script id="notice_area_template" type="text/x-jquery-tmpl">
+<section class="hoc container clear">
+	<div class="btmspace-80 center">
+		<h2 class="heading nospace">공지사항</h2>
+	</div>
+	<ul class="nospace group">
+		{{each(i,item) res}}
+			<li class="one_quarter {{if i == 0}}first{{/if}}">
+				<article class="excerpt">
+					<a href="#"><img src="\${fileUrl}" alt=""></a>
+					<div class="excerpttxt">
+						<h6 class="heading font-x1">\${title}</h6>
+						<p>\${content}</p>
+						<footer>
+							<a class="btn" href="#">Read More &raquo;</a>
+						</footer>
+					</div>
+				</article>
+			</li>
+		{{/each}}
+	</ul>
+</section>
+</script>
 
 <script id="blog_area_template" type="text/x-jquery-tmpl">
 {{if res.length > 0}}

@@ -20,7 +20,7 @@ import com.spiritgarage.www.util.RSSUtil;
 public class MainServiceImpl implements MainService{
 	
 	@Autowired
-	private MainMapper mainMapper;
+	private MainMapper mapper;
 
 	@Override
 	public HeaderVO getHeaderInfo() {
@@ -38,7 +38,7 @@ public class MainServiceImpl implements MainService{
 	@Override
 	public Map<String, Object> getBlogInfoList(){
 		
-		List<BlogRssVO> blogRssList = mainMapper.selectBlogInfoList();
+		List<BlogRssVO> blogRssList = mapper.selectBlogInfoList();
 		
 		List<String> categoryList = null;
 		categoryList = new ArrayList<String>();
@@ -52,6 +52,7 @@ public class MainServiceImpl implements MainService{
 		
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		List<Map<String, Object>> resultList = new ArrayList<Map<String,Object>>();
+		
 		for(String category : categoryList) {
 			
 			Map<String, Object> oneCategoryMap = new HashMap<String, Object>();
@@ -63,8 +64,21 @@ public class MainServiceImpl implements MainService{
 				}
 			}
 			
+			List<BlogRssVO> cutCategoryList = new ArrayList<BlogRssVO>();
+			if(oneCategoryList.size() > 5) {
+				for(int i=0;i<oneCategoryList.size();i++) {
+					if(i<=5) {
+						cutCategoryList.add(oneCategoryList.get(i));
+					}
+				}
+			} else {
+				for(int i=0;i<oneCategoryList.size();i++) {
+					cutCategoryList.add(oneCategoryList.get(i));
+				}
+			}
+			
 			oneCategoryMap.put("categoryNm", category);
-			oneCategoryMap.put("categoryList", oneCategoryList);
+			oneCategoryMap.put("categoryList", cutCategoryList);
 			resultList.add(oneCategoryMap);
 			
 			resultMap.put("res", resultList);
@@ -72,6 +86,15 @@ public class MainServiceImpl implements MainService{
 		}
 		
 		return resultMap;
+	}
+
+	@Override
+	public Map<String, Object> getMainNoticeList() {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("res", mapper.selectMainNoticeList());
+		
+		return result;
 	}
 	
 }

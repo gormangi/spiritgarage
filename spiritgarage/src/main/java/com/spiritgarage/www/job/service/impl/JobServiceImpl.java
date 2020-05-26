@@ -39,6 +39,7 @@ public class JobServiceImpl implements JobService{
 				vo.setDescription(entry.getDescription());
 				vo.setTitle(entry.getTitle());
 				vo.setLink(entry.getLink());
+				vo.setPubDate(entry.getPubDate());
 				vo.setUseYn("Y");
 				jobMapper.insertRssInfo(vo);
 			}
@@ -58,6 +59,7 @@ public class JobServiceImpl implements JobService{
 					vo.setDescription(entry.getDescription());
 					vo.setTitle(entry.getTitle());
 					vo.setLink(entry.getLink());
+					vo.setPubDate(entry.getPubDate());
 					vo.setUseYn("Y");
 					jobMapper.insertRssInfo(vo);
 				}

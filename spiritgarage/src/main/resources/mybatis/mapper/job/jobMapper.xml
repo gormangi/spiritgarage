@@ -10,6 +10,7 @@
 			TITLE,
 			LINK,
 			DESCRIPTION,
+			PUB_DATE,
 			USE_YN,
 			REG_DATE,
 			UPT_DATE
@@ -26,6 +27,7 @@
 			TITLE,
 			LINK,
 			DESCRIPTION,
+			PUB_DATE,
 			USE_YN,
 			REG_DATE,
 			UPT_DATE
@@ -36,6 +38,7 @@
 			#{title},
 			#{link},
 			#{description},
+			STR_TO_DATE(#{pubDate},'%Y-%m-%d %H:%i:%S'),
 			#{useYn},
 			NOW(),
 			NULL
