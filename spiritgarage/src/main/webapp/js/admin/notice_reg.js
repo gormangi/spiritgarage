@@ -24,13 +24,16 @@ $(document).ready(function(){
 
 var fn = {
 		
-		rMod : $("#rMod").val(),
+		rMod : '',
 		
 		init : function(){
+			
+			fn.rMod = $("#rMod").val();
 			
 			if(fn.rMod == 'N'){
 				$(".card-title").text('공지사항 추가');
 				$("#noticeWrite").show();
+				$("#noticeThumbnailFileLabel").show();
 			}else{
 				$(".card-title").text('공지사항 수정');
 				$("#noticeModify").show();
