@@ -35,7 +35,7 @@
 									<tr>
 										<th style="width: 10px">#</th>
 										<th style="width: 15px">메인화면노출</th>
-										<th>썸네일</th>
+										<th style="width: 105px">썸네일</th>
 										<th>제목</th>
 										<th>등록자</th>
 										<th>등록일</th>
@@ -67,7 +67,7 @@
 			<td>\${item.rnum}.</td>
 			<td>
 				<div class="custom-control custom-switch">
-					<input type="checkbox" class="custom-control-input" name="mainViewYn" id="mainViewYn\${i}">
+					<input type="checkbox" class="custom-control-input" name="mainViewYn" {{if mainViewYn == 'Y'}}checked{{/if}} {{if mainViewYCnt >= 4}}{{if mainViewYn != 'Y'}}disabled="disabled"{{/if}}{{/if}} id="mainViewYn\${i}">
 					<label class="custom-control-label" for="mainViewYn\${i}"></label>
 				</div>
 			</td>

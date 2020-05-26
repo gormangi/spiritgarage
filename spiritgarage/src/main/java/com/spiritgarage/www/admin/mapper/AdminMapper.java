@@ -67,4 +67,8 @@ public interface AdminMapper {
 	
 	int deleteFileInfoByNoticeSeq(NoticeVO vo) throws Exception;
 	
+	int updateMainViewYn(NoticeVO vo) throws Exception;
+	
+	int selectNoticeMainViewYCnt() throws Exception;
+	
 }

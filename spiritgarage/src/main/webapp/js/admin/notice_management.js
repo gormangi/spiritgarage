@@ -10,11 +10,14 @@ $(document).ready(function(){
 		fn.noticeModify($(this).closest('tr').data('noticeSeq'));
 	});
 	
+	$("#notice_list").on("click","input:checkbox",function(){
+		fn.uptMainViewYn($(this));
+	});
 });
 
 var fn = {
 		
-		blockPostCnt : '10',
+		blockPostCnt : '6',
 		
 		getNoticeManagementList : function(nowPageNumber){
 			
@@ -67,6 +70,44 @@ var fn = {
 			$("#noticeModifyForm input").val(noticeSeq);
 			$("#noticeModifyForm").submit();
 			
+		},
+		
+		uptMainViewYn : function(me){
+			
+			var noticeSeq = $(me).closest('tr').data('noticeSeq');
+			var mainViewYn = '';
+			if($(me).is(":checked")){
+				mainViewYn = 'Y';
+			}else{
+				mainViewYn = 'N';
+			}
+			
+			$.ajax({
+				url : '/admin/uptMainViewYn',
+				data : {noticeSeq : noticeSeq , mainViewYn : mainViewYn},
+				dataType : 'json',
+				type : 'post',
+				success : function(res){
+					
+					if(res.state == 'success'){
+						if(res.mainViewYCnt == 4){
+							var checkboxs = $("#notice_list").find('input:checkbox');
+							$.each(checkboxs,function(i , elem){
+								if(!$(elem).is(":checked")){
+									$(elem).attr('disabled',true);
+								}
+							});
+						}else if(res.mainViewYCnt < 4){
+							var checkboxs = $("#notice_list").find('input:checkbox');
+							$.each(checkboxs,function(i , elem){
+								console.log($(elem));
+								$(elem).attr('disabled',false);
+							});
+						}
+					}
+					
+				}
+			});
 		}
 		
 }

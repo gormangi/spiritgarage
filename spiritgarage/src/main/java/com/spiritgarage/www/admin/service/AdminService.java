@@ -55,4 +55,6 @@ public interface AdminService {
 	Map<String, Object> getNoticeInfo(NoticeVO vo) throws Exception;
 	
 	Map<String, Object> noticeModify(NoticeVO vo) throws Exception;
+	
+	Map<String, Object> uptMainViewYn(NoticeVO vo) throws Exception;
 }

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.spiritgarage.www.admin.mapper.AdminMapper;
@@ -270,6 +271,7 @@ public class AdminServiceImpl implements AdminService{
 		vo.setTotCnt(mapper.selectNoticeManagementCnt(vo));
 		
 		result.put("list", mapper.selectNoticeManagementList(vo));
+		result.put("mainViewYCnt", mapper.selectNoticeMainViewYCnt());
 		result.put("paging", vo);
 		
 		return result;
@@ -281,6 +283,7 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
+	@Transactional
 	public Map<String, Object> noticeWrite(NoticeVO vo) throws Exception {
 		
 		Map<String, Object> result = new HashMap<String, Object>();
@@ -371,6 +374,7 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
+	@Transactional
 	public Map<String, Object> noticeModify(NoticeVO vo) throws Exception {
 		
 		Map<String, Object> result = new HashMap<String, Object>();
@@ -453,6 +457,24 @@ public class AdminServiceImpl implements AdminService{
 			
 			result.put("state", "success");
 			
+		}
+		
+		return result;
+	}
+
+	@Override
+	public Map<String, Object> uptMainViewYn(NoticeVO vo) throws Exception {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		int res = mapper.updateMainViewYn(vo);
+		
+		if(res > 0) {
+			int mainViewYCnt = mapper.selectNoticeMainViewYCnt();
+			result.put("state", "success");
+			result.put("mainViewYCnt", mainViewYCnt);
+		}else {
+			result.put("state", "fail");
 		}
 		
 		return result;

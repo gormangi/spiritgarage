@@ -228,4 +228,10 @@ public class AdminController {
 		return service.noticeModify(vo);
 	}
 	
+	@RequestMapping(value = "/admin/uptMainViewYn")
+	@ResponseBody
+	public Map<String, Object> uptMainViewYn(NoticeVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
+		return service.uptMainViewYn(vo);
+	}
+	
 }
