@@ -13,6 +13,10 @@ $(document).ready(function(){
 	$("#notice_list").on("click","input:checkbox",function(){
 		fn.uptMainViewYn($(this));
 	});
+	
+	$("#notice_list").on("click","button[name=noticeDel]",function(){
+		fn.noticeDel($(this).closest('tr').data('noticeSeq'));
+	});
 });
 
 var fn = {
@@ -108,6 +112,30 @@ var fn = {
 					
 				}
 			});
+		},
+		
+		noticeDel : function(noticeSeq){
+			
+			if(confirm('선택하신 공지사항을 삭제하시겠습니까?')){
+				
+				$.ajax({
+					url : '/admin/noticeDel',
+					data : {noticeSeq : noticeSeq},
+					dataType : 'json',
+					type : 'post',
+					success : function(res){
+						if(res.state == 'success'){
+							alert('삭제되었습니다.');
+							fn.getNoticeManagementList();
+						}else{
+							alert('삭제에 실패하였습니다 관리자에게 문의해주세요');
+							return false;
+						}
+					}
+				});
+				
+			}
+			
 		}
 		
 }

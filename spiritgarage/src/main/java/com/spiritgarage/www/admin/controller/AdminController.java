@@ -234,4 +234,10 @@ public class AdminController {
 		return service.uptMainViewYn(vo);
 	}
 	
+	@RequestMapping(value = "/admin/noticeDel")
+	@ResponseBody
+	public Map<String, Object> noticeDel(NoticeVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
+		return service.noticeDel(vo);
+	}
+	
 }

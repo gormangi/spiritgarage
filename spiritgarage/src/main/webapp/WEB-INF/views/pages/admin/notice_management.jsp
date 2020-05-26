@@ -47,6 +47,7 @@
 										<th>등록일</th>
 										<th>수정자</th>
 										<th>수정일</th>
+										<th>삭제</th>
 									</tr>
 								</thead>
 								<tbody id="notice_list">
@@ -85,11 +86,12 @@
 			<td>\${item.regDate}</td>
 			<td>\${item.uptMngrName}</td>
 			<td>\${item.uptDate}</td>
+			<td><button type="button" name="noticeDel" class="btn btn-block btn-outline-danger btn-xs">삭제</button></td>
 		</tr>
 	{{/each}}
 {{else}}
 	<tr style="text-align:center">
-		<td colspan="8">등록된 공지사항이 없습니다.</td>
+		<td colspan="9">등록된 공지사항이 없습니다.</td>
 	</tr>
 {{/if}}
 </script>

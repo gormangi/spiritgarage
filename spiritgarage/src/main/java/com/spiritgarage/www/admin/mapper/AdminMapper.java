@@ -71,4 +71,6 @@ public interface AdminMapper {
 	
 	int selectNoticeMainViewYCnt() throws Exception;
 	
+	int deleteNotice(NoticeVO vo) throws Exception;
+	
 }

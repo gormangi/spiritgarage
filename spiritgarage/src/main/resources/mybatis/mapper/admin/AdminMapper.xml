@@ -368,7 +368,7 @@
 	</update>
 	
 	<delete id="deleteFileInfoByNoticeSeq" parameterType="com.spiritgarage.www.admin.vo.NoticeVO">
-		DELETE FROM TB_FILE WHERE POST_SEQ = #{noticeSeq}
+		DELETE FROM TB_FILE WHERE POST_SEQ = #{noticeSeq} AND FILE_KIND = 'thumbnail'
 	</delete>
 	
 	<update id="updateMainViewYn" parameterType="com.spiritgarage.www.admin.vo.NoticeVO">
@@ -381,5 +381,9 @@
 	<select id="selectNoticeMainViewYCnt" resultType="int">
 		SELECT COUNT(*) FROM TB_NOTICE WHERE MAIN_VIEW_YN = 'Y'
 	</select>
+	
+	<delete id="deleteNotice" parameterType="com.spiritgarage.www.admin.vo.NoticeVO">
+		DELETE FROM TB_NOTICE WHERE NOTICE_SEQ = #{noticeSeq}
+	</delete>
 	
 </mapper>

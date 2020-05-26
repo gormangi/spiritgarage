@@ -479,6 +479,29 @@ public class AdminServiceImpl implements AdminService{
 		
 		return result;
 	}
+
+	@Override
+	public Map<String, Object> noticeDel(NoticeVO vo) throws Exception {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("state", "fail");
+		
+		/********************** 썸네일 파일 삭제 START *************************/
+		FileVO originFileInfo = mapper.selectFileInfoByNoticeSeq(vo);
+		File originFile = new File(originFileInfo.getSaveFilePath());
+		originFile.delete();
+		int delRes = mapper.deleteFileInfoByNoticeSeq(vo);
+		/*********************** 썸네일 파일 삭제 END **************************/
+		
+		if(delRes > 0) {
+			int res = mapper.deleteNotice(vo);
+			if(res > 0) {
+				result.put("state", "success");
+			}
+		}
+		
+		return result;
+	}
 	
 }
 
