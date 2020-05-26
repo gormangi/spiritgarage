@@ -340,7 +340,7 @@ public class AdminServiceImpl implements AdminService{
 						fileVO.setFileSize(String.valueOf(destImg.getData().getDataBuffer().getSize()));
 						fileVO.setSaveFileName(thumbFileName);
 						fileVO.setSaveFilePath(thumbFilePath);
-						fileVO.setFileUrl(vo.getBaseUrl() + "/" + vo.getDateFolderName() + "/" + vo.getFolderName() + "/" + thumbFileName);
+						fileVO.setFileUrl(vo.getBaseUrl() + "/" + vo.getFolderName() + "/" + vo.getDateFolderName() + "/" + thumbFileName);
 						fileVO.setFileKind("thumbnail");
 						fileVO.setRegId(vo.getRegMngrId());
 						

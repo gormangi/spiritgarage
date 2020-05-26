@@ -192,7 +192,7 @@ public class AdminController {
 		String folderName = "user_images";
 		vo.setDateFolderName(dateFolderName);
 		vo.setFolderName(folderName);
-		vo.setThumbnailUploadPath(request.getSession().getServletContext().getRealPath("/") + dateFolderName + File.separator + folderName + File.separator);
+		vo.setThumbnailUploadPath(request.getSession().getServletContext().getRealPath("/") + folderName + File.separator + dateFolderName + File.separator);
 		vo.setBaseUrl(request.getRequestURL().toString().replace(request.getRequestURI().toString(),""));
 		return service.noticeWrite(vo);
 	}
