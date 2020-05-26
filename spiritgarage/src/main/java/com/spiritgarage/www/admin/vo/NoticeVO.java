@@ -27,6 +27,51 @@ public class NoticeVO extends BasePaging{
 	private String uptDate;
 	
 	private MultipartFile thumbnail;
+	private String thumbnailUrl;
+	private String thumbnailUploadPath;
+	private String baseUrl;
+	private String dateFolderName;
+	private String folderName;
+
+	public String getDateFolderName() {
+		return dateFolderName;
+	}
+
+	public void setDateFolderName(String dateFolderName) {
+		this.dateFolderName = dateFolderName;
+	}
+
+	public String getThumbnailUrl() {
+		return thumbnailUrl;
+	}
+
+	public void setThumbnailUrl(String thumbnailUrl) {
+		this.thumbnailUrl = thumbnailUrl;
+	}
+
+	public String getFolderName() {
+		return folderName;
+	}
+
+	public void setFolderName(String folderName) {
+		this.folderName = folderName;
+	}
+
+	public String getThumbnailUploadPath() {
+		return thumbnailUploadPath;
+	}
+
+	public void setThumbnailUploadPath(String thumbnailUploadPath) {
+		this.thumbnailUploadPath = thumbnailUploadPath;
+	}
+
+	public String getBaseUrl() {
+		return baseUrl;
+	}
+
+	public void setBaseUrl(String baseUrl) {
+		this.baseUrl = baseUrl;
+	}
 
 	public MultipartFile getThumbnail() {
 		return thumbnail;

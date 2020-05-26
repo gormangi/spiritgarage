@@ -1,18 +1,23 @@
 package com.spiritgarage.www.admin.service.impl;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpSession;
 
+import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.spiritgarage.www.admin.mapper.AdminMapper;
 import com.spiritgarage.www.admin.service.AdminService;
+import com.spiritgarage.www.admin.vo.FileVO;
 import com.spiritgarage.www.admin.vo.MngrVO;
 import com.spiritgarage.www.admin.vo.NoticeVO;
 import com.spiritgarage.www.reservation.vo.MaintenanceAreaVO;
@@ -278,9 +283,179 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public Map<String, Object> noticeWrite(NoticeVO vo) throws Exception {
 		
-		vo.setNoticeSeq(UUID.randomUUID().toString());
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("state", "fail");
 		
-		return null;
+		vo.setNoticeSeq(UUID.randomUUID().toString());
+		int res = mapper.insertNotice(vo);
+		
+		if(res > 0) {
+			
+			if(vo.getThumbnail() != null) {
+				
+				/********************* 썸네일 원본 저장 START ************************/
+				String thumbOriginFileName = vo.getThumbnail().getOriginalFilename();
+				String thumbOriginFileExt = thumbOriginFileName.substring(thumbOriginFileName.lastIndexOf(".") + 1);
+				String thumbOriginSaveFileName = UUID.randomUUID().toString() + "." + thumbOriginFileExt;
+				String thumbOriginFilePath = vo.getThumbnailUploadPath() + thumbOriginSaveFileName;
+				File thumbOriginFile = new File(thumbOriginFilePath);
+				if(!thumbOriginFile.exists()) {
+					thumbOriginFile.mkdirs();
+				}
+				vo.getThumbnail().transferTo(thumbOriginFile);
+				/********************** 썸네일 원본 저장 END *************************/
+				
+				/******************** 썸네일 생성 및 저장 START ***********************/
+				BufferedImage srcImg = ImageIO.read(new File(thumbOriginFilePath));
+				
+				int thumbWidth = 320;
+				int thumbHeight = 320;
+				
+				int originWidth = srcImg.getWidth();
+				int originHeight = srcImg.getHeight();
+				
+				int newWidth = originWidth;
+				int newHeight = (originWidth * thumbHeight) / thumbWidth;
+				
+				if(newHeight > originHeight) {
+					newWidth = (originHeight * thumbWidth) / thumbHeight;
+					newHeight = originHeight;
+				}
+				
+				BufferedImage cropImg = Scalr.crop(srcImg, (originWidth-newWidth)/2, (originHeight-newHeight)/2, newWidth, newHeight);
+				BufferedImage destImg = Scalr.resize(cropImg, thumbWidth, thumbHeight);
+				
+				String thumbFileName = UUID.randomUUID().toString() + "." + thumbOriginFileExt;
+				String thumbFilePath = vo.getThumbnailUploadPath() + thumbFileName;
+				File thumbFile = new File(thumbFilePath);
+				
+				if(ImageIO.write(destImg, thumbOriginFileExt, thumbFile)) {
+					if(thumbOriginFile.delete()) {
+						
+						FileVO fileVO = new FileVO();
+						fileVO.setFileSeq(UUID.randomUUID().toString());
+						fileVO.setPostSeq(vo.getNoticeSeq());
+						fileVO.setOriginFileName(thumbOriginFileName);
+						fileVO.setExtensionName(thumbOriginFileExt);
+						fileVO.setFileSize(String.valueOf(destImg.getData().getDataBuffer().getSize()));
+						fileVO.setSaveFileName(thumbFileName);
+						fileVO.setSaveFilePath(thumbFilePath);
+						fileVO.setFileUrl(vo.getBaseUrl() + "/" + vo.getDateFolderName() + "/" + vo.getFolderName() + "/" + thumbFileName);
+						fileVO.setFileKind("thumbnail");
+						fileVO.setRegId(vo.getRegMngrId());
+						
+						mapper.insertThumbnailFile(fileVO);
+					}
+				}
+				/********************* 썸네일 생성 및 저장 END ************************/
+			}
+			
+			result.put("state", "success");
+		}
+		
+		return result;
+	}
+
+	@Override
+	public Map<String, Object> getNoticeInfo(NoticeVO vo) throws Exception {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		NoticeVO noticeInfo = mapper.selectNoticeInfo(vo);
+		FileVO fileInfo = mapper.selectFileInfoByNoticeSeq(vo);
+		
+		result.put("noticeInfo", noticeInfo);
+		result.put("fileInfo", fileInfo);
+		
+		return result;
+	}
+
+	@Override
+	public Map<String, Object> noticeModify(NoticeVO vo) throws Exception {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("state", "fail");
+		
+		int res = mapper.updateNotice(vo);
+		
+		if(res > 0) {
+			
+			if(vo.getThumbnail() != null) {
+				
+				/********************** 기존 썸네일 파일 삭제 START *************************/
+				FileVO originFileInfo = mapper.selectFileInfoByNoticeSeq(vo);
+				File originFile = new File(originFileInfo.getSaveFilePath());
+				originFile.delete();
+				int delRes = mapper.deleteFileInfoByNoticeSeq(vo);
+				/*********************** 기존 썸네일 파일 삭제 END **************************/
+				
+				if(delRes > 0) {
+					
+					/********************* 썸네일 원본 저장 START ************************/
+					String thumbOriginFileName = vo.getThumbnail().getOriginalFilename();
+					String thumbOriginFileExt = thumbOriginFileName.substring(thumbOriginFileName.lastIndexOf(".") + 1);
+					String thumbOriginSaveFileName = UUID.randomUUID().toString() + "." + thumbOriginFileExt;
+					String thumbOriginFilePath = vo.getThumbnailUploadPath() + thumbOriginSaveFileName;
+					File thumbOriginFile = new File(thumbOriginFilePath);
+					if(!thumbOriginFile.exists()) {
+						thumbOriginFile.mkdirs();
+					}
+					vo.getThumbnail().transferTo(thumbOriginFile);
+					/********************** 썸네일 원본 저장 END *************************/
+					
+					/******************** 썸네일 생성 및 저장 START ***********************/
+					BufferedImage srcImg = ImageIO.read(new File(thumbOriginFilePath));
+					
+					int thumbWidth = 320;
+					int thumbHeight = 320;
+					
+					int originWidth = srcImg.getWidth();
+					int originHeight = srcImg.getHeight();
+					
+					int newWidth = originWidth;
+					int newHeight = (originWidth * thumbHeight) / thumbWidth;
+					
+					if(newHeight > originHeight) {
+						newWidth = (originHeight * thumbWidth) / thumbHeight;
+						newHeight = originHeight;
+					}
+					
+					BufferedImage cropImg = Scalr.crop(srcImg, (originWidth-newWidth)/2, (originHeight-newHeight)/2, newWidth, newHeight);
+					BufferedImage destImg = Scalr.resize(cropImg, thumbWidth, thumbHeight);
+					
+					String thumbFileName = UUID.randomUUID().toString() + "." + thumbOriginFileExt;
+					String thumbFilePath = vo.getThumbnailUploadPath() + thumbFileName;
+					File thumbFile = new File(thumbFilePath);
+					
+					if(ImageIO.write(destImg, thumbOriginFileExt, thumbFile)) {
+						if(thumbOriginFile.delete()) {
+							
+							FileVO fileVO = new FileVO();
+							fileVO.setFileSeq(UUID.randomUUID().toString());
+							fileVO.setPostSeq(vo.getNoticeSeq());
+							fileVO.setOriginFileName(thumbOriginFileName);
+							fileVO.setExtensionName(thumbOriginFileExt);
+							fileVO.setFileSize(String.valueOf(destImg.getData().getDataBuffer().getSize()));
+							fileVO.setSaveFileName(thumbFileName);
+							fileVO.setSaveFilePath(thumbFilePath);
+							fileVO.setFileUrl(vo.getBaseUrl() + "/" + vo.getDateFolderName() + "/" + vo.getFolderName() + "/" + thumbFileName);
+							fileVO.setFileKind("thumbnail");
+							fileVO.setRegId(vo.getRegMngrId());
+							
+							mapper.insertThumbnailFile(fileVO);
+						}
+					}
+					/********************* 썸네일 생성 및 저장 END ************************/
+					
+				}
+				
+			}
+			
+			result.put("state", "success");
+			
+		}
+		
+		return result;
 	}
 	
 }

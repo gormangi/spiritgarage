@@ -1,6 +1,8 @@
 package com.spiritgarage.www.admin.controller;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -163,7 +166,8 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "/admin/noticeReg")
-	public String noticeReg(HttpServletRequest request , HttpServletResponse response) throws Exception{
+	public String noticeReg(Model model , HttpServletRequest request , HttpServletResponse response) throws Exception{
+		model.addAttribute("rMod","N");
 		return "admin/notice_reg";
 	}
 	
@@ -182,7 +186,46 @@ public class AdminController {
 		HttpSession session = request.getSession();
 		MngrVO mngrInfo = (MngrVO)session.getAttribute("mngrInfo");
 		vo.setRegMngrId(mngrInfo.getId());
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date today = new Date();
+		String dateFolderName = format.format(today);
+		String folderName = "user_images";
+		vo.setDateFolderName(dateFolderName);
+		vo.setFolderName(folderName);
+		vo.setThumbnailUploadPath(request.getSession().getServletContext().getRealPath("/") + dateFolderName + File.separator + folderName + File.separator);
+		vo.setBaseUrl(request.getRequestURL().toString().replace(request.getRequestURI().toString(),""));
 		return service.noticeWrite(vo);
+	}
+	
+	@RequestMapping(value = "/admin/noticeModify")
+	public String noticeModify(Model model , NoticeVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
+		model.addAttribute("rMod","U");
+		model.addAttribute("noticeSeq",vo.getNoticeSeq());
+		return "admin/notice_reg";
+	}
+	
+	@RequestMapping(value = "/admin/getNoticeInfo")
+	@ResponseBody
+	public Map<String, Object> getNoticeInfo(NoticeVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
+		return service.getNoticeInfo(vo);
+	}
+	
+	@RequestMapping(value = "/admin/doNoticeModify")
+	@ResponseBody
+	public Map<String, Object> doNoticeModify(NoticeVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
+		HttpSession session = request.getSession();
+		MngrVO mngrInfo = (MngrVO)session.getAttribute("mngrInfo");
+		vo.setRegMngrId(mngrInfo.getId());
+		vo.setUptMngrId(mngrInfo.getId());
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date today = new Date();
+		String dateFolderName = format.format(today);
+		String folderName = "user_images";
+		vo.setDateFolderName(dateFolderName);
+		vo.setFolderName(folderName);
+		vo.setThumbnailUploadPath(request.getSession().getServletContext().getRealPath("/") + dateFolderName + File.separator + folderName + File.separator);
+		vo.setBaseUrl(request.getRequestURL().toString().replace(request.getRequestURI().toString(),""));
+		return service.noticeModify(vo);
 	}
 	
 }

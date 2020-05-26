@@ -3,6 +3,9 @@
 <script src='/js/library/ckeditor/ckeditor.js'></script>
 <script src="/js/admin/notice_reg.js"></script>
 
+<input type="hidden" id="rMod" value="${rMod }"/>
+<input type="hidden" id="noticeSeq" value="${noticeSeq }"/>
+
 <div class="content-wrapper">
 	<section class="content-header">
 		<div class="container-fluid">
@@ -26,7 +29,7 @@
 				<div class="col-md-12">
 					<div class="card card-primary">
 						<div class="card-header">
-							<h3 class="card-title">공지사항 추가</h3>
+							<h3 class="card-title"></h3>
 						</div>
 						<form role="form">
 							<div class="card-body">
@@ -34,7 +37,9 @@
 									<label for="exampleInputFile">썸네일</label>
 									<div class="input-group">
 										<div class="custom-file">
-											<input type="file" class="custom-file-input" id="noticeThumbnailFile"> <label class="custom-file-label" id="noticeThumbnailFileLabel"></label>
+											<input type="file" class="custom-file-input" id="noticeThumbnailFile"/>
+											<label class="custom-file-label" id="noticeThumbnailFileLabel" style="display:none;"></label>
+											<label class="custom-file-label" id="noticeOriginThumbnailFileLabel" style="display:none;"></label>
 										</div>
 									</div>
 								</div>
@@ -48,7 +53,8 @@
 								</div>
 							</div>
 							<div class="card-footer">
-								<button type="button" id="noticeWrite" class="btn btn-primary">추가</button>
+								<button type="button" id="noticeWrite" class="btn btn-primary" style="display:none;">추가</button>
+								<button type="button" id="noticeModify" class="btn btn-primary" style="display:none;">수정</button>
 								<button type="button" id="noticeWriteCancel" class="btn btn-default">취소</button>
 							</div>
 						</form>

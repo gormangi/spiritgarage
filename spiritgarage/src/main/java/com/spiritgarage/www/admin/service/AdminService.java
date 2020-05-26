@@ -52,4 +52,7 @@ public interface AdminService {
 	
 	Map<String, Object> noticeWrite(NoticeVO vo) throws Exception;
 	
+	Map<String, Object> getNoticeInfo(NoticeVO vo) throws Exception;
+	
+	Map<String, Object> noticeModify(NoticeVO vo) throws Exception;
 }

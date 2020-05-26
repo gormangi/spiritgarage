@@ -31,34 +31,21 @@ var fn = {
 				return false;
 			}
 			
-			if(fn.validation()){
-				document.location.href = '/admin/mngrManagement';
-			}
-		},
-		
-		validation : function(){
-			
-			var id = $("#id").val();
-			var password = $("#password").val();
-			var resule = false;
-			
 			$.ajax({
 				url : '/admin/loginValidation',
 				data : {id : id , password : password},
 				dataType : 'json',
-				async : false,
 				type : 'post',
 				success : function(res){
 					
 					if(res.result == 'fail'){
 						alert(res.resultString);
 					}else if(res.result == 'success'){
-						resule = true;
+						document.location.href = '/admin/mngrManagement';
 					}
 				}
 			});
 			
-			return resule;
 		}
 		
 }

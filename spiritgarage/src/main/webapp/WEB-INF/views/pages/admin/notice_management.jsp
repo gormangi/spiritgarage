@@ -34,6 +34,7 @@
 								<thead>
 									<tr>
 										<th style="width: 10px">#</th>
+										<th style="width: 15px">메인화면노출</th>
 										<th>썸네일</th>
 										<th>제목</th>
 										<th>등록자</th>
@@ -55,15 +56,25 @@
 	</section>
 </div>
 
+<form id="noticeModifyForm">
+	<input type="hidden" name="noticeSeq"/>
+</form>
+
 <script id="notice_list_template" type="text/x-jquery-tmpl">
 {{if list.length > 0}}
 	{{each(i,item) list}}
 		<tr data-notice-seq="\${item.noticeSeq}">
 			<td>\${item.rnum}.</td>
-			<td><img src="\${item.thumbnailUrl}"/></td>
-			<td>\${item.title}</td>
+			<td>
+				<div class="custom-control custom-switch">
+					<input type="checkbox" class="custom-control-input" name="mainViewYn" id="mainViewYn\${i}">
+					<label class="custom-control-label" for="mainViewYn\${i}"></label>
+				</div>
+			</td>
+			<td><a href="javascript:void(0);"><img src="\${item.thumbnailUrl}" style="width:70px;height:70px;"/></td>
+			<td><a href="javascript:void(0);">\${item.title}</a></td>
 			<td>\${item.regMngrName}</td>
-			<td>\${item.regMngrId}</td>
+			<td>\${item.regDate}</td>
 		</tr>
 	{{/each}}
 {{else}}

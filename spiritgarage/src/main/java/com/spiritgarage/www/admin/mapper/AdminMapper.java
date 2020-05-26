@@ -3,6 +3,7 @@ package com.spiritgarage.www.admin.mapper;
 import java.util.List;
 import java.util.Map;
 
+import com.spiritgarage.www.admin.vo.FileVO;
 import com.spiritgarage.www.admin.vo.MngrVO;
 import com.spiritgarage.www.admin.vo.NoticeVO;
 import com.spiritgarage.www.reservation.vo.MaintenanceAreaVO;
@@ -53,5 +54,17 @@ public interface AdminMapper {
 	int selectNoticeManagementCnt(NoticeVO vo) throws Exception;
 	
 	List<NoticeVO> selectNoticeManagementList(NoticeVO vo) throws Exception;
+	
+	int insertNotice(NoticeVO vo) throws Exception;
+	
+	int insertThumbnailFile(FileVO vo) throws Exception;
+	
+	NoticeVO selectNoticeInfo(NoticeVO vo) throws Exception;
+	
+	FileVO selectFileInfoByNoticeSeq(NoticeVO vo) throws Exception;
+	
+	int updateNotice(NoticeVO vo) throws Exception;
+	
+	int deleteFileInfoByNoticeSeq(NoticeVO vo) throws Exception;
 	
 }

@@ -6,6 +6,10 @@ $(document).ready(function(){
 		document.location.href = "/admin/noticeReg";
 	});
 	
+	$("#notice_list").on("click","tr a",function(){
+		fn.noticeModify($(this).closest('tr').data('noticeSeq'));
+	});
+	
 });
 
 var fn = {
@@ -54,6 +58,15 @@ var fn = {
 				html.push('<li class="page-item disabled"><a href="javascript:void(0);" class="page-link">&raquo;</a></li>');
 			}		
 			$("#notice_pagination").html(html.join(''));
+		},
+		
+		noticeModify : function(noticeSeq){
+
+			$("#noticeModifyForm").attr('action','/admin/noticeModify');
+			$("#noticeModifyForm").attr('method','post');
+			$("#noticeModifyForm input").val(noticeSeq);
+			$("#noticeModifyForm").submit();
+			
 		}
 		
 }

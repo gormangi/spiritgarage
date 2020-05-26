@@ -4,11 +4,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.spiritgarage.www.admin.vo.MngrVO;
 
+@Configuration
 public class Interceptor extends HandlerInterceptorAdapter{
 	
 	/**
@@ -29,17 +31,24 @@ public class Interceptor extends HandlerInterceptorAdapter{
 		
 		HttpSession session = request.getSession();
 		MngrVO vo = (MngrVO)session.getAttribute("mngrInfo");
+		
+		String header = request.getHeader("x-requested-with");
+		
 		if(vo != null) {
 			
 			String url = request.getRequestURL().toString();
 			int pos = url.lastIndexOf("/");
 			
-			modelAndView.addObject("mngrSeq", vo.getMngrSeq());
-			modelAndView.addObject("id",vo.getId());
-			modelAndView.addObject("name",vo.getName());
-			modelAndView.addObject("activeUrl",url.substring(pos + 1));
-		}else {
-			modelAndView.setViewName("/admin");
+			if(!"XMLHttpRequest".equals(header)) {
+				modelAndView.addObject("mngrSeq", vo.getMngrSeq());
+				modelAndView.addObject("id",vo.getId());
+				modelAndView.addObject("name",vo.getName());
+				modelAndView.addObject("activeUrl",url.substring(pos + 1));
+			}
+		}else{
+			if(!"XMLHttpRequest".equals(header)) {
+				modelAndView.setViewName("/admin");
+			}
 		}
 		
 		super.postHandle(request, response, handler, modelAndView);
