@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <script src="/js/admin/notice_management.js"></script>
 
+<style type="text/css">
+#notice_list tr td:nth-child(4) a{
+	display: inline-block; width: 400px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+</style>
+
 <div class="content-wrapper">
 	<section class="content-header">
 		<div class="container-fluid">
