@@ -2,6 +2,10 @@ $(document).ready(function(){
 	
 	headerFn.init();
 	
+	$("#categoryMenuList").on("click","li a",function(){
+		headerFn.categoryListView($(this).data('category'));
+	});
+	
 });
 
 var headerFn = {
@@ -9,17 +13,46 @@ var headerFn = {
 		init : function(){
 			headerFn.highlightMenu();
 			headerFn.getHeaderInfo();
+			headerFn.getCategoryMenuList();
+		},
+		
+		categoryListView : function(category){
+			
+			$("#categoryMoveForm").attr('action','/category');
+			$("#categoryMoveForm").attr('method','post');
+			$("#categoryMoveForm input").val(category);
+			$("#categoryMoveForm").submit();
+			
+		},
+		
+		getCategoryMenuList : function(){
+			
+			$.ajax({
+				url : '/category/getCategoryMenuList',
+				dataType : 'json',
+				type : 'post',
+				success : function(res){
+					$("#categoryMenuList").empty();
+					var html = [];
+					$.each(res,function(i,item){
+						html.push('<li><a href="javascript:void(0);" data-category="'+item+'">'+item+'</a></li>');
+					});
+					$("#categoryMenuList").html(html.join(''));
+				}
+			});
+			
 		},
 		
 		highlightMenu : function(){
 			var viewDivision = $("#viewDivition").val();
-			
 			$("#mainav .clear li").removeClass('active');
 			
 			if(viewDivision == 'mainPage'){
 				$("#mainMove").addClass('active');
 			}else if(viewDivision == 'reservationPage'){
 				$("#reservationMove").addClass('active');
+			}else if(viewDivision == 'categoryPage'){
+				$("#categoryMove").addClass('active');
 			}
 			
 		},
@@ -52,6 +85,20 @@ var headerFn = {
 				});
 			}else{
 				$("#breadcrumb").show();
+				
+				var html = [];
+				if(viewDivision == 'reservationPage'){
+					html.push('<ul>');
+					html.push('<li><a href="javascript:void(0);">Spiritgarage</a></li>');
+					html.push('<li><a href="javascript:void(0);">예약</a></li>');
+					html.push('</ui>');
+				}else if(viewDivision == 'categoryPage'){
+					html.push('<ul>');
+					html.push('<li><a href="javascript:void(0);">Spiritgarage</a></li>');
+					html.push('<li><a href="javascript:void(0);">'+$("#category").val()+'</a></li>');
+					html.push('</ui>');
+				}
+				$("#breadcrumb").html(html.join(''));
 			}
 		}
 		

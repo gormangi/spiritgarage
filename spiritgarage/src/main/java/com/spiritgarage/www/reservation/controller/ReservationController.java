@@ -26,7 +26,8 @@ public class ReservationController {
 	private ReservationService service;
 	
 	@RequestMapping(value = "/reservation")
-	public String reservation(HttpServletRequest request , HttpServletResponse response) throws Exception{
+	public String reservation(Model model , HttpServletRequest request , HttpServletResponse response) throws Exception{
+		model.addAttribute("viewDivision","reservationPage");
 		return "user/reservation";
 	}
 	

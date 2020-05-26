@@ -13,26 +13,11 @@
 				<ul class="clear">
 					<li id="mainMove"><a href="/">Home</a></li>
 					<li id="reservationMove"><a href="/reservation">예약</a></li>
-					<li><a class="drop" href="#">카테고리</a>
-						<ul>
-							<li><a href="pages/gallery.html">Gallery</a></li>
-							<li><a href="pages/full-width.html">Full Width</a></li>
-							<li><a href="pages/sidebar-left.html">Sidebar Left</a></li>
-							<li><a href="pages/sidebar-right.html">Sidebar Right</a></li>
-							<li><a href="pages/basic-grid.html">Basic Grid</a></li>
-						</ul></li>
-					<li><a class="drop" href="#">Dropdown</a>
-						<ul>
-							<li><a href="#">Level 2</a></li>
-							<li><a class="drop" href="#">Level 2 + Drop</a>
-								<ul>
-									<li><a href="#">Level 3</a></li>
-									<li><a href="#">Level 3</a></li>
-									<li><a href="#">Level 3</a></li>
-								</ul></li>
-							<li><a href="#">Level 2</a></li>
-						</ul></li>
-					<li><a href="#">Link Text</a></li>
+					<li id="categoryMove">
+						<a class="drop" href="javascript:void(0);">카테고리</a>
+						<ul id="categoryMenuList">
+						</ul>
+					</li>
 				</ul>
 			</nav>
 		</header>
@@ -45,15 +30,19 @@
 	</div>
 	<div id="breadcrumb" class="hoc clear" style="display:none">
 		<ul>
-			<li><a href="#">Home</a></li>
-			<li><a href="#">Lorem</a></li>
-			<li><a href="#">Ipsum</a></li>
-			<li><a href="#">Dolor</a></li>
+			<li><a href="javascript:void(0);">Home</a></li>
+			<li><a href="javascript:void(0);">Lorem</a></li>
+			<li><a href="javascript:void(0);">Ipsum</a></li>
+			<li><a href="javascript:void(0);">Dolor</a></li>
 		</ul>
 	</div>
 	
 </div>
 <input type="hidden" id="viewDivition" value="${viewDivision }"/>
+
+<form id="categoryMoveForm">
+	<input type="hidden" name="category"/>
+</form>
 
 <script id="header_slide_template" type="text/x-jquery-tmpl">
 	<li>
