@@ -20,29 +20,9 @@
 <div class="wrapper bgded overlay" id="notice_area" style="background-image: url('images/common/auto-repair-1954636_1920.jpg');">
 </div>
 
-<script id="notice_area_template" type="text/x-jquery-tmpl">
-<section class="hoc container clear">
-	<div class="btmspace-80 center">
-		<h2 class="heading nospace">공지사항</h2>
-	</div>
-	<ul class="nospace group">
-		{{each(i,item) res}}
-			<li class="one_quarter {{if i == 0}}first{{/if}}">
-				<article class="excerpt">
-					<a href="#"><img src="\${fileUrl}" alt=""></a>
-					<div class="excerpttxt">
-						<h6 class="heading font-x1">\${title}</h6>
-						<p>\${content}</p>
-						<footer>
-							<a class="btn" href="#">Read More &raquo;</a>
-						</footer>
-					</div>
-				</article>
-			</li>
-		{{/each}}
-	</ul>
-</section>
-</script>
+<form id="noticeContentViewForm">
+	<input type="hidden" name="noticeSeq"/>
+</form>
 
 <script id="blog_area_template" type="text/x-jquery-tmpl">
 {{if res.length > 0}}
@@ -71,4 +51,28 @@
 		</div>
 	{{/each}}
 {{/if}}
+</script>
+
+<script id="notice_area_template" type="text/x-jquery-tmpl">
+<section class="hoc container clear">
+	<div class="btmspace-80 center">
+		<h2 class="heading nospace">공지사항</h2>
+	</div>
+	<ul class="nospace group">
+		{{each(i,item) res}}
+			<li class="one_quarter {{if i == 0}}first{{/if}}" data-notice-seq="\${item.noticeSeq}">
+				<article class="excerpt">
+					<a href="javascript:void(0);"><img src="\${item.fileUrl}" alt=""></a>
+					<div class="excerpttxt">
+						<h6 class="heading font-x1">\${item.title}</h6>
+						<p>\${item.content}</p>
+						<footer>
+							<a class="btn" href="javascript:void(0);">Read More &raquo;</a>
+						</footer>
+					</div>
+				</article>
+			</li>
+		{{/each}}
+	</ul>
+</section>
 </script>

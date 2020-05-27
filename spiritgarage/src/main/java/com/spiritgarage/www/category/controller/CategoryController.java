@@ -1,6 +1,7 @@
 package com.spiritgarage.www.category.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spiritgarage.www.category.service.CategoryService;
-import com.spiritgarage.www.main.vo.BlogRssVO;
+import com.spiritgarage.www.category.vo.BlogRssVO;
 
 @Controller
 public class CategoryController {
@@ -31,6 +32,12 @@ public class CategoryController {
 		model.addAttribute("viewDivision","categoryPage");
 		model.addAttribute("category",vo.getCategory());
 		return "user/category_list";
+	}
+	
+	@RequestMapping(value = "/category/getCategoryList")
+	@ResponseBody
+	public Map<String, Object> getCategoryList(BlogRssVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
+		return service.getCategoryList(vo);
 	}
 	
 }

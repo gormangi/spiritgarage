@@ -1,5 +1,9 @@
 $(document).ready(function(){
 	fn.init();
+	
+	$("#notice_area").on("click","a",function(){
+		fn.noticeContentView($(this).closest('li').data('noticeSeq'));
+	});
 });
 
 var fn = {
@@ -29,6 +33,10 @@ var fn = {
 				dataType : 'json',
 				type : 'post',
 				success : function(res){
+					$.each(res.res,function(i , item){
+						item.content = item.content.replace(/(<([^>]+)>)/gi, "");
+					});
+					
 					if(res.res.length > 0){
 						$("#notice_area").empty();
 						$("#notice_area_template").tmpl(res).appendTo("#notice_area");
@@ -37,6 +45,16 @@ var fn = {
 					}
 				}
 			});
+			
+		},
+		
+		noticeContentView : function(noticeSeq){
+			
+			var noticeContentViewForm = $("#noticeContentViewForm");
+			$("#noticeContentViewForm input").val(noticeSeq);
+			noticeContentViewForm.attr('action','/noticeContentView');
+			noticeContentViewForm.attr('method','post');
+			noticeContentViewForm.submit();
 			
 		}
 }

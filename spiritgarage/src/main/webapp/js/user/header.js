@@ -53,6 +53,8 @@ var headerFn = {
 				$("#reservationMove").addClass('active');
 			}else if(viewDivision == 'categoryPage'){
 				$("#categoryMove").addClass('active');
+			}else if(viewDivision == 'noticePage'){
+				$("#noticeMove").addClass('active');
 			}
 			
 		},
@@ -96,6 +98,11 @@ var headerFn = {
 					html.push('<ul>');
 					html.push('<li><a href="javascript:void(0);">Spiritgarage</a></li>');
 					html.push('<li><a href="javascript:void(0);">'+$("#category").val()+'</a></li>');
+					html.push('</ui>');
+				}else if(viewDivision == 'noticePage'){
+					html.push('<ul>');
+					html.push('<li><a href="javascript:void(0);">Spiritgarage</a></li>');
+					html.push('<li><a href="javascript:void(0);">공지</a></li>');
 					html.push('</ui>');
 				}
 				$("#breadcrumb").html(html.join(''));

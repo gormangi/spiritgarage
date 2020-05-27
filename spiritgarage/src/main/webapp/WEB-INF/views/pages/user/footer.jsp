@@ -10,7 +10,6 @@
 			</ul>
 		</div>
 		<div class="one_half">
-			<!-- <h6 class="heading">velit porttitor ac euismod</h6> -->
 			<ul class="nospace linklist">
 				<li>
 					<article>
@@ -30,7 +29,7 @@
 						<p class="nospace">블랙박스 | 썬팅 | 네비게이션 | 옵션설치</p>
 						<p class="nospace" style="margin-top:15px;">
 							<a target="_blank" href="https://open.kakao.com/o/sxKWBO5">
-								<img style="border-radius:100px 100px 100px 100px;" src="https://blogfiles.pstatic.net/MjAxODExMjhfNjEg/MDAxNTQzMzczMjEzNDQ0.H-DwUXLZ8r5Q0ddEuGqh6dwo4w9eiDnKjniu3DtfXYIg.GqpD5PwdlFLR8I9N7JCQzn9agbVGXIFcIl0o2NBdLRwg.JPEG.spiritgarage/%EC%98%A4%ED%94%88%EC%B1%84%ED%8C%85.jpg">
+								<img style="border-radius:100px 100px 100px 100px; width:300px;" src="images/admin_img/kakao.png">
 							</a>
 						</p>
 					</article>

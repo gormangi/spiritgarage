@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spiritgarage.www.notice.mapper.NoticeMapper">
+	
+	<select id="selectNoticeCnt" resultType="int">
+		SELECT COUNT(*) FROM TB_NOTICE
+	</select>
+	
+	<select id="selectNoticeList" parameterType="com.spiritgarage.www.notice.vo.NoticeVO" resultType="com.spiritgarage.www.notice.vo.NoticeVO">
+		SELECT
+			T.RNUM,
+			T.NOTICE_SEQ,
+			T.TITLE,
+			T.CONTENT,
+			T.MAIN_VIEW_YN,
+			T.REG_MNGR_ID,
+			T.REG_DATE,
+			T.UPT_MNGR_ID,
+			T.UPT_DATE,
+			(SELECT FILE_URL FROM TB_FILE WHERE POST_SEQ = T.NOTICE_SEQ AND FILE_KIND = 'thumbnail' ) FILE_URL
+		FROM
+			(SELECT
+				@rownum:=@rownum+1 RNUM,
+				R.NOTICE_SEQ,
+				R.TITLE,
+				R.CONTENT,
+				R.MAIN_VIEW_YN,
+				R.REG_MNGR_ID,
+				DATE_FORMAT(R.REG_DATE,'%Y-%m-%d %H:%i') REG_DATE,
+				R.UPT_MNGR_ID,
+				DATE_FORMAT(R.UPT_DATE,'%Y-%m-%d %H:%i') UPT_DATE
+			FROM
+				TB_NOTICE R INNER JOIN (SELECT @ROWNUM := 0) C
+			ORDER BY R.REG_DATE DESC) T
+		LIMIT #{startPostNumber} , #{blockPostCnt}
+	</select>
+	
+	<select id="selectNoticeInfo" parameterType="com.spiritgarage.www.notice.vo.NoticeVO" resultType="com.spiritgarage.www.notice.vo.NoticeVO">
+		SELECT
+			NOTICE_SEQ,
+			TITLE,
+			CONTENT,
+			MAIN_VIEW_YN,
+			REG_MNGR_ID,
+			DATE_FORMAT(REG_DATE,'%Y-%m-%d %H:%i') REG_DATE,
+			UPT_MNGR_ID,
+			DATE_FORMAT(UPT_DATE,'%Y-%m-%d %H:%i') UPT_DATE
+		FROM
+			TB_NOTICE
+		WHERE
+			NOTICE_SEQ = #{noticeSeq}
+	</select>
+	
+</mapper>

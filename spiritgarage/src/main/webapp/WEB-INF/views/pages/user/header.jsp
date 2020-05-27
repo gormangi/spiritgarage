@@ -12,6 +12,7 @@
 			<nav id="mainav" class="fl_right">
 				<ul class="clear">
 					<li id="mainMove"><a href="/">Home</a></li>
+					<li id="noticeMove"><a href="/notice">공지</a></li>
 					<li id="reservationMove"><a href="/reservation">예약</a></li>
 					<li id="categoryMove">
 						<a class="drop" href="javascript:void(0);">카테고리</a>
@@ -29,12 +30,6 @@
 		</div>
 	</div>
 	<div id="breadcrumb" class="hoc clear" style="display:none">
-		<ul>
-			<li><a href="javascript:void(0);">Home</a></li>
-			<li><a href="javascript:void(0);">Lorem</a></li>
-			<li><a href="javascript:void(0);">Ipsum</a></li>
-			<li><a href="javascript:void(0);">Dolor</a></li>
-		</ul>
 	</div>
 	
 </div>

@@ -10,4 +10,44 @@
 		GROUP BY CATEGORY
 	</select>
 	
+	<select id="selectCategoryCnt" parameterType="com.spiritgarage.www.category.vo.BlogRssVO" resultType="int">
+		SELECT COUNT(*) FROM TB_BLOG_RSS WHERE CATEGORY = #{category}
+	</select>
+	
+	<select id="selectCategoryList" parameterType="com.spiritgarage.www.category.vo.BlogRssVO" resultType="com.spiritgarage.www.category.vo.BlogRssVO">
+		SELECT
+			T.RNUM,
+			T.BLOG_RSS_SEQ,
+			T.AUTHOR,
+			T.CATEGORY,
+			T.TITLE,
+			T.LINK,
+			T.DESCRIPTION,
+			T.PUB_DATE,
+			T.USE_YN,
+			T.REG_DATE,
+			T.UPT_DATE
+		FROM
+			(SELECT
+				@rownum:=@rownum+1 RNUM,
+				R.BLOG_RSS_SEQ,
+				R.AUTHOR,
+				R.CATEGORY,
+				R.TITLE,
+				R.LINK,
+				R.DESCRIPTION,
+				DATE_FORMAT(R.PUB_DATE,'%Y-%m-%d %H:%i') PUB_DATE,
+				R.USE_YN,
+				DATE_FORMAT(R.REG_DATE,'%Y-%m-%d %H:%i') REG_DATE,
+				DATE_FORMAT(R.UPT_DATE,'%Y-%m-%d %H:%i') UPT_DATE
+			FROM
+				TB_BLOG_RSS R INNER JOIN (SELECT @ROWNUM := 0) C
+			WHERE
+				R.CATEGORY = #{category}
+				AND
+				R.USE_YN = 'Y'
+			ORDER BY R.PUB_DATE DESC) T
+		LIMIT #{startPostNumber} , #{blockPostCnt}
+	</select>
+	
 </mapper>

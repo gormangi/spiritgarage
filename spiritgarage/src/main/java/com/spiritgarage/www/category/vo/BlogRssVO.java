@@ -1,6 +1,8 @@
 package com.spiritgarage.www.category.vo;
 
-public class BlogRssVO {
+import com.spiritgarage.www.common.BasePaging;
+
+public class BlogRssVO extends BasePaging{
 
 	private String blogRssSeq;
 	
