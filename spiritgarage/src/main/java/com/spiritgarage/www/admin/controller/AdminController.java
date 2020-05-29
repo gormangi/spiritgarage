@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.spiritgarage.www.admin.service.AdminService;
+import com.spiritgarage.www.admin.vo.MainSlideVO;
 import com.spiritgarage.www.admin.vo.MngrVO;
 import com.spiritgarage.www.admin.vo.NoticeVO;
 import com.spiritgarage.www.reservation.vo.MaintenanceAreaVO;
@@ -240,4 +241,61 @@ public class AdminController {
 		return service.noticeDel(vo);
 	}
 	
+	@RequestMapping(value = "/admin/mainViewManagement")
+	public String mainViewManagement(HttpServletRequest request , HttpServletResponse response) throws Exception{
+		return "admin/main_view_management";
+	}
+	
+	@RequestMapping(value = "/admin/getMainSlideList")
+	@ResponseBody
+	public Map<String, Object> getMainSlideList(HttpServletRequest request , HttpServletResponse response) throws Exception{
+		return service.getMainSlideList();
+	}
+	
+	@RequestMapping(value = "/admin/mainSlideWrite")
+	@ResponseBody
+	public Map<String, Object> mainSlideWrite(MainSlideVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
+		HttpSession session = request.getSession();
+		MngrVO mngrInfo = (MngrVO)session.getAttribute("mngrInfo");
+		vo.setRegMngrId(mngrInfo.getId());
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date today = new Date();
+		String dateFolderName = format.format(today);
+		String folderName = "user_images";
+		vo.setDateFolderName(dateFolderName);
+		vo.setFolderName(folderName);
+		vo.setBannerUploadPath(request.getSession().getServletContext().getRealPath("/") + folderName + File.separator + dateFolderName + File.separator);
+		vo.setBaseUrl(request.getRequestURL().toString().replace(request.getRequestURI().toString(),""));
+		return service.mainSlideWrite(vo);
+		
+	}
+	
+	@RequestMapping(value = "/admin/getMainSlideInfo")
+	@ResponseBody
+	public MainSlideVO getMainSlideInfo(MainSlideVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
+		return service.getMainSlideInfo(vo);
+	}
+	
+	@RequestMapping(value = "/admin/mainSlideModify")
+	@ResponseBody
+	public Map<String, Object> mainSlideModify(MainSlideVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
+		HttpSession session = request.getSession();
+		MngrVO mngrInfo = (MngrVO)session.getAttribute("mngrInfo");
+		vo.setRegMngrId(mngrInfo.getId());
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date today = new Date();
+		String dateFolderName = format.format(today);
+		String folderName = "user_images";
+		vo.setDateFolderName(dateFolderName);
+		vo.setFolderName(folderName);
+		vo.setBannerUploadPath(request.getSession().getServletContext().getRealPath("/") + folderName + File.separator + dateFolderName + File.separator);
+		vo.setBaseUrl(request.getRequestURL().toString().replace(request.getRequestURI().toString(),""));
+		return service.mainSlideModify(vo);
+	}
+	
+	@RequestMapping(value = "/admin/mainSlideDelete")
+	@ResponseBody
+	public Map<String, Object> mainSlideDelete(MainSlideVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
+		return service.mainSlideDelete(vo);
+	}
 }

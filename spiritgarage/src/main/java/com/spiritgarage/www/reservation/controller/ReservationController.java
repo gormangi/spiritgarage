@@ -48,6 +48,7 @@ public class ReservationController {
 	
 	@RequestMapping(value = "/reservationConfirm")
 	public String reservationConfirm(ReservationVO vo , Model model , HttpServletRequest request , HttpServletResponse response) throws Exception{
+		model.addAttribute("viewDivision","reservationPage");
 		model.addAttribute("reservationName",vo.getReservationName());
 		model.addAttribute("phone",vo.getPhone());
 		return "user/reservation_confirm";

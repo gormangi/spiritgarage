@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.spiritgarage.www.admin.mapper.AdminMapper;
 import com.spiritgarage.www.admin.service.AdminService;
 import com.spiritgarage.www.admin.vo.FileVO;
+import com.spiritgarage.www.admin.vo.MainSlideVO;
 import com.spiritgarage.www.admin.vo.MngrVO;
 import com.spiritgarage.www.admin.vo.NoticeVO;
 import com.spiritgarage.www.reservation.vo.MaintenanceAreaVO;
@@ -498,6 +499,152 @@ public class AdminServiceImpl implements AdminService{
 			if(res > 0) {
 				result.put("state", "success");
 			}
+		}
+		
+		return result;
+	}
+
+	@Override
+	public Map<String, Object> getMainSlideList() throws Exception {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		List<MainSlideVO> list = mapper.selectMainSlideList();
+		
+		result.put("list", list);
+		return result;
+	}
+
+	@Override
+	public Map<String, Object> mainSlideWrite(MainSlideVO vo) throws Exception {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("state", "fail");
+		
+		vo.setMainSlideSeq(UUID.randomUUID().toString());
+		int res = mapper.insertMainSlide(vo);
+		
+		if(res > 0) {
+			
+			if(vo.getBannerFile() != null) {
+				String bannerOriginFileName = vo.getBannerFile().getOriginalFilename();
+				String bannerOriginFileExt = bannerOriginFileName.substring(bannerOriginFileName.lastIndexOf(".") + 1);
+				String bannerOriginSaveFileName = UUID.randomUUID().toString() + "." + bannerOriginFileExt;
+				String bannerOriginFilePath = vo.getBannerUploadPath() + bannerOriginSaveFileName;
+				File bannerOriginFile = new File(bannerOriginFilePath);
+				if(!bannerOriginFile.exists()) {
+					bannerOriginFile.mkdirs();
+				}
+				vo.getBannerFile().transferTo(bannerOriginFile);
+				
+				FileVO fileVO = new FileVO();
+				fileVO.setFileSeq(UUID.randomUUID().toString());
+				fileVO.setPostSeq(vo.getMainSlideSeq());
+				fileVO.setOriginFileName(bannerOriginFileName);
+				fileVO.setExtensionName(bannerOriginFileExt);
+				fileVO.setFileSize(String.valueOf(vo.getBannerFile().getSize()));
+				fileVO.setSaveFileName(bannerOriginSaveFileName);
+				fileVO.setSaveFilePath(bannerOriginFilePath);
+				fileVO.setFileUrl(vo.getBaseUrl() + "/" + vo.getFolderName() + "/" + vo.getDateFolderName() + "/" + bannerOriginSaveFileName);
+				fileVO.setFileKind("banner");
+				fileVO.setRegId(vo.getRegMngrId());
+				
+				mapper.insertThumbnailFile(fileVO);
+			}
+			
+			result.put("state", "success");
+		}
+		
+		return result;
+	}
+
+	@Override
+	public MainSlideVO getMainSlideInfo(MainSlideVO vo) throws Exception {
+		return mapper.selectMainSlideInfo(vo);
+	}
+
+	@Override
+	public Map<String, Object> mainSlideModify(MainSlideVO vo) throws Exception {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("state", "fail");
+		
+		int res = mapper.updateMainSlide(vo);
+		
+		if(res > 0) {
+			
+			if("T".equals(vo.getSlideDv())) {
+				
+				FileVO originFileInfo = mapper.selectFileInfoByMainSlideSeq(vo);
+				if(originFileInfo != null) {
+					File originFile = new File(originFileInfo.getSaveFilePath());
+					originFile.delete();
+				}
+				mapper.deleteFileInfoByMainSlideSeq(vo);
+				
+			} else {
+				
+				if(vo.getBannerFile() != null) {
+					
+					FileVO originFileInfo = mapper.selectFileInfoByMainSlideSeq(vo);
+					if(originFileInfo != null) {
+						File originFile = new File(originFileInfo.getSaveFilePath());
+						originFile.delete();
+					}
+					mapper.deleteFileInfoByMainSlideSeq(vo);
+					
+					String bannerOriginFileName = vo.getBannerFile().getOriginalFilename();
+					String bannerOriginFileExt = bannerOriginFileName.substring(bannerOriginFileName.lastIndexOf(".") + 1);
+					String bannerOriginSaveFileName = UUID.randomUUID().toString() + "." + bannerOriginFileExt;
+					String bannerOriginFilePath = vo.getBannerUploadPath() + bannerOriginSaveFileName;
+					File bannerOriginFile = new File(bannerOriginFilePath);
+					if(!bannerOriginFile.exists()) {
+						bannerOriginFile.mkdirs();
+					}
+					vo.getBannerFile().transferTo(bannerOriginFile);
+					
+					FileVO fileVO = new FileVO();
+					fileVO.setFileSeq(UUID.randomUUID().toString());
+					fileVO.setPostSeq(vo.getMainSlideSeq());
+					fileVO.setOriginFileName(bannerOriginFileName);
+					fileVO.setExtensionName(bannerOriginFileExt);
+					fileVO.setFileSize(String.valueOf(vo.getBannerFile().getSize()));
+					fileVO.setSaveFileName(bannerOriginSaveFileName);
+					fileVO.setSaveFilePath(bannerOriginFilePath);
+					fileVO.setFileUrl(vo.getBaseUrl() + "/" + vo.getFolderName() + "/" + vo.getDateFolderName() + "/" + bannerOriginSaveFileName);
+					fileVO.setFileKind("banner");
+					fileVO.setRegId(vo.getRegMngrId());
+					
+					mapper.insertBannerFile(fileVO);
+					
+				}
+				
+			}
+			
+			result.put("state", "success");
+			
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public Map<String, Object> mainSlideDelete(MainSlideVO vo) throws Exception{
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("state", "fail");
+		
+		FileVO originFileInfo = mapper.selectFileInfoByMainSlideSeq(vo);
+		if(originFileInfo != null) {
+			File originFile = new File(originFileInfo.getSaveFilePath());
+			originFile.delete();
+		}
+		mapper.deleteFileInfoByMainSlideSeq(vo);
+		
+		int res = mapper.deleteMainSlideByMainSlideSeq(vo);
+		
+		if(res > 0) {
+			result.put("state", "success");
 		}
 		
 		return result;

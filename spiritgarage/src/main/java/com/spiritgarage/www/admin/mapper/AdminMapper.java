@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.spiritgarage.www.admin.vo.FileVO;
+import com.spiritgarage.www.admin.vo.MainSlideVO;
 import com.spiritgarage.www.admin.vo.MngrVO;
 import com.spiritgarage.www.admin.vo.NoticeVO;
 import com.spiritgarage.www.reservation.vo.MaintenanceAreaVO;
@@ -72,5 +73,21 @@ public interface AdminMapper {
 	int selectNoticeMainViewYCnt() throws Exception;
 	
 	int deleteNotice(NoticeVO vo) throws Exception;
+	
+	List<MainSlideVO> selectMainSlideList() throws Exception;
+	
+	int insertMainSlide(MainSlideVO vo) throws Exception;
+	
+	MainSlideVO selectMainSlideInfo(MainSlideVO vo) throws Exception;
+	
+	int updateMainSlide(MainSlideVO vo) throws Exception;
+	
+	FileVO selectFileInfoByMainSlideSeq(MainSlideVO vo) throws Exception;
+	
+	int deleteFileInfoByMainSlideSeq(MainSlideVO vo) throws Exception;
+	
+	int insertBannerFile(FileVO vo) throws Exception;
+	
+	int deleteMainSlideByMainSlideSeq(MainSlideVO vo) throws Exception;
 	
 }

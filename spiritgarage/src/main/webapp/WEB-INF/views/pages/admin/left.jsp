@@ -40,6 +40,12 @@
 						<p>공지사항 관리</p>
 					</a>
 				</li>
+				<li class="nav-item" id="menu_mainViewManagement">
+					<a href="/admin/mainViewManagement" class="nav-link">
+						<i class="nav-icon fas fa-table"></i>
+						<p>메인화면 관리</p>
+					</a>
+				</li>
 			</ul>
 		</nav>
 		

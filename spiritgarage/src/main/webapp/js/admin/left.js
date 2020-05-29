@@ -29,7 +29,9 @@ var leftFn = {
 			}else if(activeUrl == 'noticeReg'){
 				$("#menu_noticeManagement a").addClass('active');
 			}else if(activeUrl == 'noticeModify'){
-				$("#menu_noticeManagement a").addClass('active');
+				$("#menu_noticManagement a").addClass('active');
+			}else if(activeUrl == 'mainViewManagement'){
+				$("#menu_mainViewManagement a").addClass('active');
 			}
 			
 		}

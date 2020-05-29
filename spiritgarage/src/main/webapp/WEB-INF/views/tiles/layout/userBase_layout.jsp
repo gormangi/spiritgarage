@@ -19,7 +19,6 @@
 	<tiles:insertAttribute name="footer"/>
 	
 	<script src="layout/scripts/jquery.backtotop.js"></script>
-	<script src="layout/scripts/jquery.mobilemenu.js"></script>
 	<script src="layout/scripts/jquery.flexslider-min.js"></script>
 </body>
 </html>

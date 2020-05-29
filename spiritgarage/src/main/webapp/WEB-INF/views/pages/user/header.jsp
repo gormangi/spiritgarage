@@ -49,9 +49,7 @@
 	</li>
 	<li>
 		<article>
-			<p class="heading">TITLE TEST 입니다</p>
-			<h2 class="heading">TITLE TEST 입니다 TITLE TEST 입니다 TITLE TEST 입니다</h2>
-			<p>TITLE TEST 입니다 TITLE TEST 입니다 TITLE TEST 입니다 TITLE TEST 입니다 TITLE TEST 입니다 TITLE TEST 입니다</p>
+			<img src="/images/admin_img/prod-5.jpg"/>
 			<footer>
 				<ul class="nospace inline pushright">
 					<li><a class="btn" href="#">TEST 버튼 1</a></li>

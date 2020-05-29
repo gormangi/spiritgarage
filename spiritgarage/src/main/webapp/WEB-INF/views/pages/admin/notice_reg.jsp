@@ -37,7 +37,7 @@
 									<label for="exampleInputFile">썸네일</label>
 									<div class="input-group">
 										<div class="custom-file">
-											<input type="file" class="custom-file-input" id="noticeThumbnailFile"/>
+											<input type="file" class="custom-file-input" id="noticeThumbnailFile" accept="image/x-png,image/gif,image/jpeg" />
 											<label class="custom-file-label" id="noticeThumbnailFileLabel" style="display:none;"></label>
 											<label class="custom-file-label" id="noticeOriginThumbnailFileLabel" style="display:none;"></label>
 										</div>

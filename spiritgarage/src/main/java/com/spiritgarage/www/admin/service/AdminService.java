@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.spiritgarage.www.admin.vo.MainSlideVO;
 import com.spiritgarage.www.admin.vo.MngrVO;
 import com.spiritgarage.www.admin.vo.NoticeVO;
 import com.spiritgarage.www.reservation.vo.MaintenanceAreaVO;
@@ -59,4 +60,14 @@ public interface AdminService {
 	Map<String, Object> uptMainViewYn(NoticeVO vo) throws Exception;
 	
 	Map<String, Object> noticeDel(NoticeVO vo) throws Exception;
+	
+	Map<String, Object> getMainSlideList() throws Exception;
+	
+	Map<String, Object> mainSlideWrite(MainSlideVO vo) throws Exception;
+	
+	MainSlideVO getMainSlideInfo(MainSlideVO vo) throws Exception;
+	
+	Map<String, Object> mainSlideModify(MainSlideVO vo) throws Exception;
+	
+	Map<String, Object> mainSlideDelete(MainSlideVO vo) throws Exception;
 }

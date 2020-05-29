@@ -386,4 +386,146 @@
 		DELETE FROM TB_NOTICE WHERE NOTICE_SEQ = #{noticeSeq}
 	</delete>
 	
+	<select id="selectMainSlideList" resultType="com.spiritgarage.www.admin.vo.MainSlideVO">
+		SELECT
+			R.MAIN_SLIDE_SEQ,
+			R.SLIDE_DV,
+			R.TOP_TEXT,
+			R.MIDDLE_TEXT,
+			R.BOTTOM_TEXT,
+			(SELECT ORIGIN_FILE_NAME FROM TB_FILE WHERE POST_SEQ = R.MAIN_SLIDE_SEQ) ORIGIN_FILE_NAME,
+			R.RESERVATION_BTN_YN,
+			R.MAINTENANCE_HISTORY_BTN_YN,
+			R.MAIN_SLIDE_ORDER,
+			R.REG_DATE,
+			R.UPT_DATE
+		FROM
+			TB_MAIN_SLIDE R
+		ORDER BY MAIN_SLIDE_ORDER
+	</select>
+	
+	<insert id="insertMainSlide" parameterType="com.spiritgarage.www.admin.vo.MainSlideVO">
+		INSERT INTO TB_MAIN_SLIDE
+		(
+			MAIN_SLIDE_SEQ,
+			SLIDE_DV,
+			TOP_TEXT,
+			MIDDLE_TEXT,
+			BOTTOM_TEXT,
+			RESERVATION_BTN_YN,
+			MAINTENANCE_HISTORY_BTN_YN,
+			MAIN_SLIDE_ORDER,
+			REG_DATE,
+			UPT_DATE
+		)VALUES(
+			#{mainSlideSeq},
+			#{slideDv},
+			#{topText},
+			#{middleText},
+			#{bottomText},
+			#{reservationBtnYn},
+			#{maintenanceHistoryBtnYn},
+			(SELECT IFNULL(MAX(MAIN_SLIDE_ORDER),0)+1 FROM TB_MAIN_SLIDE A),
+			NOW(),
+			NOW()
+		)
+	</insert>
+	
+	<select id="selectMainSlideInfo" parameterType="com.spiritgarage.www.admin.vo.MainSlideVO" resultType="com.spiritgarage.www.admin.vo.MainSlideVO">
+		SELECT
+			R.MAIN_SLIDE_SEQ,
+			R.SLIDE_DV,
+			R.TOP_TEXT,
+			R.MIDDLE_TEXT,
+			R.BOTTOM_TEXT,
+			R.RESERVATION_BTN_YN,
+			R.MAINTENANCE_HISTORY_BTN_YN,
+			R.MAIN_SLIDE_ORDER,
+			R.REG_DATE,
+			R.UPT_DATE,
+			F.ORIGIN_FILE_NAME
+		FROM
+			TB_MAIN_SLIDE R LEFT OUTER JOIN TB_FILE F ON R.MAIN_SLIDE_SEQ = F.POST_SEQ
+		WHERE
+			R.MAIN_SLIDE_SEQ = #{mainSlideSeq}
+	</select>
+	
+	<update id="updateMainSlide" parameterType="com.spiritgarage.www.admin.vo.MainSlideVO">
+		UPDATE TB_MAIN_SLIDE SET
+			SLIDE_DV = #{slideDv},
+			<if test='slideDv == "T"'>
+				TOP_TEXT = #{topText},
+				MIDDLE_TEXT = #{middleText},
+				BOTTOM_TEXT = #{bottomText},
+			</if>
+			<if test='slideDv == "F"'>
+				TOP_TEXT = NULL,
+				MIDDLE_TEXT = NULL,
+				BOTTOM_TEXT = NULL,
+			</if>
+			RESERVATION_BTN_YN = #{reservationBtnYn},
+			MAINTENANCE_HISTORY_BTN_YN = #{maintenanceHistoryBtnYn},
+			UPT_DATE = NOW()
+		WHERE
+			MAIN_SLIDE_SEQ = #{mainSlideSeq}
+	</update>
+	
+	<select id="selectFileInfoByMainSlideSeq" parameterType="com.spiritgarage.www.admin.vo.MainSlideVO" resultType="com.spiritgarage.www.admin.vo.FileVO">
+		SELECT
+			FILE_SEQ,
+			POST_SEQ,
+			ORIGIN_FILE_NAME,
+			EXTENSION_NAME,
+			FILE_SIZE,
+			SAVE_FILE_NAME,
+			SAVE_FILE_PATH,
+			FILE_URL,
+			FILE_KIND,
+			REG_ID,
+			REG_DATE
+		FROM
+			TB_FILE
+		WHERE
+			POST_SEQ = #{mainSlideSeq}
+			AND
+			FILE_KIND = 'banner'
+	</select>
+	
+	<delete id="deleteFileInfoByMainSlideSeq" parameterType="com.spiritgarage.www.admin.vo.MainSlideVO">
+		DELETE FROM TB_FILE WHERE POST_SEQ = #{mainSlideSeq} AND FILE_KIND = 'banner'
+	</delete>
+	
+	<insert id="insertBannerFile" parameterType="com.spiritgarage.www.admin.vo.FileVO">
+		INSERT INTO TB_FILE
+		(
+			FILE_SEQ,
+			POST_SEQ,
+			ORIGIN_FILE_NAME,
+			EXTENSION_NAME,
+			FILE_SIZE,
+			SAVE_FILE_NAME,
+			SAVE_FILE_PATH,
+			FILE_URL,
+			FILE_KIND,
+			REG_ID,
+			REG_DATE
+		)VALUES(
+			#{fileSeq},
+			#{postSeq},
+			#{originFileName},
+			#{extensionName},
+			#{fileSize},
+			#{saveFileName},
+			#{saveFilePath},
+			#{fileUrl},
+			#{fileKind},
+			#{regId},
+			NOW()
+		)
+	</insert>
+	
+	<delete id="deleteMainSlideByMainSlideSeq" parameterType="com.spiritgarage.www.admin.vo.MainSlideVO">
+		DELETE FROM TB_MAIN_SLIDE WHERE MAIN_SLIDE_SEQ = #{mainSlideSeq}
+	</delete>
+	
 </mapper>

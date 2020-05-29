@@ -3,6 +3,7 @@
 
 <style type="text/css">
 .btn{margin-top:20px;}
+#content img{height:auto !important;width:auto !important;}
 </style>
 
 <input type="hidden" value="${noticeSeq }" id="noticeSeq"/>
