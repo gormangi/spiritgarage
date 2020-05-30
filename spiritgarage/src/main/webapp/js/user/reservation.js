@@ -19,7 +19,8 @@ var fn = {
 			$("#reservation_date").datetimepicker({
 				format:'Y-m-d H:i',
 				ignoreReadonly:true,
-				minDate:0
+				minDate:0,
+				step:30
 			});
 			
 			fn.getMaintenanceAreaList();

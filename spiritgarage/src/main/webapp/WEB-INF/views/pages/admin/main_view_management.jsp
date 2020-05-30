@@ -32,7 +32,7 @@
 					<div class="card-header">
 						<h3 class="card-title">메인슬라이드 설정</h3>
 						<div class="card-tools">
-							<button type="button" id="mainSlideAddBtn" class="btn btn-block btn-primary btn-sm">메인슬라이드 추가</button>
+							<button type="button" id="mainSlideAddBtn" class="btn btn-primary btn-sm">메인슬라이드 추가</button>
 						</div>
 					</div>
 					<div class="card-body table-responsive p-0">
@@ -166,7 +166,7 @@
 <script id="mainSlide_list_template" type="text/x-jquery-tmpl">
 {{if list.length > 0}}
 	{{each(i,item) list}}
-		<tr data-main-slide-seq="\${item.mainSlideSeq}">
+		<tr data-main-slide-seq="\${item.mainSlideSeq}" data-main-slide-order="\${item.mainSlideOrder}">
 			<td>\${item.slideDv}</td>
 			<td><span>\${item.topText}</span></td>
 			<td><span>\${item.middleText}</span></td>
@@ -174,7 +174,11 @@
 			<td>\${item.originFileName}</td>
 			<td>\${item.reservationBtnYn}</td>
 			<td>\${item.maintenanceHistoryBtnYn}</td>
-			<td>\${item.mainSlideOrder}</td>
+			<td>
+				<span>\${item.mainSlideOrder}</span>
+				<button type="button" {{if item.mainSlideMinOrder == item.mainSlideOrder}}disabled="disabled"{{/if}} name="mainSlideOrderUpBtn" class="btn btn-primary btn-sm"><i class="fa fa-arrow-circle-up"></i></button>
+				<button type="button" {{if item.mainSlideMaxOrder == item.mainSlideOrder}}disabled="disabled"{{/if}} name="mainSlideOrderDownBtn" class="btn btn-primary btn-sm"><i class="fa fa-arrow-circle-down"></i></button>
+			</td>
 			<td><button type="button" name="mainSlideModifyBtn" class="btn btn-block btn-outline-info btn-xs">수정</button></td>
 			<td><button type="button" name="mainSlideDelBtn" class="btn btn-block btn-outline-danger btn-xs">삭제</button></td>
 		</tr>

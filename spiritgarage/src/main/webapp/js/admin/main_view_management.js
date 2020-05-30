@@ -30,6 +30,14 @@ $(document).ready(function(){
 		fn.mainSlideDelete($(this).closest('tr').data('mainSlideSeq'));
 	});
 	
+	$("#mainSlide_list").on("click","button[name=mainSlideOrderUpBtn]",function(){
+		fn.mainSlideOrderModify($(this).closest('tr').data('mainSlideOrder'),'up');
+	});
+	
+	$("#mainSlide_list").on("click","button[name=mainSlideOrderDownBtn]",function(){
+		fn.mainSlideOrderModify($(this).closest('tr').data('mainSlideOrder'),'down');
+	});
+	
 });
 
 var fn = {
@@ -342,6 +350,24 @@ var fn = {
 					}
 				});
 			}
+			
+		},
+		
+		mainSlideOrderModify : function(mainSlideOrder , way){
+			
+			$.ajax({
+				url : '/admin/mainSlideOrderModify',
+				data : {mainSlideOrder : mainSlideOrder , mainSlideOrderWay : way},
+				dataType : 'json',
+				type : 'post',
+				success : function(res){
+					if(res.state == 'success'){
+						fn.mainSlideList();
+					}else{
+						alert('순서 변경에 실패하였습니다. 관리자에게 문의해주세요');
+					}
+				}
+			});
 			
 		}
 		

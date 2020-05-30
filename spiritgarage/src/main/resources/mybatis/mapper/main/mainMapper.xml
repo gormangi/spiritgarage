@@ -37,4 +37,22 @@
 		ORDER BY UPT_DATE DESC
 	</select>
 	
+	<select id="selectMainSlideList" resultType="com.spiritgarage.www.admin.vo.MainSlideVO">
+		SELECT
+			R.MAIN_SLIDE_SEQ,
+			R.SLIDE_DV,
+			R.TOP_TEXT,
+			R.MIDDLE_TEXT,
+			R.BOTTOM_TEXT,
+			R.RESERVATION_BTN_YN,
+			R.MAINTENANCE_HISTORY_BTN_YN,
+			R.MAIN_SLIDE_ORDER,
+			R.REG_DATE,
+			R.UPT_DATE,
+			F.FILE_URL
+		FROM
+			TB_MAIN_SLIDE R LEFT OUTER JOIN TB_FILE F ON R.MAIN_SLIDE_SEQ = F.POST_SEQ
+		ORDER BY R.MAIN_SLIDE_ORDER
+	</select>
+	
 </mapper>

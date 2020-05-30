@@ -649,6 +649,38 @@ public class AdminServiceImpl implements AdminService{
 		
 		return result;
 	}
+
+	@Override
+	public Map<String, Object> mainSlideOrderModify(MainSlideVO vo) throws Exception {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("state", "fail");
+		
+		if("up".equals(vo.getMainSlideOrderWay())) {
+			
+			MainSlideVO upVo = mapper.selectOrderUpMainSlide(vo);
+			MainSlideVO meVo = mapper.selectOrderMeMainSlide(vo);
+			
+			int res = mapper.updateOrderDownMainSlide(upVo);
+			if(res > 0) {
+				mapper.updateOrderUpMainSlide(meVo);
+				result.put("state", "success");
+			}
+			
+		}else if("down".equals(vo.getMainSlideOrderWay())) {
+			
+			MainSlideVO downVo = mapper.selectOrderDownMainSlide(vo);
+			MainSlideVO meVo = mapper.selectOrderMeMainSlide(vo);
+			
+			int res = mapper.updateOrderUpMainSlide(downVo);
+			if(res > 0) {
+				mapper.updateOrderDownMainSlide(meVo);
+				result.put("state", "success");
+			}
+		}
+		
+		return result;
+	}
 	
 }
 

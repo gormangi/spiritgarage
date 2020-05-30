@@ -40,35 +40,48 @@
 </form>
 
 <script id="header_slide_template" type="text/x-jquery-tmpl">
+{{if list.length > 0}}
+	{{each(i,item) list}}
+		{{if item.slideDv == 'T'}}
+			<li>
+				<article>
+					<p class="heading">\${item.topText}</p>
+					<h2 class="heading">\${item.middleText}</h2>
+					<p>\${item.bottomText}</p>
+						{{if item.reservationBtnYn == 'Y' || item.maintenanceHistoryBtnYn == 'Y'}}
+							<footer>
+							<ul class="nospace inline pushright">
+								{{if item.reservationBtnYn == 'Y'}}<li><a class="btn" href="/reservation">예약하기</a></li>{{/if}}
+								{{if item.maintenanceHistoryBtnYn == 'Y'}}<li><a class="btn inverse" href="#">내 정비이력보기</a></li>{{/if}}
+							</ul>
+						</footer>
+					{{/if}}
+				</article>
+			</li>
+		{{/if}}
+		{{if item.slideDv == 'F'}}
+			<li>
+				<article>
+					<img src="\${item.fileUrl}"/>
+					{{if item.reservationBtnYn == 'Y' || item.maintenanceHistoryBtnYn == 'Y'}}
+						<footer>
+							<ul class="nospace inline pushright">
+								{{if item.reservationBtnYn == 'Y'}}<li><a class="btn" href="/reservation">예약하기</a></li>{{/if}}
+								{{if item.maintenanceHistoryBtnYn == 'Y'}}<li><a class="btn inverse" href="#">내 정비이력보기</a></li>{{/if}}
+							</ul>
+						</footer>
+					{{/if}}
+				</article>
+			</li>
+		{{/if}}
+	{{/each}}
+{{else}}
 	<li>
 		<article>
-			<p class="heading">\${title}</p>
+			<p class="heading">\${vo.title}</p>
 			<h2 class="heading">프리미엄 카 케어센터 스피릿 개러지</h2>
-			<p>\${description}</p>
+			<p>\${vo.description}</p>
 		</article>
 	</li>
-	<li>
-		<article>
-			<img src="/images/admin_img/prod-5.jpg"/>
-			<footer>
-				<ul class="nospace inline pushright">
-					<li><a class="btn" href="#">TEST 버튼 1</a></li>
-					<li><a class="btn inverse" href="#">TEST 버튼 2</a></li>
-				</ul>
-			</footer>
-		</article>
-	</li>
-	<li>
-		<article>
-			<p class="heading">TITLE TEST 입니다</p>
-			<h2 class="heading">TITLE TEST 입니다 TITLE TEST 입니다 TITLE TEST 입니다</h2>
-			<p>TITLE TEST 입니다 TITLE TEST 입니다 TITLE TEST 입니다 TITLE TEST 입니다 TITLE TEST 입니다 TITLE TEST 입니다</p>
-			<footer>
-				<ul class="nospace inline pushright">
-					<li><a class="btn" href="#">DUMY 버튼 1</a></li>
-					<li><a class="btn inverse" href="#">DUMY 버튼 2</a></li>
-				</ul>
-			</footer>
-		</article>
-	</li>
+{{/if}}
 </script>

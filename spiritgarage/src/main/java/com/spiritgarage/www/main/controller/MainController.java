@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spiritgarage.www.main.service.MainService;
-import com.spiritgarage.www.main.vo.HeaderVO;
 
 @Controller
 public class MainController {
@@ -28,7 +27,7 @@ public class MainController {
 	
 	@RequestMapping("/main/headerInfo")
 	@ResponseBody
-	public HeaderVO headerInfo(HttpServletRequest request , HttpServletResponse respones) throws Exception{
+	public Map<String, Object> headerInfo(HttpServletRequest request , HttpServletResponse respones) throws Exception{
 		return service.getHeaderInfo();
 	}
 	

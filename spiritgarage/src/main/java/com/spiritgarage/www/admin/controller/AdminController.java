@@ -298,4 +298,10 @@ public class AdminController {
 	public Map<String, Object> mainSlideDelete(MainSlideVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
 		return service.mainSlideDelete(vo);
 	}
+	
+	@RequestMapping(value = "/admin/mainSlideOrderModify")
+	@ResponseBody
+	public Map<String, Object> mainSlideOrderModify(MainSlideVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
+		return service.mainSlideOrderModify(vo);
+	}
 }

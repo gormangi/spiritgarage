@@ -398,7 +398,9 @@
 			R.MAINTENANCE_HISTORY_BTN_YN,
 			R.MAIN_SLIDE_ORDER,
 			R.REG_DATE,
-			R.UPT_DATE
+			R.UPT_DATE,
+			(SELECT MAX(MAIN_SLIDE_ORDER) FROM TB_MAIN_SLIDE) MAIN_SLIDE_MAX_ORDER,
+			(SELECT MIN(MAIN_SLIDE_ORDER) FROM TB_MAIN_SLIDE) MAIN_SLIDE_MIN_ORDER
 		FROM
 			TB_MAIN_SLIDE R
 		ORDER BY MAIN_SLIDE_ORDER
@@ -527,5 +529,73 @@
 	<delete id="deleteMainSlideByMainSlideSeq" parameterType="com.spiritgarage.www.admin.vo.MainSlideVO">
 		DELETE FROM TB_MAIN_SLIDE WHERE MAIN_SLIDE_SEQ = #{mainSlideSeq}
 	</delete>
+	
+	<select id="selectOrderUpMainSlide" parameterType="com.spiritgarage.www.admin.vo.MainSlideVO" resultType="com.spiritgarage.www.admin.vo.MainSlideVO">
+		SELECT
+			MAIN_SLIDE_SEQ,
+			SLIDE_DV,
+			TOP_TEXT,
+			MIDDLE_TEXT,
+			BOTTOM_TEXT,
+			RESERVATION_BTN_YN,
+			MAINTENANCE_HISTORY_BTN_YN,
+			MAIN_SLIDE_ORDER,
+			REG_DATE,
+			UPT_DATE
+		FROM
+			TB_MAIN_SLIDE
+		WHERE
+			MAIN_SLIDE_ORDER = (CAST(#{mainSlideOrder} AS UNSIGNED) - 1)
+	</select>
+	
+	<select id="selectOrderDownMainSlide" parameterType="com.spiritgarage.www.admin.vo.MainSlideVO" resultType="com.spiritgarage.www.admin.vo.MainSlideVO">
+		SELECT
+			MAIN_SLIDE_SEQ,
+			SLIDE_DV,
+			TOP_TEXT,
+			MIDDLE_TEXT,
+			BOTTOM_TEXT,
+			RESERVATION_BTN_YN,
+			MAINTENANCE_HISTORY_BTN_YN,
+			MAIN_SLIDE_ORDER,
+			REG_DATE,
+			UPT_DATE
+		FROM
+			TB_MAIN_SLIDE
+		WHERE
+			MAIN_SLIDE_ORDER = (CAST(#{mainSlideOrder} AS UNSIGNED) + 1)
+	</select>
+	
+	<select id="selectOrderMeMainSlide" parameterType="com.spiritgarage.www.admin.vo.MainSlideVO" resultType="com.spiritgarage.www.admin.vo.MainSlideVO">
+		SELECT
+			MAIN_SLIDE_SEQ,
+			SLIDE_DV,
+			TOP_TEXT,
+			MIDDLE_TEXT,
+			BOTTOM_TEXT,
+			RESERVATION_BTN_YN,
+			MAINTENANCE_HISTORY_BTN_YN,
+			MAIN_SLIDE_ORDER,
+			REG_DATE,
+			UPT_DATE
+		FROM
+			TB_MAIN_SLIDE
+		WHERE
+			MAIN_SLIDE_ORDER = #{mainSlideOrder}
+	</select>
+	
+	<update id="updateOrderDownMainSlide" parameterType="com.spiritgarage.www.admin.vo.MainSlideVO">
+		UPDATE TB_MAIN_SLIDE SET
+			MAIN_SLIDE_ORDER = CAST(MAIN_SLIDE_ORDER AS UNSIGNED) + 1
+		WHERE
+			MAIN_SLIDE_SEQ = #{mainSlideSeq}
+	</update>
+	
+	<update id="updateOrderUpMainSlide" parameterType="com.spiritgarage.www.admin.vo.MainSlideVO">
+		UPDATE TB_MAIN_SLIDE SET
+			MAIN_SLIDE_ORDER = CAST(MAIN_SLIDE_ORDER AS UNSIGNED) - 1
+		WHERE
+			MAIN_SLIDE_SEQ = #{mainSlideSeq}
+	</update>
 	
 </mapper>

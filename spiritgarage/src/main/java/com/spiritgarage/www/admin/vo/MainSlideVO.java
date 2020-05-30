@@ -26,8 +26,48 @@ public class MainSlideVO {
 	
 	private String originFileName;
 	
+	private String fileUrl;
+	
 	private String regMngrId;
 	
+	private String mainSlideMaxOrder;
+	
+	private String mainSlideMinOrder;
+	
+	private String mainSlideOrderWay;
+	
+	public String getFileUrl() {
+		return fileUrl;
+	}
+
+	public void setFileUrl(String fileUrl) {
+		this.fileUrl = fileUrl;
+	}
+
+	public String getMainSlideOrderWay() {
+		return mainSlideOrderWay;
+	}
+
+	public void setMainSlideOrderWay(String mainSlideOrderWay) {
+		this.mainSlideOrderWay = mainSlideOrderWay;
+	}
+
+	public String getMainSlideMaxOrder() {
+		return mainSlideMaxOrder;
+	}
+
+	public void setMainSlideMaxOrder(String mainSlideMaxOrder) {
+		this.mainSlideMaxOrder = mainSlideMaxOrder;
+	}
+
+	public String getMainSlideMinOrder() {
+		return mainSlideMinOrder;
+	}
+
+	public void setMainSlideMinOrder(String mainSlideMinOrder) {
+		this.mainSlideMinOrder = mainSlideMinOrder;
+	}
+
 	private MultipartFile bannerFile;
 	private String bannerUrl;
 	private String bannerUploadPath;

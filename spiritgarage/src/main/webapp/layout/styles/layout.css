@@ -32,9 +32,9 @@ File: Layout CSS
 
 /* Page Intro
 --------------------------------------------------------------------------------------------------------------- */
-#pageintro{padding:150px 0;}
+#pageintro{padding:100px 0 150px 0;}
 
-#pageintro article{max-width:75%;}
+#pageintro article{max-width:100%;}
 #pageintro article *{text-transform:uppercase;}
 #pageintro article .heading{margin:0 0 50px 0; padding:0; line-height:1; font-size:46px;}
 #pageintro article p{margin:0;}

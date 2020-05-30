@@ -9,6 +9,7 @@ import java.util.TreeSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spiritgarage.www.admin.vo.MainSlideVO;
 import com.spiritgarage.www.main.mapper.MainMapper;
 import com.spiritgarage.www.main.service.MainService;
 import com.spiritgarage.www.main.vo.BlogRssVO;
@@ -23,7 +24,9 @@ public class MainServiceImpl implements MainService{
 	private MainMapper mapper;
 
 	@Override
-	public HeaderVO getHeaderInfo() {
+	public Map<String, Object> getHeaderInfo() {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
 		
 		RSSUtil rssUtil = new RSSUtil("https://rss.blog.naver.com/spiritgarage.xml");
 		RSSFeed feed = rssUtil.getRSSFeed();
@@ -32,7 +35,12 @@ public class MainServiceImpl implements MainService{
 		vo.setTitle(feed.getTitle());
 		vo.setDescription(feed.getDescription());
 		
-		return vo;
+		List<MainSlideVO> list = mapper.selectMainSlideList();
+		
+		result.put("list", list);
+		result.put("vo", vo);
+		
+		return result;
 	}
 
 	@Override

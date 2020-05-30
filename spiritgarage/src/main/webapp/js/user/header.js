@@ -71,7 +71,7 @@ var headerFn = {
 					url : '/main/headerInfo',
 					dataType : 'json',
 					type : 'post',
-					success : function(res){
+					success : function(res){console.log(res);
 						$("#header_slide").empty();
 						$("#header_slide_template").tmpl(res).appendTo("#header_slide");
 						

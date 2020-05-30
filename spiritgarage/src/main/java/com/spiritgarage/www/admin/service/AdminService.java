@@ -70,4 +70,6 @@ public interface AdminService {
 	Map<String, Object> mainSlideModify(MainSlideVO vo) throws Exception;
 	
 	Map<String, Object> mainSlideDelete(MainSlideVO vo) throws Exception;
+	
+	Map<String, Object> mainSlideOrderModify(MainSlideVO vo) throws Exception;
 }
