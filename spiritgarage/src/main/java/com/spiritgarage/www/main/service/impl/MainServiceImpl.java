@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spiritgarage.www.admin.vo.MainSlideVO;
+import com.spiritgarage.www.category.vo.BlogCategoryVO;
 import com.spiritgarage.www.main.mapper.MainMapper;
 import com.spiritgarage.www.main.service.MainService;
 import com.spiritgarage.www.main.vo.BlogRssVO;
@@ -61,35 +62,41 @@ public class MainServiceImpl implements MainService{
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		List<Map<String, Object>> resultList = new ArrayList<Map<String,Object>>();
 		
+		List<BlogCategoryVO> displayCategoryList = mapper.selectCategoryDisplayY();
+		
 		for(String category : categoryList) {
 			
-			Map<String, Object> oneCategoryMap = new HashMap<String, Object>();
-			List<BlogRssVO> oneCategoryList = new ArrayList<BlogRssVO>();
-			
-			for(BlogRssVO vo : blogRssList) {
-				if(category.equals(vo.getCategory())) {
-					oneCategoryList.add(vo);
-				}
-			}
-			
-			List<BlogRssVO> cutCategoryList = new ArrayList<BlogRssVO>();
-			if(oneCategoryList.size() > 5) {
-				for(int i=0;i<oneCategoryList.size();i++) {
-					if(i<=5) {
-						cutCategoryList.add(oneCategoryList.get(i));
+			for(BlogCategoryVO displayCategory : displayCategoryList) {
+				if(displayCategory.getCategory().equals(category)) {
+					Map<String, Object> oneCategoryMap = new HashMap<String, Object>();
+					List<BlogRssVO> oneCategoryList = new ArrayList<BlogRssVO>();
+					
+					for(BlogRssVO vo : blogRssList) {
+						if(category.equals(vo.getCategory())) {
+							oneCategoryList.add(vo);
+						}
 					}
-				}
-			} else {
-				for(int i=0;i<oneCategoryList.size();i++) {
-					cutCategoryList.add(oneCategoryList.get(i));
+					
+					List<BlogRssVO> cutCategoryList = new ArrayList<BlogRssVO>();
+					if(oneCategoryList.size() > 5) {
+						for(int i=0;i<oneCategoryList.size();i++) {
+							if(i<=5) {
+								cutCategoryList.add(oneCategoryList.get(i));
+							}
+						}
+					} else {
+						for(int i=0;i<oneCategoryList.size();i++) {
+							cutCategoryList.add(oneCategoryList.get(i));
+						}
+					}
+					
+					oneCategoryMap.put("categoryNm", category);
+					oneCategoryMap.put("categoryList", cutCategoryList);
+					resultList.add(oneCategoryMap);
+					
+					resultMap.put("res", resultList);
 				}
 			}
-			
-			oneCategoryMap.put("categoryNm", category);
-			oneCategoryMap.put("categoryList", cutCategoryList);
-			resultList.add(oneCategoryMap);
-			
-			resultMap.put("res", resultList);
 			
 		}
 		

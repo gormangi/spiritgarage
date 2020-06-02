@@ -1,5 +1,6 @@
 package com.spiritgarage.www.job.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import com.spiritgarage.www.category.vo.BlogCategoryVO;
 import com.spiritgarage.www.job.mapper.JobMapper;
 import com.spiritgarage.www.job.service.JobService;
 import com.spiritgarage.www.main.vo.BlogRssVO;
@@ -62,6 +64,42 @@ public class JobServiceImpl implements JobService{
 					vo.setPubDate(entry.getPubDate());
 					vo.setUseYn("Y");
 					jobMapper.insertRssInfo(vo);
+				}
+			}
+		}
+		
+		List<String> uniCategoryList = new ArrayList<String>();
+		for(BlogRssVO vo : blogRssList) {
+			String category = vo.getCategory();
+			if(!uniCategoryList.contains(category)) {
+				uniCategoryList.add(category);
+			}
+		}
+		
+		List<BlogCategoryVO> categoryList = jobMapper.selectRssCategoryList();
+		
+		if(categoryList.size() < 1) {
+			for(String category : uniCategoryList) {
+				BlogCategoryVO vo  = new BlogCategoryVO();
+				vo.setBlogCategorySeq(UUID.randomUUID().toString());
+				vo.setCategory(category);
+				vo.setDisplayYn("Y");
+				jobMapper.insertRssCategory(vo);
+			}
+		}else {
+			for(String category : uniCategoryList) {
+				boolean match = false;
+				for(BlogCategoryVO vo : categoryList) {
+					if(category.equals(vo.getCategory())) {
+						match = true;
+					}
+				}
+				if(!match) {
+					BlogCategoryVO vo  = new BlogCategoryVO();
+					vo.setBlogCategorySeq(UUID.randomUUID().toString());
+					vo.setCategory(category);
+					vo.setDisplayYn("Y");
+					jobMapper.insertRssCategory(vo);
 				}
 			}
 		}

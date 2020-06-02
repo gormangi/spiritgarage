@@ -7,6 +7,7 @@ import com.spiritgarage.www.admin.vo.FileVO;
 import com.spiritgarage.www.admin.vo.MainSlideVO;
 import com.spiritgarage.www.admin.vo.MngrVO;
 import com.spiritgarage.www.admin.vo.NoticeVO;
+import com.spiritgarage.www.category.vo.BlogCategoryVO;
 import com.spiritgarage.www.reservation.vo.MaintenanceAreaVO;
 import com.spiritgarage.www.reservation.vo.ReservationVO;
 
@@ -99,5 +100,9 @@ public interface AdminMapper {
 	int updateOrderDownMainSlide(MainSlideVO vo) throws Exception;
 	
 	int updateOrderUpMainSlide(MainSlideVO vo) throws Exception;
+	
+	List<BlogCategoryVO> selectCategoryList() throws Exception;
+	
+	int updateCategoryDisplayYn(BlogCategoryVO vo) throws Exception;
 	
 }

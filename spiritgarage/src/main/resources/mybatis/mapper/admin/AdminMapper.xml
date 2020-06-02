@@ -598,4 +598,22 @@
 			MAIN_SLIDE_SEQ = #{mainSlideSeq}
 	</update>
 	
+	<select id="selectCategoryList" resultType="com.spiritgarage.www.category.vo.BlogCategoryVO">
+		SELECT
+			BLOG_CATEGORY_SEQ,
+			CATEGORY,
+			DISPLAY_YN,
+			REG_DATE,
+			UPT_DATE
+		FROM
+			TB_BLOG_CATEGORY
+	</select>
+	
+	<update id="updateCategoryDisplayYn" parameterType="com.spiritgarage.www.category.vo.BlogCategoryVO">
+		UPDATE TB_BLOG_CATEGORY SET
+			DISPLAY_YN = #{displayYn}
+		WHERE
+			BLOG_CATEGORY_SEQ = #{blogCategorySeq}
+	</update>
+	
 </mapper>

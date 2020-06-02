@@ -45,4 +45,32 @@
 		)
 	</insert>
 	
+	<select id="selectRssCategoryList" resultType="com.spiritgarage.www.category.vo.BlogCategoryVO">
+		SELECT
+			BLOG_CATEGORY_SEQ,
+			CATEGORY,
+			DISPLAY_YN,
+			REG_DATE,
+			UPT_DATE
+		FROM
+			TB_BLOG_CATEGORY
+	</select>
+	
+	<insert id="insertRssCategory" parameterType="com.spiritgarage.www.category.vo.BlogCategoryVO">
+		INSERT INTO TB_BLOG_CATEGORY
+		(
+			BLOG_CATEGORY_SEQ,
+			CATEGORY,
+			DISPLAY_YN,
+			REG_DATE,
+			UPT_DATE
+		)VALUES(
+			#{blogCategorySeq},
+			#{category},
+			#{displayYn},
+			NOW(),
+			NOW()
+		)
+	</insert>
+	
 </mapper>

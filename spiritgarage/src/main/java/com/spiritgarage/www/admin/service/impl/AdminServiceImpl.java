@@ -22,6 +22,7 @@ import com.spiritgarage.www.admin.vo.FileVO;
 import com.spiritgarage.www.admin.vo.MainSlideVO;
 import com.spiritgarage.www.admin.vo.MngrVO;
 import com.spiritgarage.www.admin.vo.NoticeVO;
+import com.spiritgarage.www.category.vo.BlogCategoryVO;
 import com.spiritgarage.www.reservation.vo.MaintenanceAreaVO;
 import com.spiritgarage.www.reservation.vo.ReservationVO;
 import com.spiritgarage.www.util.ImageUploadUtil;
@@ -677,6 +678,30 @@ public class AdminServiceImpl implements AdminService{
 				mapper.updateOrderDownMainSlide(meVo);
 				result.put("state", "success");
 			}
+		}
+		
+		return result;
+	}
+
+	@Override
+	public Map<String, Object> getCategoryList() throws Exception {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("list", mapper.selectCategoryList());
+		
+		return result;
+	}
+
+	@Override
+	public Map<String, Object> uptCategoryDisplayYn(BlogCategoryVO vo) throws Exception {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("state", "fail");
+		
+		int res = mapper.updateCategoryDisplayYn(vo);
+		
+		if(res > 0) {
+			result.put("state", "success");
 		}
 		
 		return result;

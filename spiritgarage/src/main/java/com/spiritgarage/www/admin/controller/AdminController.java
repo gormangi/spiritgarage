@@ -22,6 +22,7 @@ import com.spiritgarage.www.admin.service.AdminService;
 import com.spiritgarage.www.admin.vo.MainSlideVO;
 import com.spiritgarage.www.admin.vo.MngrVO;
 import com.spiritgarage.www.admin.vo.NoticeVO;
+import com.spiritgarage.www.category.vo.BlogCategoryVO;
 import com.spiritgarage.www.reservation.vo.MaintenanceAreaVO;
 import com.spiritgarage.www.reservation.vo.ReservationVO;
 
@@ -303,5 +304,17 @@ public class AdminController {
 	@ResponseBody
 	public Map<String, Object> mainSlideOrderModify(MainSlideVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
 		return service.mainSlideOrderModify(vo);
+	}
+	
+	@RequestMapping(value = "/admin/getCategoryList")
+	@ResponseBody
+	public Map<String, Object> getCategoryList(HttpServletRequest request , HttpServletResponse response) throws Exception{
+		return service.getCategoryList();
+	}
+	
+	@RequestMapping(value = "/admin/uptCategoryDisplayYn")
+	@ResponseBody
+	public Map<String, Object> uptCategoryDisplayYn(BlogCategoryVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
+		return service.uptCategoryDisplayYn(vo);
 	}
 }

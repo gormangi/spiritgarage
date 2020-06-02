@@ -2,6 +2,8 @@ $(document).ready(function(){
 	
 	fn.mainSlideList();
 	
+	fn.categoryList();
+	
 	$("#mainSlideAddBtn").on("click",function(){
 		fn.mainSlideAddModalOpen();
 	});
@@ -36,6 +38,10 @@ $(document).ready(function(){
 	
 	$("#mainSlide_list").on("click","button[name=mainSlideOrderDownBtn]",function(){
 		fn.mainSlideOrderModify($(this).closest('tr').data('mainSlideOrder'),'down');
+	});
+	
+	$("#category_list").on("click","input:checkbox",function(){
+		fn.uptCategoryDisplayYn($(this));
 	});
 	
 });
@@ -365,6 +371,44 @@ var fn = {
 						fn.mainSlideList();
 					}else{
 						alert('순서 변경에 실패하였습니다. 관리자에게 문의해주세요');
+					}
+				}
+			});
+			
+		},
+		
+		categoryList : function(){
+			
+			$.ajax({
+				url : '/admin/getCategoryList',
+				dataType : 'json',
+				type : 'post',
+				success : function(res){
+					$("#category_list").empty();
+					$('#category_list_template').tmpl(res).appendTo('#category_list');
+				}
+			});
+			
+		},
+		
+		uptCategoryDisplayYn : function(me){
+			
+			var blogCategorySeq = $(me).closest('tr').data('blogCategorySeq');
+			var displayYn = '';
+			if($(me).is(":checked")){
+				displayYn = 'Y';
+			}else{
+				displayYn = 'N';
+			}
+			
+			$.ajax({
+				url : '/admin/uptCategoryDisplayYn',
+				data : {blogCategorySeq : blogCategorySeq , displayYn : displayYn},
+				dataType : 'json',
+				type : 'post',
+				success : function(res){
+					if(res.state == 'success'){
+						fn.categoryList();
 					}
 				}
 			});

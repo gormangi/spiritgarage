@@ -55,4 +55,17 @@
 		ORDER BY R.MAIN_SLIDE_ORDER
 	</select>
 	
+	<select id="selectCategoryDisplayY" resultType="com.spiritgarage.www.category.vo.BlogCategoryVO">
+		SELECT
+			BLOG_CATEGORY_SEQ,
+			CATEGORY,
+			DISPLAY_YN,
+			REG_DATE,
+			UPT_DATE
+		FROM
+			TB_BLOG_CATEGORY
+		WHERE
+			DISPLAY_YN = 'Y'
+	</select>
+	
 </mapper>

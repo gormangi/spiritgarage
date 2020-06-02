@@ -59,6 +59,33 @@
 
 			</div>
 		</div>
+		
+		<div class="row">
+			<div class="col-md-4">
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">메인 카테고리 노출 설정</h3>
+						<div class="card-tools">
+							
+						</div>
+					</div>
+					<div class="card-body table-responsive p-0">
+						<table class="table table-hover text-nowrap">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>카테고리명</th>
+									<th>노출여부</th>
+								</tr>
+							</thead>
+							<tbody id="category_list">
+								
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
 	</section>
 
 </div>
@@ -186,6 +213,27 @@
 {{else}}
 	<tr style="text-align:center">
 		<td colspan="10">등록된 슬라이드가 없습니다.</td>
+	</tr>
+{{/if}}
+</script>
+
+<script id="category_list_template" type="text/x-jquery-tmpl">
+{{if list.length > 0}}
+	{{each(i,item) list}}
+		<tr data-blog-category-seq="\${item.blogCategorySeq}">
+			<td>
+				<div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+					<input type="checkbox" class="custom-control-input" name="category" id="category\${i}" {{if item.displayYn == 'Y'}}checked="checked"{{/if}}>
+					<label class="custom-control-label" for="category\${i}"></label>
+				</div>
+			</td>
+			<td>\${item.category}</td>
+			<td>{{if item.displayYn == 'Y'}}노출{{/if}}{{if item.displayYn == 'N'}}미노출{{/if}}</td>
+		</tr>
+	{{/each}}
+{{else}}
+	<tr style="text-align:center">
+		<td colspan="3">등록된 카테고리가 없습니다.</td>
 	</tr>
 {{/if}}
 </script>

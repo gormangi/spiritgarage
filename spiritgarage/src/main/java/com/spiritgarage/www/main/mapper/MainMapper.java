@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.spiritgarage.www.admin.vo.MainSlideVO;
 import com.spiritgarage.www.admin.vo.NoticeVO;
+import com.spiritgarage.www.category.vo.BlogCategoryVO;
 import com.spiritgarage.www.main.vo.BlogRssVO;
 
 public interface MainMapper {
@@ -13,5 +14,7 @@ public interface MainMapper {
 	List<NoticeVO> selectMainNoticeList();
 	
 	List<MainSlideVO> selectMainSlideList();
+	
+	List<BlogCategoryVO> selectCategoryDisplayY();
 	
 }
