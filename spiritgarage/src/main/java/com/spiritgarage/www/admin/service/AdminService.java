@@ -11,6 +11,7 @@ import com.spiritgarage.www.admin.vo.MainSlideVO;
 import com.spiritgarage.www.admin.vo.MngrVO;
 import com.spiritgarage.www.admin.vo.NoticeVO;
 import com.spiritgarage.www.category.vo.BlogCategoryVO;
+import com.spiritgarage.www.main.vo.MainFooterVO;
 import com.spiritgarage.www.reservation.vo.MaintenanceAreaVO;
 import com.spiritgarage.www.reservation.vo.ReservationVO;
 
@@ -77,4 +78,8 @@ public interface AdminService {
 	Map<String, Object> getCategoryList() throws Exception;
 	
 	Map<String, Object> uptCategoryDisplayYn(BlogCategoryVO vo) throws Exception;
+	
+	Map<String, Object> footerContactSave(MainFooterVO vo) throws Exception;
+	
+	Map<String, Object> getMainFooterContact() throws Exception;
 }

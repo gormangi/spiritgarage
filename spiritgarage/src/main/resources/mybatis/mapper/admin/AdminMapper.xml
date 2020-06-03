@@ -616,4 +616,81 @@
 			BLOG_CATEGORY_SEQ = #{blogCategorySeq}
 	</update>
 	
+	<select id="selectMainFooterContactLocation" parameterType="com.spiritgarage.www.main.vo.MainFooterVO" resultType="com.spiritgarage.www.main.vo.MainFooterVO">
+		SELECT
+			MAIN_FOOTER_SEQ,
+			CONTENT,
+			CONTENT_DV,
+			REG_DATE,
+			UPT_DATE
+		FROM
+			TB_MAIN_FOOTER
+		WHERE
+			CONTENT_DV = 'location'
+	</select>
+	
+	<select id="selectMainFooterContactMobile" parameterType="com.spiritgarage.www.main.vo.MainFooterVO" resultType="com.spiritgarage.www.main.vo.MainFooterVO">
+		SELECT
+			MAIN_FOOTER_SEQ,
+			CONTENT,
+			CONTENT_DV,
+			REG_DATE,
+			UPT_DATE
+		FROM
+			TB_MAIN_FOOTER
+		WHERE
+			CONTENT_DV = 'mobile'
+	</select>
+	
+	<select id="selectMainFooterContactPhone" parameterType="com.spiritgarage.www.main.vo.MainFooterVO" resultType="com.spiritgarage.www.main.vo.MainFooterVO">
+		SELECT
+			MAIN_FOOTER_SEQ,
+			CONTENT,
+			CONTENT_DV,
+			REG_DATE,
+			UPT_DATE
+		FROM
+			TB_MAIN_FOOTER
+		WHERE
+			CONTENT_DV = 'phone'
+	</select>
+	
+	<insert id="insertMainFooterContact" parameterType="com.spiritgarage.www.main.vo.MainFooterVO">
+		INSERT INTO TB_MAIN_FOOTER
+		(
+			MAIN_FOOTER_SEQ,
+			CONTENT,
+			CONTENT_DV,
+			REG_DATE,
+			UPT_DATE
+		)VALUES(
+			#{mainFooterSeq},
+			#{content},
+			#{contentDv},
+			NOW(),
+			NOW()
+		)
+	</insert>
+	
+	<update id="updateMainFooterContact" parameterType="com.spiritgarage.www.main.vo.MainFooterVO">
+		UPDATE TB_MAIN_FOOTER SET
+			CONTENT = #{content},
+			UPT_DATE = NOW()
+		WHERE
+			CONTENT_DV = #{contentDv}
+	</update>
+	
+	<select id="selectMainFooterContactList" resultType="com.spiritgarage.www.main.vo.MainFooterVO">
+		SELECT
+			MAIN_FOOTER_SEQ,
+			CONTENT,
+			CONTENT_DV,
+			REG_DATE,
+			UPT_DATE
+		FROM
+			TB_MAIN_FOOTER
+		WHERE
+			CONTENT_DV IN ('location','mobile','phone')
+	</select>
+	
 </mapper>

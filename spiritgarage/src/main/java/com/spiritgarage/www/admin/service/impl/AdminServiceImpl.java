@@ -23,6 +23,7 @@ import com.spiritgarage.www.admin.vo.MainSlideVO;
 import com.spiritgarage.www.admin.vo.MngrVO;
 import com.spiritgarage.www.admin.vo.NoticeVO;
 import com.spiritgarage.www.category.vo.BlogCategoryVO;
+import com.spiritgarage.www.main.vo.MainFooterVO;
 import com.spiritgarage.www.reservation.vo.MaintenanceAreaVO;
 import com.spiritgarage.www.reservation.vo.ReservationVO;
 import com.spiritgarage.www.util.ImageUploadUtil;
@@ -704,6 +705,98 @@ public class AdminServiceImpl implements AdminService{
 			result.put("state", "success");
 		}
 		
+		return result;
+	}
+
+	@Override
+	public Map<String, Object> footerContactSave(MainFooterVO vo) throws Exception {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("state", "fail");
+		
+		boolean pass = false;
+		
+		MainFooterVO locationVO = mapper.selectMainFooterContactLocation(vo);
+		MainFooterVO mobileVO = mapper.selectMainFooterContactMobile(vo);
+		MainFooterVO phoneVO = mapper.selectMainFooterContactPhone(vo);
+		
+		
+		if(locationVO != null) {
+			vo.setContent(vo.getUserInputLocation());
+			vo.setContentDv("location");
+			int res = mapper.updateMainFooterContact(vo);
+			if(res > 0) {
+				pass = true;
+			}
+		} else {
+			vo.setMainFooterSeq(UUID.randomUUID().toString());
+			vo.setContent(vo.getUserInputLocation());
+			vo.setContentDv("location");
+			int res = mapper.insertMainFooterContact(vo);
+			if(res > 0) {
+				pass = true;
+			}
+		}
+		
+		if(mobileVO != null) {
+			vo.setContent(vo.getUserInputMobile());
+			vo.setContentDv("mobile");
+			int res = mapper.updateMainFooterContact(vo);
+			if(res > 0) {
+				pass = true;
+			}
+		} else {
+			vo.setMainFooterSeq(UUID.randomUUID().toString());
+			vo.setContent(vo.getUserInputMobile());
+			vo.setContentDv("mobile");
+			int res = mapper.insertMainFooterContact(vo);
+			if(res > 0) {
+				pass = true;
+			}
+		}
+		
+		if(phoneVO != null) {
+			vo.setContent(vo.getUserInputPhone());
+			vo.setContentDv("phone");
+			int res = mapper.updateMainFooterContact(vo);
+			if(res > 0) {
+				pass = true;
+			}
+		} else {
+			vo.setMainFooterSeq(UUID.randomUUID().toString());
+			vo.setContent(vo.getUserInputPhone());
+			vo.setContentDv("phone");
+			int res = mapper.insertMainFooterContact(vo);
+			if(res > 0) {
+				pass = true;
+			}
+		}
+		
+		if(pass) {
+			result.put("state", "success");
+		}
+		
+		return result;
+	}
+
+	@Override
+	public Map<String, Object> getMainFooterContact() throws Exception {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		List<MainFooterVO> list = mapper.selectMainFooterContactList();
+		
+		for(MainFooterVO vo : list) {
+			
+			if("location".equals(vo.getContentDv())){
+				result.put("location", vo);
+			}else if("mobile".equals(vo.getContentDv())) {
+				result.put("mobile", vo);
+			}else if("phone".equals(vo.getContentDv())) {
+				result.put("phone", vo);
+			}
+			
+		}
 		return result;
 	}
 	

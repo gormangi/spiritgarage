@@ -68,4 +68,17 @@
 			DISPLAY_YN = 'Y'
 	</select>
 	
+	<select id="selectMainFooterContactList" resultType="com.spiritgarage.www.main.vo.MainFooterVO">
+		SELECT
+			MAIN_FOOTER_SEQ,
+			CONTENT,
+			CONTENT_DV,
+			REG_DATE,
+			UPT_DATE
+		FROM
+			TB_MAIN_FOOTER
+		WHERE
+			CONTENT_DV IN ('location','mobile','phone')
+	</select>
+	
 </mapper>

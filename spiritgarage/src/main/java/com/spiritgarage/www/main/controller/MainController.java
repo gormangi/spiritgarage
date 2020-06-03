@@ -43,4 +43,10 @@ public class MainController {
 		return service.getMainNoticeList();
 	}
 	
+	@RequestMapping(value = "/main/getMainFooterContact")
+	@ResponseBody
+	public Map<String, Object> getMainFooterContact(HttpServletRequest request , HttpServletResponse respones) throws Exception{
+		return service.getMainFooterContact();
+	}
+	
 }

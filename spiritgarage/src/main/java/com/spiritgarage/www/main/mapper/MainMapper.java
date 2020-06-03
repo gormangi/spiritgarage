@@ -6,6 +6,7 @@ import com.spiritgarage.www.admin.vo.MainSlideVO;
 import com.spiritgarage.www.admin.vo.NoticeVO;
 import com.spiritgarage.www.category.vo.BlogCategoryVO;
 import com.spiritgarage.www.main.vo.BlogRssVO;
+import com.spiritgarage.www.main.vo.MainFooterVO;
 
 public interface MainMapper {
 	
@@ -16,5 +17,7 @@ public interface MainMapper {
 	List<MainSlideVO> selectMainSlideList();
 	
 	List<BlogCategoryVO> selectCategoryDisplayY();
+	
+	List<MainFooterVO> selectMainFooterContactList();
 	
 }

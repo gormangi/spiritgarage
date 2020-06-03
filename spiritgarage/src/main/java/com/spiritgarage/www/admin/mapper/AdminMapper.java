@@ -8,6 +8,7 @@ import com.spiritgarage.www.admin.vo.MainSlideVO;
 import com.spiritgarage.www.admin.vo.MngrVO;
 import com.spiritgarage.www.admin.vo.NoticeVO;
 import com.spiritgarage.www.category.vo.BlogCategoryVO;
+import com.spiritgarage.www.main.vo.MainFooterVO;
 import com.spiritgarage.www.reservation.vo.MaintenanceAreaVO;
 import com.spiritgarage.www.reservation.vo.ReservationVO;
 
@@ -104,5 +105,17 @@ public interface AdminMapper {
 	List<BlogCategoryVO> selectCategoryList() throws Exception;
 	
 	int updateCategoryDisplayYn(BlogCategoryVO vo) throws Exception;
+	
+	MainFooterVO selectMainFooterContactLocation(MainFooterVO vo) throws Exception;
+	
+	MainFooterVO selectMainFooterContactMobile(MainFooterVO vo) throws Exception;
+	
+	MainFooterVO selectMainFooterContactPhone(MainFooterVO vo) throws Exception;
+	
+	int updateMainFooterContact(MainFooterVO vo) throws Exception;
+	
+	int insertMainFooterContact(MainFooterVO vo) throws Exception;
+	
+	List<MainFooterVO> selectMainFooterContactList() throws Exception;
 	
 }

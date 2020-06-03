@@ -15,6 +15,7 @@ import com.spiritgarage.www.main.mapper.MainMapper;
 import com.spiritgarage.www.main.service.MainService;
 import com.spiritgarage.www.main.vo.BlogRssVO;
 import com.spiritgarage.www.main.vo.HeaderVO;
+import com.spiritgarage.www.main.vo.MainFooterVO;
 import com.spiritgarage.www.util.RSSFeed;
 import com.spiritgarage.www.util.RSSUtil;
 
@@ -109,6 +110,27 @@ public class MainServiceImpl implements MainService{
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("res", mapper.selectMainNoticeList());
 		
+		return result;
+	}
+
+	@Override
+	public Map<String, Object> getMainFooterContact() {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		List<MainFooterVO> list = mapper.selectMainFooterContactList();
+		
+		for(MainFooterVO vo : list) {
+			
+			if("location".equals(vo.getContentDv())){
+				result.put("location", vo);
+			}else if("mobile".equals(vo.getContentDv())) {
+				result.put("mobile", vo);
+			}else if("phone".equals(vo.getContentDv())) {
+				result.put("phone", vo);
+			}
+			
+		}
 		return result;
 	}
 	

@@ -85,6 +85,56 @@
 					</div>
 				</div>
 			</div>
+			<div class="col-md-8">
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">메인 FOOTER CONTACT 설정</h3>
+						<div class="card-tools">
+							<button type="button" id="footer_contact_save" class="btn btn-primary btn-sm">저장</button>
+						</div>
+					</div>
+					<div class="card-body">
+						<div class="form-group">
+							<label for="footer_contact_location"><i class="fa fa-map-marker"></i>&nbsp;&nbsp;위치</label>
+							<input type="text" class="form-control" id="footer_contact_location" placeholder="(14961)경기도 시흥시 포동 20-19 스피릿개러지" maxlength="150"/>
+						</div>
+						<div class="form-group">
+							<label for="footer_contact_mobile"><i class="fa fa-phone"></i>&nbsp;&nbsp;mobile</label>
+							<input type="text" class="form-control" id="footer_contact_mobile" placeholder="010-7476-7884" maxlength="150"/>
+						</div>
+						<div class="form-group">
+							<label for="footer_contact_phone"><i class="fa fa-fax"></i>&nbsp;&nbsp;phone</label>
+							<input type="text" class="form-control" id="footer_contact_phone" placeholder="031-314-8884" maxlength="150"/>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">메인 FOOTER 영업시간 설정</h3>
+						<div class="card-tools">
+							<button type="button" id="footer_openhour_save" class="btn btn-primary btn-sm">저장</button>
+						</div>
+					</div>
+					<div class="card-body">
+						<div class="form-group">
+							<textarea rows="3" class="form-control" id="footer_openhour" maxlength="150"></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">메인 FOOTER 주요 분야 설정</h3>
+						<div class="card-tools">
+							<button type="button" id="footer_mainfield_save" class="btn btn-primary btn-sm">저장</button>
+						</div>
+					</div>
+					<div class="card-body">
+						<div class="form-group">
+							<textarea rows="3" class="form-control" id="footer_mainfield" maxlength="150"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</section>
 

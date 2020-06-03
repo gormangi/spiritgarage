@@ -23,6 +23,7 @@ import com.spiritgarage.www.admin.vo.MainSlideVO;
 import com.spiritgarage.www.admin.vo.MngrVO;
 import com.spiritgarage.www.admin.vo.NoticeVO;
 import com.spiritgarage.www.category.vo.BlogCategoryVO;
+import com.spiritgarage.www.main.vo.MainFooterVO;
 import com.spiritgarage.www.reservation.vo.MaintenanceAreaVO;
 import com.spiritgarage.www.reservation.vo.ReservationVO;
 
@@ -316,5 +317,17 @@ public class AdminController {
 	@ResponseBody
 	public Map<String, Object> uptCategoryDisplayYn(BlogCategoryVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
 		return service.uptCategoryDisplayYn(vo);
+	}
+	
+	@RequestMapping(value = "/admin/footerContactSave")
+	@ResponseBody
+	public Map<String, Object> footerContactSave(MainFooterVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
+		return service.footerContactSave(vo);
+	}
+	
+	@RequestMapping(value = "/admin/getMainFooterContact")
+	@ResponseBody
+	public Map<String, Object> getMainFooterContact(HttpServletRequest request , HttpServletResponse response) throws Exception{
+		return service.getMainFooterContact();
 	}
 }

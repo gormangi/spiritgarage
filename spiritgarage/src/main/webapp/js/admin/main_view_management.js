@@ -4,6 +4,8 @@ $(document).ready(function(){
 	
 	fn.categoryList();
 	
+	fn.getMainFooterContact();
+	
 	$("#mainSlideAddBtn").on("click",function(){
 		fn.mainSlideAddModalOpen();
 	});
@@ -42,6 +44,10 @@ $(document).ready(function(){
 	
 	$("#category_list").on("click","input:checkbox",function(){
 		fn.uptCategoryDisplayYn($(this));
+	});
+	
+	$("#footer_contact_save").on("click",function(){
+		fn.footerContactSave();
 	});
 	
 });
@@ -410,6 +416,47 @@ var fn = {
 					if(res.state == 'success'){
 						fn.categoryList();
 					}
+				}
+			});
+			
+		},
+		
+		footerContactSave : function(){
+			
+			var footerContactLocation = $("#footer_contact_location").val();
+			var footerContactMobile = $("#footer_contact_mobile").val();
+			var footerContactPhone = $("#footer_contact_phone").val();
+			
+			var param = {
+					userInputLocation : footerContactLocation,
+					userInputMobile : footerContactMobile,
+					userInputPhone : footerContactPhone
+			}
+			
+			$.ajax({
+				url : '/admin/footerContactSave',
+				data : param,
+				dataType : 'json',
+				type : 'post',
+				success : function(res){
+					if(res.state == 'success'){
+						alert('저장되었습니다.');
+						return false;
+					}
+				}
+			});
+		},
+		
+		getMainFooterContact : function(){
+			
+			$.ajax({
+				url : '/admin/getMainFooterContact',
+				dataType : 'json',
+				type : 'post',
+				success : function(res){
+					$("#footer_contact_location").val(res.location.content);
+					$("#footer_contact_mobile").val(res.mobile.content);
+					$("#footer_contact_phone").val(res.phone.content);
 				}
 			});
 			
