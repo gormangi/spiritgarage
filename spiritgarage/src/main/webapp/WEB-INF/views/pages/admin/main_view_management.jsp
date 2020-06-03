@@ -117,7 +117,7 @@
 					</div>
 					<div class="card-body">
 						<div class="form-group">
-							<textarea rows="3" class="form-control" id="footer_openhour" maxlength="150"></textarea>
+							<textarea rows="3" class="form-control" id="footer_openhour" maxlength="150" placeholder="월 ~ 토 09:30 - 20:00&#13;&#10;일요일은 예약 고객에 한하여 작업합니다"></textarea>
 						</div>
 					</div>
 				</div>
@@ -130,7 +130,7 @@
 					</div>
 					<div class="card-body">
 						<div class="form-group">
-							<textarea rows="3" class="form-control" id="footer_mainfield" maxlength="150"></textarea>
+							<textarea rows="3" class="form-control" id="footer_mainfield" maxlength="150" placeholder="경정비 | 합성오일 | 휠타이어&#13;&#10;블랙박스 | 썬팅 | 네비게이션 | 옵션설치"></textarea>
 						</div>
 					</div>
 				</div>
