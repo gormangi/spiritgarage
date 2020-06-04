@@ -4,7 +4,7 @@ $(document).ready(function(){
 	
 	fn.categoryList();
 	
-	fn.getMainFooterContact();
+	fn.getMainFooter();
 	
 	$("#mainSlideAddBtn").on("click",function(){
 		fn.mainSlideAddModalOpen();
@@ -48,6 +48,14 @@ $(document).ready(function(){
 	
 	$("#footer_contact_save").on("click",function(){
 		fn.footerContactSave();
+	});
+	
+	$("#footer_openhour_save").on("click",function(){
+		fn.footerOpenhourSave();
+	});
+	
+	$("#footer_mainfield_save").on("click",function(){
+		fn.footerMainfieldSave();
 	});
 	
 });
@@ -447,16 +455,56 @@ var fn = {
 			});
 		},
 		
-		getMainFooterContact : function(){
+		getMainFooter : function(){
 			
 			$.ajax({
-				url : '/admin/getMainFooterContact',
+				url : '/admin/getMainFooter',
 				dataType : 'json',
 				type : 'post',
 				success : function(res){
 					$("#footer_contact_location").val(res.location.content);
 					$("#footer_contact_mobile").val(res.mobile.content);
 					$("#footer_contact_phone").val(res.phone.content);
+					$("#footer_openhour").val(res.openhour.content);
+					$("#footer_mainfield").val(res.mainfield.content);
+				}
+			});
+			
+		},
+		
+		footerOpenhourSave : function(){
+			
+			var footerOpenhour = $("#footer_openhour").val();
+			
+			$.ajax({
+				url : '/admin/footerOpenhourSave',
+				dataType : 'json',
+				type : 'post',
+				data : {inputOpenhour : footerOpenhour},
+				success : function(res){
+					if(res.state == 'success'){
+						alert('저장되었습니다.');
+						return false;
+					}
+				}
+			});
+			
+		},
+		
+		footerMainfieldSave : function(){
+			
+			var footerMainfield = $("#footer_mainfield").val();
+			
+			$.ajax({
+				url : '/admin/footerMainfieldSave',
+				dataType : 'json',
+				type : 'post',
+				data : {inputMainfield : footerMainfield},
+				success : function(res){
+					if(res.state == 'success'){
+						alert('저장되었습니다.');
+						return false;
+					}
 				}
 			});
 			

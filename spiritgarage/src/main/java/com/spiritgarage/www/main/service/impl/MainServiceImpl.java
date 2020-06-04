@@ -114,11 +114,11 @@ public class MainServiceImpl implements MainService{
 	}
 
 	@Override
-	public Map<String, Object> getMainFooterContact() {
+	public Map<String, Object> getMainFooter() {
 		
 		Map<String, Object> result = new HashMap<String, Object>();
 		
-		List<MainFooterVO> list = mapper.selectMainFooterContactList();
+		List<MainFooterVO> list = mapper.selectMainFooterList();
 		
 		for(MainFooterVO vo : list) {
 			
@@ -128,6 +128,10 @@ public class MainServiceImpl implements MainService{
 				result.put("mobile", vo);
 			}else if("phone".equals(vo.getContentDv())) {
 				result.put("phone", vo);
+			}else if("openhour".equals(vo.getContentDv())) {
+				result.put("openhour", vo);
+			}else if("mainfield".equals(vo.getContentDv())) {
+				result.put("mainfield", vo);
 			}
 			
 		}

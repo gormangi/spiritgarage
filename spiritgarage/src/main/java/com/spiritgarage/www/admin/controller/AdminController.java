@@ -325,9 +325,21 @@ public class AdminController {
 		return service.footerContactSave(vo);
 	}
 	
-	@RequestMapping(value = "/admin/getMainFooterContact")
+	@RequestMapping(value = "/admin/getMainFooter")
 	@ResponseBody
-	public Map<String, Object> getMainFooterContact(HttpServletRequest request , HttpServletResponse response) throws Exception{
-		return service.getMainFooterContact();
+	public Map<String, Object> getMainFooter(HttpServletRequest request , HttpServletResponse response) throws Exception{
+		return service.getMainFooter();
+	}
+	
+	@RequestMapping(value = "/admin/footerOpenhourSave")
+	@ResponseBody
+	public Map<String, Object> footerOpenhourSave(MainFooterVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
+		return service.footerOpenhourSave(vo);
+	}
+	
+	@RequestMapping(value = "/admin/footerMainfieldSave")
+	@ResponseBody
+	public Map<String, Object> footerMainfieldSave(MainFooterVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
+		return service.footerMainfieldSave(vo);
 	}
 }

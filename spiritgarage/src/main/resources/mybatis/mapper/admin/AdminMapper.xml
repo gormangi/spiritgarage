@@ -655,7 +655,7 @@
 			CONTENT_DV = 'phone'
 	</select>
 	
-	<insert id="insertMainFooterContact" parameterType="com.spiritgarage.www.main.vo.MainFooterVO">
+	<insert id="insertMainFooter" parameterType="com.spiritgarage.www.main.vo.MainFooterVO">
 		INSERT INTO TB_MAIN_FOOTER
 		(
 			MAIN_FOOTER_SEQ,
@@ -672,7 +672,7 @@
 		)
 	</insert>
 	
-	<update id="updateMainFooterContact" parameterType="com.spiritgarage.www.main.vo.MainFooterVO">
+	<update id="updateMainFooter" parameterType="com.spiritgarage.www.main.vo.MainFooterVO">
 		UPDATE TB_MAIN_FOOTER SET
 			CONTENT = #{content},
 			UPT_DATE = NOW()
@@ -680,7 +680,7 @@
 			CONTENT_DV = #{contentDv}
 	</update>
 	
-	<select id="selectMainFooterContactList" resultType="com.spiritgarage.www.main.vo.MainFooterVO">
+	<select id="selectMainFooterList" resultType="com.spiritgarage.www.main.vo.MainFooterVO">
 		SELECT
 			MAIN_FOOTER_SEQ,
 			CONTENT,
@@ -690,7 +690,33 @@
 		FROM
 			TB_MAIN_FOOTER
 		WHERE
-			CONTENT_DV IN ('location','mobile','phone')
+			CONTENT_DV IN ('location','mobile','phone','openhour','mainfield')
+	</select>
+	
+	<select id="selectMainFooterOpenhour" parameterType="com.spiritgarage.www.main.vo.MainFooterVO" resultType="com.spiritgarage.www.main.vo.MainFooterVO">
+		SELECT
+			MAIN_FOOTER_SEQ,
+			CONTENT,
+			CONTENT_DV,
+			REG_DATE,
+			UPT_DATE
+		FROM
+			TB_MAIN_FOOTER
+		WHERE
+			CONTENT_DV = 'openhour'
+	</select>
+	
+	<select id="selectMainFooterMainfield" parameterType="com.spiritgarage.www.main.vo.MainFooterVO" resultType="com.spiritgarage.www.main.vo.MainFooterVO">
+		SELECT
+			MAIN_FOOTER_SEQ,
+			CONTENT,
+			CONTENT_DV,
+			REG_DATE,
+			UPT_DATE
+		FROM
+			TB_MAIN_FOOTER
+		WHERE
+			CONTENT_DV = 'mainfield'
 	</select>
 	
 </mapper>

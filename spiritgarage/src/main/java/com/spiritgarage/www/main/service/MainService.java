@@ -10,6 +10,6 @@ public interface MainService {
 	
 	Map<String, Object> getMainNoticeList();
 	
-	Map<String, Object> getMainFooterContact();
+	Map<String, Object> getMainFooter();
 	
 }

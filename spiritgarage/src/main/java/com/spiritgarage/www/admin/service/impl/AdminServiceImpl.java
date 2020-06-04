@@ -724,7 +724,7 @@ public class AdminServiceImpl implements AdminService{
 		if(locationVO != null) {
 			vo.setContent(vo.getUserInputLocation());
 			vo.setContentDv("location");
-			int res = mapper.updateMainFooterContact(vo);
+			int res = mapper.updateMainFooter(vo);
 			if(res > 0) {
 				pass = true;
 			}
@@ -732,7 +732,7 @@ public class AdminServiceImpl implements AdminService{
 			vo.setMainFooterSeq(UUID.randomUUID().toString());
 			vo.setContent(vo.getUserInputLocation());
 			vo.setContentDv("location");
-			int res = mapper.insertMainFooterContact(vo);
+			int res = mapper.insertMainFooter(vo);
 			if(res > 0) {
 				pass = true;
 			}
@@ -741,7 +741,7 @@ public class AdminServiceImpl implements AdminService{
 		if(mobileVO != null) {
 			vo.setContent(vo.getUserInputMobile());
 			vo.setContentDv("mobile");
-			int res = mapper.updateMainFooterContact(vo);
+			int res = mapper.updateMainFooter(vo);
 			if(res > 0) {
 				pass = true;
 			}
@@ -749,7 +749,7 @@ public class AdminServiceImpl implements AdminService{
 			vo.setMainFooterSeq(UUID.randomUUID().toString());
 			vo.setContent(vo.getUserInputMobile());
 			vo.setContentDv("mobile");
-			int res = mapper.insertMainFooterContact(vo);
+			int res = mapper.insertMainFooter(vo);
 			if(res > 0) {
 				pass = true;
 			}
@@ -758,7 +758,7 @@ public class AdminServiceImpl implements AdminService{
 		if(phoneVO != null) {
 			vo.setContent(vo.getUserInputPhone());
 			vo.setContentDv("phone");
-			int res = mapper.updateMainFooterContact(vo);
+			int res = mapper.updateMainFooter(vo);
 			if(res > 0) {
 				pass = true;
 			}
@@ -766,7 +766,7 @@ public class AdminServiceImpl implements AdminService{
 			vo.setMainFooterSeq(UUID.randomUUID().toString());
 			vo.setContent(vo.getUserInputPhone());
 			vo.setContentDv("phone");
-			int res = mapper.insertMainFooterContact(vo);
+			int res = mapper.insertMainFooter(vo);
 			if(res > 0) {
 				pass = true;
 			}
@@ -780,11 +780,11 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public Map<String, Object> getMainFooterContact() throws Exception {
+	public Map<String, Object> getMainFooter() throws Exception {
 		
 		Map<String, Object> result = new HashMap<String, Object>();
 		
-		List<MainFooterVO> list = mapper.selectMainFooterContactList();
+		List<MainFooterVO> list = mapper.selectMainFooterList();
 		
 		for(MainFooterVO vo : list) {
 			
@@ -794,9 +794,82 @@ public class AdminServiceImpl implements AdminService{
 				result.put("mobile", vo);
 			}else if("phone".equals(vo.getContentDv())) {
 				result.put("phone", vo);
+			}else if("openhour".equals(vo.getContentDv())) {
+				result.put("openhour", vo);
+			}else if("mainfield".equals(vo.getContentDv())) {
+				result.put("mainfield", vo);
 			}
 			
 		}
+		
+		return result;
+	}
+
+	@Override
+	public Map<String, Object> footerOpenhourSave(MainFooterVO vo) throws Exception {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("state", "fail");
+		
+		boolean pass = false;
+		
+		MainFooterVO openhourVO = mapper.selectMainFooterOpenhour(vo);
+		
+		if(openhourVO != null) {
+			vo.setContent(vo.getInputOpenhour());
+			vo.setContentDv("openhour");
+			int res = mapper.updateMainFooter(vo);
+			if(res > 0) {
+				pass = true;
+			}
+		} else {
+			vo.setMainFooterSeq(UUID.randomUUID().toString());
+			vo.setContent(vo.getInputOpenhour());
+			vo.setContentDv("openhour");
+			int res = mapper.insertMainFooter(vo);
+			if(res > 0) {
+				pass = true;
+			}
+		}
+		
+		if(pass) {
+			result.put("state", "success");
+		}
+		
+		return result;
+	}
+
+	@Override
+	public Map<String, Object> footerMainfieldSave(MainFooterVO vo) throws Exception {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("state", "fail");
+		
+		boolean pass = false;
+		
+		MainFooterVO mainfieldVO = mapper.selectMainFooterMainfield(vo);
+		
+		if(mainfieldVO != null) {
+			vo.setContent(vo.getInputMainfield());
+			vo.setContentDv("mainfield");
+			int res = mapper.updateMainFooter(vo);
+			if(res > 0) {
+				pass = true;
+			}
+		} else {
+			vo.setMainFooterSeq(UUID.randomUUID().toString());
+			vo.setContent(vo.getInputMainfield());
+			vo.setContentDv("mainfield");
+			int res = mapper.insertMainFooter(vo);
+			if(res > 0) {
+				pass = true;
+			}
+		}
+		
+		if(pass) {
+			result.put("state", "success");
+		}
+		
 		return result;
 	}
 	

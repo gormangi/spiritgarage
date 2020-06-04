@@ -18,7 +18,7 @@
 						<h2 class="nospace font-x1">
 							<a href="#">영업시간</a>
 						</h2>
-						<p class="nospace">월 ~ 토 09:30 - 20:00<br/>일요일은 예약 고객에 한하여 작업합니다</p>
+						<p class="nospace" id="main_footer_openhour"></p>
 					</article>
 				</li>
 				<li>
@@ -26,7 +26,7 @@
 						<h2 class="nospace font-x1">
 							<a href="#">주요 분야</a>
 						</h2>
-						<p class="nospace">경정비 | 합성오일 | 휠타이어<br/>블랙박스 | 썬팅 | 네비게이션 | 옵션설치</p>
+						<p class="nospace" id="main_footer_mainfield">경정비 | 합성오일 | 휠타이어<br/>블랙박스 | 썬팅 | 네비게이션 | 옵션설치</p>
 						<p class="nospace" style="margin-top:15px;">
 							<a target="_blank" href="https://open.kakao.com/o/sxKWBO5">
 								<img style="border-radius:100px 100px 100px 100px; width:300px;" src="images/admin_img/kakao.png">

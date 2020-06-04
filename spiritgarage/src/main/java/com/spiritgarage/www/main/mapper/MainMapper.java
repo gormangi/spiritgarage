@@ -18,6 +18,6 @@ public interface MainMapper {
 	
 	List<BlogCategoryVO> selectCategoryDisplayY();
 	
-	List<MainFooterVO> selectMainFooterContactList();
+	List<MainFooterVO> selectMainFooterList();
 	
 }

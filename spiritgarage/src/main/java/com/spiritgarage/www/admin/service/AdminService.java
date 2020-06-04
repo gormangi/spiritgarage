@@ -81,5 +81,9 @@ public interface AdminService {
 	
 	Map<String, Object> footerContactSave(MainFooterVO vo) throws Exception;
 	
-	Map<String, Object> getMainFooterContact() throws Exception;
+	Map<String, Object> getMainFooter() throws Exception;
+	
+	Map<String, Object> footerOpenhourSave(MainFooterVO vo) throws Exception;
+	
+	Map<String, Object> footerMainfieldSave(MainFooterVO vo) throws Exception;
 }

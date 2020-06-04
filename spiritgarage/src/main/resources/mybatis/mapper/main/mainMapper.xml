@@ -68,7 +68,7 @@
 			DISPLAY_YN = 'Y'
 	</select>
 	
-	<select id="selectMainFooterContactList" resultType="com.spiritgarage.www.main.vo.MainFooterVO">
+	<select id="selectMainFooterList" resultType="com.spiritgarage.www.main.vo.MainFooterVO">
 		SELECT
 			MAIN_FOOTER_SEQ,
 			CONTENT,
@@ -78,7 +78,7 @@
 		FROM
 			TB_MAIN_FOOTER
 		WHERE
-			CONTENT_DV IN ('location','mobile','phone')
+			CONTENT_DV IN ('location','mobile','phone','openhour','mainfield')
 	</select>
 	
 </mapper>

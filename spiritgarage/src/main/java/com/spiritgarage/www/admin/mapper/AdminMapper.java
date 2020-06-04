@@ -112,10 +112,14 @@ public interface AdminMapper {
 	
 	MainFooterVO selectMainFooterContactPhone(MainFooterVO vo) throws Exception;
 	
-	int updateMainFooterContact(MainFooterVO vo) throws Exception;
+	int updateMainFooter(MainFooterVO vo) throws Exception;
 	
-	int insertMainFooterContact(MainFooterVO vo) throws Exception;
+	int insertMainFooter(MainFooterVO vo) throws Exception;
 	
-	List<MainFooterVO> selectMainFooterContactList() throws Exception;
+	List<MainFooterVO> selectMainFooterList() throws Exception;
+	
+	MainFooterVO selectMainFooterOpenhour(MainFooterVO vo) throws Exception;
+	
+	MainFooterVO selectMainFooterMainfield(MainFooterVO vo) throws Exception;
 	
 }

@@ -18,6 +18,26 @@ public class MainFooterVO {
 	
 	private String userInputPhone;
 	
+	private String inputOpenhour;
+	
+	private String inputMainfield;
+	
+	public String getInputMainfield() {
+		return inputMainfield;
+	}
+
+	public void setInputMainfield(String inputMainfield) {
+		this.inputMainfield = inputMainfield;
+	}
+
+	public String getInputOpenhour() {
+		return inputOpenhour;
+	}
+
+	public void setInputOpenhour(String inputOpenhour) {
+		this.inputOpenhour = inputOpenhour;
+	}
+
 	public String getUserInputLocation() {
 		return userInputLocation;
 	}
