@@ -643,11 +643,22 @@ public class AdminServiceImpl implements AdminService{
 		}
 		mapper.deleteFileInfoByMainSlideSeq(vo);
 		
-		int res = mapper.deleteMainSlideByMainSlideSeq(vo);
+		int delRes = mapper.deleteMainSlideByMainSlideSeq(vo);
 		
-		if(res > 0) {
-			result.put("state", "success");
+		if(delRes > 0) {
+			List<MainSlideVO> orderList = mapper.selectMainSlideOrderList();
+			for(int i=0;i<orderList.size();i++) {
+				
+				MainSlideVO orderUpdateVO = new MainSlideVO();
+				orderUpdateVO.setMainSlideSeq(orderList.get(i).getMainSlideSeq());
+				orderUpdateVO.setMainSlideOrder(String.valueOf(i+1));
+				
+				mapper.updateMainSlideOrder(orderUpdateVO);
+				
+			}
 		}
+		
+		result.put("state", "success");
 		
 		return result;
 	}

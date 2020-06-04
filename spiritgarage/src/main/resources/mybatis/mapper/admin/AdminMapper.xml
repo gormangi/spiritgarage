@@ -530,6 +530,30 @@
 		DELETE FROM TB_MAIN_SLIDE WHERE MAIN_SLIDE_SEQ = #{mainSlideSeq}
 	</delete>
 	
+	<select id="selectMainSlideOrderList" resultType="com.spiritgarage.www.admin.vo.MainSlideVO">
+		SELECT
+			MAIN_SLIDE_SEQ,
+			SLIDE_DV,
+			TOP_TEXT,
+			MIDDLE_TEXT,
+			BOTTOM_TEXT,
+			RESERVATION_BTN_YN,
+			MAINTENANCE_HISTORY_BTN_YN,
+			MAIN_SLIDE_ORDER,
+			REG_DATE,
+			UPT_DATE
+		FROM
+			TB_MAIN_SLIDE
+		ORDER BY MAIN_SLIDE_ORDER
+	</select>
+	
+	<update id="updateMainSlideOrder" parameterType="com.spiritgarage.www.admin.vo.MainSlideVO">
+		UPDATE TB_MAIN_SLIDE SET
+			MAIN_SLIDE_ORDER = #{mainSlideOrder}
+		WHERE
+			MAIN_SLIDE_SEQ = #{mainSlideSeq}
+	</update>
+	
 	<select id="selectOrderUpMainSlide" parameterType="com.spiritgarage.www.admin.vo.MainSlideVO" resultType="com.spiritgarage.www.admin.vo.MainSlideVO">
 		SELECT
 			MAIN_SLIDE_SEQ,

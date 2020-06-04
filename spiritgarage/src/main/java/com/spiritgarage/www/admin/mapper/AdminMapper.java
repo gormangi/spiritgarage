@@ -92,6 +92,10 @@ public interface AdminMapper {
 	
 	int deleteMainSlideByMainSlideSeq(MainSlideVO vo) throws Exception;
 	
+	List<MainSlideVO> selectMainSlideOrderList() throws Exception;
+	
+	int updateMainSlideOrder(MainSlideVO vo) throws Exception;
+	
 	MainSlideVO selectOrderUpMainSlide(MainSlideVO vo) throws Exception;
 	
 	MainSlideVO selectOrderMeMainSlide(MainSlideVO vo) throws Exception;
