@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.spiritgarage.www.admin.vo.MainSlideVO;
+import com.spiritgarage.www.admin.vo.MaintenanceHistoryDetailVO;
+import com.spiritgarage.www.admin.vo.MaintenanceHistoryVO;
 import com.spiritgarage.www.admin.vo.MngrVO;
 import com.spiritgarage.www.admin.vo.NoticeVO;
 import com.spiritgarage.www.category.vo.BlogCategoryVO;
@@ -86,4 +88,18 @@ public interface AdminService {
 	Map<String, Object> footerOpenhourSave(MainFooterVO vo) throws Exception;
 	
 	Map<String, Object> footerMainfieldSave(MainFooterVO vo) throws Exception;
+	
+	Map<String, Object> getMaintenanceHistoryList(MaintenanceHistoryVO vo) throws Exception;
+	
+	Map<String, Object> saveMaintenanceHistory(MaintenanceHistoryVO vo) throws Exception;
+	
+	Map<String, Object> saveMaintenanceHistoryDetail(MaintenanceHistoryDetailVO vo) throws Exception;
+	
+	Map<String, Object> getMaintenanceHistoryInfo(MaintenanceHistoryVO vo) throws Exception;
+	
+	Map<String, Object> maintenanceHistoryModifyDo(MaintenanceHistoryVO vo) throws Exception;
+	
+	Map<String, Object> delMaintenanceHistoryDetail(MaintenanceHistoryVO vo) throws Exception;
+	
+	Map<String, Object> maintenanceHistoryDelete(MaintenanceHistoryVO vo) throws Exception;
 }

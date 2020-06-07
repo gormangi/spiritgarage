@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.spiritgarage.www.admin.vo.FileVO;
 import com.spiritgarage.www.admin.vo.MainSlideVO;
+import com.spiritgarage.www.admin.vo.MaintenanceHistoryDetailVO;
+import com.spiritgarage.www.admin.vo.MaintenanceHistoryVO;
 import com.spiritgarage.www.admin.vo.MngrVO;
 import com.spiritgarage.www.admin.vo.NoticeVO;
 import com.spiritgarage.www.category.vo.BlogCategoryVO;
@@ -125,5 +127,23 @@ public interface AdminMapper {
 	MainFooterVO selectMainFooterOpenhour(MainFooterVO vo) throws Exception;
 	
 	MainFooterVO selectMainFooterMainfield(MainFooterVO vo) throws Exception;
+	
+	int selectMaintenanceHistoryCnt(MaintenanceHistoryVO vo) throws Exception;
+	
+	List<MaintenanceHistoryVO> selectMaintenanceHistoryList(MaintenanceHistoryVO vo) throws Exception;
+	
+	int insertMaintenanceHistory(MaintenanceHistoryVO vo) throws Exception;
+	
+	int insertMaintenanceHistoryDetail(MaintenanceHistoryDetailVO vo) throws Exception;
+	
+	MaintenanceHistoryVO selectMaintenanceHistoryInfo(MaintenanceHistoryVO vo) throws Exception;
+	
+	List<MaintenanceHistoryDetailVO> selectMaintenanceHistoryDetailList(MaintenanceHistoryVO vo) throws Exception;
+	
+	int updateMaintenanceHistory(MaintenanceHistoryVO vo) throws Exception;
+	
+	int deleteMaintenanceHistoryDetail(MaintenanceHistoryVO vo) throws Exception;
+	
+	int deleteMaintenanceHistory(MaintenanceHistoryVO vo) throws Exception;
 	
 }

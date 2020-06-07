@@ -32,6 +32,12 @@ var leftFn = {
 				$("#menu_noticManagement a").addClass('active');
 			}else if(activeUrl == 'mainViewManagement'){
 				$("#menu_mainViewManagement a").addClass('active');
+			}else if(activeUrl == 'maintenanceHistoryManagement'){
+				$("#menu_maintenanceHistoryManagement a").addClass('active');
+			}else if(activeUrl == 'maintenanceHistoryReg'){
+				$("#menu_maintenanceHistoryManagement a").addClass('active');
+			}else if(activeUrl == 'maintenanceHistoryModify'){
+				$("#menu_maintenanceHistoryManagement a").addClass('active');
 			}
 			
 		}

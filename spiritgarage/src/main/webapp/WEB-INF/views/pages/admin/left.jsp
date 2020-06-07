@@ -46,6 +46,12 @@
 						<p>메인화면 관리</p>
 					</a>
 				</li>
+				<li class="nav-item" id="menu_maintenanceHistoryManagement">
+					<a href="/admin/maintenanceHistoryManagement" class="nav-link">
+						<i class="nav-icon fas fa-table"></i>
+						<p>정비이력 관리</p>
+					</a>
+				</li>
 			</ul>
 		</nav>
 		

@@ -20,6 +20,8 @@ import com.spiritgarage.www.admin.mapper.AdminMapper;
 import com.spiritgarage.www.admin.service.AdminService;
 import com.spiritgarage.www.admin.vo.FileVO;
 import com.spiritgarage.www.admin.vo.MainSlideVO;
+import com.spiritgarage.www.admin.vo.MaintenanceHistoryDetailVO;
+import com.spiritgarage.www.admin.vo.MaintenanceHistoryVO;
 import com.spiritgarage.www.admin.vo.MngrVO;
 import com.spiritgarage.www.admin.vo.NoticeVO;
 import com.spiritgarage.www.category.vo.BlogCategoryVO;
@@ -878,6 +880,112 @@ public class AdminServiceImpl implements AdminService{
 		}
 		
 		if(pass) {
+			result.put("state", "success");
+		}
+		
+		return result;
+	}
+
+	@Override
+	public Map<String, Object> getMaintenanceHistoryList(MaintenanceHistoryVO vo) throws Exception {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		vo.setTotCnt(mapper.selectMaintenanceHistoryCnt(vo));
+		
+		result.put("list", mapper.selectMaintenanceHistoryList(vo));
+		result.put("paging", vo);
+		
+		return result;
+	}
+
+	@Override
+	public Map<String, Object> saveMaintenanceHistory(MaintenanceHistoryVO vo) throws Exception {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("state", "fail");
+		
+		vo.setMaintenanceHistorySeq(UUID.randomUUID().toString());
+		
+		int res = mapper.insertMaintenanceHistory(vo);
+		
+		if(res > 0) {
+			result.put("state", "success");
+			result.put("maintenanceHistorySeq", vo.getMaintenanceHistorySeq());
+		}
+		
+		return result;
+	}
+
+	@Override
+	public Map<String, Object> saveMaintenanceHistoryDetail(MaintenanceHistoryDetailVO vo) throws Exception {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("state", "fail");
+		
+		vo.setMaintenanceHistoryDetailSeq(UUID.randomUUID().toString());
+		
+		int res = mapper.insertMaintenanceHistoryDetail(vo);
+		
+		if(res > 0) {
+			result.put("state", "success");
+		}
+		
+		return result;
+	}
+
+	@Override
+	public Map<String, Object> getMaintenanceHistoryInfo(MaintenanceHistoryVO vo) throws Exception {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		result.put("maintenanceHistoryinfo", mapper.selectMaintenanceHistoryInfo(vo));
+		result.put("maintenanceHistoryDetailList", mapper.selectMaintenanceHistoryDetailList(vo));
+		
+		return result;
+	}
+
+	@Override
+	public Map<String, Object> maintenanceHistoryModifyDo(MaintenanceHistoryVO vo) throws Exception {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("state", "fail");
+		
+		int res = mapper.updateMaintenanceHistory(vo);
+		
+		if(res > 0) {
+			result.put("state", "success");
+		}
+		
+		return result;
+	}
+
+	@Override
+	public Map<String, Object> delMaintenanceHistoryDetail(MaintenanceHistoryVO vo) throws Exception {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("state", "fail");
+		
+		int res = mapper.deleteMaintenanceHistoryDetail(vo);
+		if(res > 0) {
+			result.put("state", "success");
+		}
+		return result;
+	}
+
+	@Override
+	public Map<String, Object> maintenanceHistoryDelete(MaintenanceHistoryVO vo) throws Exception {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("state", "fail");
+		
+		int res = 0;
+		int delHistory = mapper.deleteMaintenanceHistory(vo);
+		if(delHistory > 0) {
+			res = mapper.deleteMaintenanceHistoryDetail(vo);
+		}
+		
+		if(res > 0) {
 			result.put("state", "success");
 		}
 		

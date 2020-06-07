@@ -20,6 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.spiritgarage.www.admin.service.AdminService;
 import com.spiritgarage.www.admin.vo.MainSlideVO;
+import com.spiritgarage.www.admin.vo.MaintenanceHistoryDetailVO;
+import com.spiritgarage.www.admin.vo.MaintenanceHistoryVO;
 import com.spiritgarage.www.admin.vo.MngrVO;
 import com.spiritgarage.www.admin.vo.NoticeVO;
 import com.spiritgarage.www.category.vo.BlogCategoryVO;
@@ -341,5 +343,71 @@ public class AdminController {
 	@ResponseBody
 	public Map<String, Object> footerMainfieldSave(MainFooterVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
 		return service.footerMainfieldSave(vo);
+	}
+	
+	@RequestMapping(value = "/admin/maintenanceHistoryManagement")
+	public String maintenanceHistoryManagement(HttpServletRequest request , HttpServletResponse response) throws Exception{
+		return "admin/maintenance_history_management";
+	}
+	
+	@RequestMapping(value = "/admin/getMaintenanceHistoryList")
+	@ResponseBody
+	public Map<String, Object> getMaintenanceHistoryList(MaintenanceHistoryVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
+		return service.getMaintenanceHistoryList(vo);
+	}
+	
+	@RequestMapping(value = "/admin/maintenanceHistoryReg")
+	public String maintenanceHistoryReg(Model model , HttpServletRequest request , HttpServletResponse response) throws Exception{
+		model.addAttribute("rMod","N");
+		return "admin/maintenance_history_reg";
+	}
+	
+	@RequestMapping(value = "/admin/saveMaintenanceHistory")
+	@ResponseBody
+	public Map<String, Object> saveMaintenanceHistory(MaintenanceHistoryVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
+		HttpSession session = request.getSession();
+		MngrVO mngrInfo = (MngrVO)session.getAttribute("mngrInfo");
+		vo.setRegMngrId(mngrInfo.getId());
+		return service.saveMaintenanceHistory(vo);
+	}
+	
+	@RequestMapping(value = "/admin/saveMaintenanceHistoryDetail")
+	@ResponseBody
+	public Map<String, Object> saveMaintenanceHistoryDetail(MaintenanceHistoryDetailVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
+		return service.saveMaintenanceHistoryDetail(vo);
+	}
+	
+	@RequestMapping(value = "/admin/maintenanceHistoryModify")
+	public String maintenanceHistoryModify(Model model , MaintenanceHistoryVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
+		model.addAttribute("rMod","U");
+		model.addAttribute("maintenanceHistorySeq",vo.getMaintenanceHistorySeq());
+		return "admin/maintenance_history_reg";
+	}
+	
+	@RequestMapping(value = "/admin/getMaintenanceHistoryInfo")
+	@ResponseBody
+	public Map<String, Object> getMaintenanceHistoryInfo(MaintenanceHistoryVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
+		return service.getMaintenanceHistoryInfo(vo);
+	}
+	
+	@RequestMapping(value = "/admin/maintenanceHistoryModifyDo")
+	@ResponseBody
+	public Map<String, Object> maintenanceHistoryModifyDo(MaintenanceHistoryVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
+		HttpSession session = request.getSession();
+		MngrVO mngrInfo = (MngrVO)session.getAttribute("mngrInfo");
+		vo.setUptMngrId(mngrInfo.getId());
+		return service.maintenanceHistoryModifyDo(vo);
+	}
+	
+	@RequestMapping(value = "/admin/delMaintenanceHistoryDetail")
+	@ResponseBody
+	public Map<String, Object> delMaintenanceHistoryDetail(MaintenanceHistoryVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
+		return service.delMaintenanceHistoryDetail(vo);
+	}
+	
+	@RequestMapping(value = "/admin/maintenanceHistoryDelete")
+	@ResponseBody
+	public Map<String, Object> maintenanceHistoryDelete(MaintenanceHistoryVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
+		return service.maintenanceHistoryDelete(vo);
 	}
 }
