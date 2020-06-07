@@ -57,6 +57,8 @@ var headerFn = {
 				$("#categoryMove").addClass('active');
 			}else if(viewDivision == 'noticePage'){
 				$("#noticeMove").addClass('active');
+			}else if(viewDivision == 'maintenanceHistoryPage'){
+				$("#maintenanceHistoryMove").addClass('active');
 			}
 			
 		},
@@ -105,6 +107,11 @@ var headerFn = {
 					html.push('<ul>');
 					html.push('<li><a href="javascript:void(0);">Spiritgarage</a></li>');
 					html.push('<li><a href="javascript:void(0);">공지</a></li>');
+					html.push('</ui>');
+				}else if(viewDivision == 'maintenanceHistoryPage'){
+					html.push('<ul>');
+					html.push('<li><a href="javascript:void(0);">Spiritgarage</a></li>');
+					html.push('<li><a href="javascript:void(0);">정비이력</a></li>');
 					html.push('</ui>');
 				}
 				$("#breadcrumb").html(html.join(''));

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spiritgarage.www.maintenancehistory.mapper.MaintenanceHistoryMapper">
+	
+	<select id="selectMaintenanceHistoryCnt" parameterType="com.spiritgarage.www.admin.vo.MaintenanceHistoryVO" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			TB_MAINTENANCE_HISTORY
+		WHERE
+			PHONE = #{phone}
+			AND
+			CAR_REG_NUM = #{carRegNum}
+	</select>
+	
+	<select id="selectMaintenanceHistoryList" parameterType="com.spiritgarage.www.admin.vo.MaintenanceHistoryVO" resultType="com.spiritgarage.www.admin.vo.MaintenanceHistoryVO">
+		SELECT
+			T.RNUM,
+			T.MAINTENANCE_HISTORY_SEQ,
+			T.PHONE,
+			T.CAR_REG_NUM,
+			T.NAME,
+			T.CAR_REG_DATE,
+			T.MAINTENANCE_REQUEST_DATE,
+			T.DAY_OF_DELIVERY,
+			T.DISTANCE_DRIVEN,
+			T.PAYMENT,
+			T.REG_MNGR_NAME,
+			T.REG_DATE,
+			T.REG_MNGR_ID,
+			T.UPT_MNGR_NAME,
+			T.UPT_DATE,
+			T.UPT_MNGR_ID
+		FROM
+			(SELECT
+				@rownum:=@rownum+1 RNUM,
+				MAINTENANCE_HISTORY_SEQ,
+				PHONE,
+				CAR_REG_NUM,
+				NAME,
+				DATE_FORMAT(R.CAR_REG_DATE,'%Y-%m-%d') CAR_REG_DATE,
+				DATE_FORMAT(R.MAINTENANCE_REQUEST_DATE,'%Y-%m-%d') MAINTENANCE_REQUEST_DATE,
+				DATE_FORMAT(R.DAY_OF_DELIVERY,'%Y-%m-%d') DAY_OF_DELIVERY,
+				DISTANCE_DRIVEN,
+				PAYMENT,
+				(SELECT NAME FROM TB_MNGR WHERE ID = R.REG_MNGR_ID) REG_MNGR_NAME,
+				DATE_FORMAT(R.REG_DATE,'%Y-%m-%d %H:%i') REG_DATE,
+				R.REG_MNGR_ID,
+				(SELECT NAME FROM TB_MNGR WHERE ID = R.UPT_MNGR_ID) UPT_MNGR_NAME,
+				DATE_FORMAT(R.UPT_DATE,'%Y-%m-%d %H:%i') UPT_DATE,
+				R.UPT_MNGR_ID
+			FROM
+				TB_MAINTENANCE_HISTORY R INNER JOIN (SELECT @ROWNUM := 0) C
+			WHERE
+				R.PHONE = #{phone}
+				AND
+				R.CAR_REG_NUM = #{carRegNum}
+			ORDER BY R.REG_DATE DESC) T
+		LIMIT #{startPostNumber} , #{blockPostCnt}
+	</select>
+	
+	<select id="selectMaintenanceHistoryInfo" parameterType="com.spiritgarage.www.admin.vo.MaintenanceHistoryVO" resultType="com.spiritgarage.www.admin.vo.MaintenanceHistoryVO">
+		SELECT
+			MAINTENANCE_HISTORY_SEQ,
+			PHONE,
+			CAR_REG_NUM,
+			NAME,
+			DATE_FORMAT(CAR_REG_DATE,'%Y-%m-%d') CAR_REG_DATE,
+			DATE_FORMAT(MAINTENANCE_REQUEST_DATE,'%Y-%m-%d') MAINTENANCE_REQUEST_DATE,
+			DATE_FORMAT(DAY_OF_DELIVERY,'%Y-%m-%d') DAY_OF_DELIVERY,
+			DISTANCE_DRIVEN,
+			PAYMENT,
+			REG_MNGR_ID,
+			REG_DATE
+		FROM
+			TB_MAINTENANCE_HISTORY
+		WHERE
+			MAINTENANCE_HISTORY_SEQ = #{maintenanceHistorySeq}
+	</select>
+	
+	<select id="selectMaintenanceHistoryDetailList" parameterType="com.spiritgarage.www.admin.vo.MaintenanceHistoryVO" resultType="com.spiritgarage.www.admin.vo.MaintenanceHistoryDetailVO">
+		SELECT
+			MAINTENANCE_HISTORY_DETAIL_SEQ,
+			MAINTENANCE_HISTORY_SEQ,
+			MAINTENANCE_DV,
+			WORK_CONTENT,
+			PARTS_CLASS,
+			REG_DATE
+		FROM
+			TB_MAINTENANCE_HISTORY_DETAIL
+		WHERE
+			MAINTENANCE_HISTORY_SEQ = #{maintenanceHistorySeq}
+		ORDER BY REG_DATE DESC
+	</select>
+	
+</mapper>

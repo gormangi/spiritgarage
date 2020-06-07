@@ -2,6 +2,15 @@
 <script src="/js/library/jquery/jquery.inputmask.bundle.min.js"></script>
 <script src="/js/admin/maintenance_history_reg.js"></script>
 
+<style type="text/css">
+#maintenance_history_detail_list tr td:nth-child(1) span{
+	display: inline-block; width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+#maintenance_history_detail_list tr td:nth-child(2) span{
+	display: inline-block; width: 700px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+</style>
+
 <input type="hidden" id="rMod" value="${rMod }"/>
 <input type="hidden" id="maintenanceHistorySeq" value="${maintenanceHistorySeq }"/>
 
@@ -65,14 +74,14 @@
 									
 									<div class="col-sm-4">
 										<div class="form-group">
-											<label>정비의뢰일</label>
+											<label><span style="color:red; margin-right:8px;">*</span>정비의뢰일</label>
 											<input type="text" class="form-control" id="maintenanceRequestDate" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask/>
 										</div>
 									</div>
 									
 									<div class="col-sm-4">
 										<div class="form-group">
-											<label>출고일</label>
+											<label><span style="color:red; margin-right:8px;">*</span>출고일</label>
 											<input type="text" class="form-control" id="dayOfDelivery" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask/>
 										</div>
 									</div>

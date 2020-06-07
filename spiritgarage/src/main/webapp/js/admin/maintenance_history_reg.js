@@ -100,8 +100,8 @@ var fn = {
 			
 			var html = [];
 			html.push('<tr data-maintenance-history-detail-order='+(maxTrLength+1)+'>');
-			html.push('<td data-maintenance-history-detail-maintenance-dv='+maintenanceDv+'>'+maintenanceDv+'</td>');
-			html.push('<td data-maintenance-history-detail-work-content='+workContent+'>'+workContent+'</td>');
+			html.push('<td data-maintenance-history-detail-maintenance-dv='+maintenanceDv+'><span>'+maintenanceDv+'</span></td>');
+			html.push('<td data-maintenance-history-detail-work-content='+workContent+'><span>'+workContent+'</span></td>');
 			if(partsClass == 'N'){
 				html.push('<td data-maintenance-history-detail-parts-class='+partsClass+'>신품</td>');
 			}else if(partsClass == 'R'){
@@ -126,7 +126,7 @@ var fn = {
 			
 			$("#detailOrder").val($(me).closest('tr').data('maintenanceHistoryDetailOrder'));
 			var maintenanceDv = $(me).closest('tr').children().eq(0).data('maintenanceHistoryDetailMaintenanceDv');
-			var workContent = $(me).closest('tr').children().eq(1).data('maintenanceHistoryDetailWorkContent');
+			var workContent = $(me).closest('tr').children().eq(1).find('span').text();
 			var partsClass = $(me).closest('tr').children().eq(2).data('maintenanceHistoryDetailPartsClass');
 			
 			$("#maintenanceHistoryDetail_maintenanceDv").val(maintenanceDv);
@@ -146,8 +146,8 @@ var fn = {
 			
 			var modifyTr = $("#maintenance_history_detail_list").find('tr[data-maintenance-history-detail-order="'+detailOrder+'"]');
 			
-			$(modifyTr).children().eq(0).data('maintenanceHistoryDetailMaintenanceDv',maintenanceDv).text(maintenanceDv);
-			$(modifyTr).children().eq(1).data('maintenanceHistoryDetailWorkContent',workContent).text(workContent);
+			$(modifyTr).children().eq(0).data('maintenanceHistoryDetailMaintenanceDv',maintenanceDv).find('span').text(maintenanceDv);
+			$(modifyTr).children().eq(1).data('maintenanceHistoryDetailWorkContent',workContent).find('span').text(workContent);
 			$(modifyTr).children().eq(2).data('maintenanceHistoryDetailPartsClass',partsClass);
 			if(partsClass == 'N'){
 				$(modifyTr).children().eq(2).text('신품');
@@ -184,6 +184,16 @@ var fn = {
 			
 			if(carRegNum == ''){
 				alert('차량등록번호를 입력하세요');
+				return false;
+			}
+			
+			if(maintenanceRequestDate == ''){
+				alert('정비의뢰일을 입력하세요');
+				return false;
+			}
+			
+			if(dayOfDelivery == ''){
+				alert('출고일을 입력하세요');
 				return false;
 			}
 			
@@ -246,10 +256,11 @@ var fn = {
 			var rMod = $("#rMod").val();
 			if(rMod == 'N'){
 				alert('등록되었습니다.');
+				document.location.href = "/admin/maintenanceHistoryManagement";
 			}else{
 				alert('수정되었습니다.');
+				window.location.reload();
 			}
-			document.location.href = "/admin/maintenanceHistoryManagement";
 			
 		},
 		
@@ -289,8 +300,8 @@ var fn = {
 						
 						var html = [];
 						html.push('<tr data-maintenance-history-detail-order='+(maxTrLength+1)+'>');
-						html.push('<td data-maintenance-history-detail-maintenance-dv='+item.maintenanceDv+'>'+item.maintenanceDv+'</td>');
-						html.push('<td data-maintenance-history-detail-work-content='+item.workContent+'>'+item.workContent+'</td>');
+						html.push('<td data-maintenance-history-detail-maintenance-dv='+item.maintenanceDv+'><span>'+item.maintenanceDv+'</span></td>');
+						html.push('<td data-maintenance-history-detail-work-content='+item.workContent+'><span>'+item.workContent+'</span></td>');
 						if(item.partsClass == 'N'){
 							html.push('<td data-maintenance-history-detail-parts-class='+item.partsClass+'>신품</td>');
 						}else if(item.partsClass == 'R'){
@@ -331,6 +342,16 @@ var fn = {
 			
 			if(carRegNum == ''){
 				alert('차량등록번호를 입력하세요');
+				return false;
+			}
+			
+			if(maintenanceRequestDate == ''){
+				alert('정비의뢰일을 입력하세요');
+				return false;
+			}
+			
+			if(dayOfDelivery == ''){
+				alert('출고일을 입력하세요');
 				return false;
 			}
 			

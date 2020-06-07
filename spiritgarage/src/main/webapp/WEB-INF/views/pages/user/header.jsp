@@ -14,6 +14,7 @@
 					<li id="mainMove"><a href="/">Home</a></li>
 					<li id="noticeMove"><a href="/notice">공지</a></li>
 					<li id="reservationMove"><a href="/reservation">예약</a></li>
+					<li id="maintenanceHistoryMove"><a href="/maintenanceHistory">정비이력</a></li>
 					<li id="categoryMove">
 						<a class="drop" href="javascript:void(0);">카테고리</a>
 						<ul id="categoryMenuList">
