@@ -53,7 +53,7 @@
 							<footer>
 							<ul class="nospace inline pushright">
 								{{if item.reservationBtnYn == 'Y'}}<li><a class="btn" href="/reservation">예약하기</a></li>{{/if}}
-								{{if item.maintenanceHistoryBtnYn == 'Y'}}<li><a class="btn inverse" href="#">내 정비이력보기</a></li>{{/if}}
+								{{if item.maintenanceHistoryBtnYn == 'Y'}}<li><a class="btn inverse" href="/maintenanceHistory">내 정비이력보기</a></li>{{/if}}
 							</ul>
 						</footer>
 					{{/if}}
@@ -68,7 +68,7 @@
 						<footer>
 							<ul class="nospace inline pushright">
 								{{if item.reservationBtnYn == 'Y'}}<li><a class="btn" href="/reservation">예약하기</a></li>{{/if}}
-								{{if item.maintenanceHistoryBtnYn == 'Y'}}<li><a class="btn inverse" href="#">내 정비이력보기</a></li>{{/if}}
+								{{if item.maintenanceHistoryBtnYn == 'Y'}}<li><a class="btn inverse" href="/maintenanceHistory">내 정비이력보기</a></li>{{/if}}
 							</ul>
 						</footer>
 					{{/if}}
