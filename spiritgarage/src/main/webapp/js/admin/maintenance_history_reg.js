@@ -125,7 +125,7 @@ var fn = {
 			$("#maintenanceHistoryDetailAdd").hide();
 			
 			$("#detailOrder").val($(me).closest('tr').data('maintenanceHistoryDetailOrder'));
-			var maintenanceDv = $(me).closest('tr').children().eq(0).data('maintenanceHistoryDetailMaintenanceDv');
+			var maintenanceDv = $(me).closest('tr').children().eq(0).find('span').text();
 			var workContent = $(me).closest('tr').children().eq(1).find('span').text();
 			var partsClass = $(me).closest('tr').children().eq(2).data('maintenanceHistoryDetailPartsClass');
 			
@@ -235,8 +235,8 @@ var fn = {
 				
 				var detail = {};
 				
-				var maintenanceDv = $(elem).children().eq(0).data('maintenanceHistoryDetailMaintenanceDv');
-				var workContent = $(elem).children().eq(1).data('maintenanceHistoryDetailWorkContent');
+				var maintenanceDv = $(elem).children().eq(0).find('span').text();
+				var workContent = $(elem).children().eq(1).find('span').text();
 				var partsClass = $(elem).children().eq(2).data('maintenanceHistoryDetailPartsClass');
 				
 				$.ajax({
