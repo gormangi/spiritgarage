@@ -920,4 +920,44 @@
 		DELETE FROM TB_MAINTENANCE_HISTORY WHERE MAINTENANCE_HISTORY_SEQ = #{maintenanceHistorySeq}
 	</delete>
 	
+	<select id="selectReservationNotPossibleList" resultType="com.spiritgarage.www.admin.vo.ReservationNotPossibleVO">
+		SELECT
+			R.NOT_POSSIBLE_SEQ,
+			DATE_FORMAT(R.START_DATE,'%Y-%m-%d %H:%i') START_DATE,
+			DATE_FORMAT(R.END_DATE,'%Y-%m-%d %H:%i') END_DATE,
+			R.REASON,
+			R.REG_MNGR_ID,
+			(SELECT NAME FROM TB_MNGR WHERE ID = R.REG_MNGR_ID) REG_MNGR_NAME,
+			DATE_FORMAT(R.REG_DATE,'%Y-%m-%d') REG_DATE,
+			R.UPT_MNGR_ID,
+			(SELECT NAME FROM TB_MNGR WHERE ID = R.UPT_MNGR_ID) UPT_MNGR_NAME,
+			DATE_FORMAT(R.UPT_DATE,'%Y-%m-%d') UPT_DATE
+		FROM
+			TB_RESERVATION_NOT_POSSIBLE R
+		ORDER BY R.REG_DATE DESC
+	</select>
+	
+	<insert id="insertReservationNotPossible" parameterType="com.spiritgarage.www.admin.vo.ReservationNotPossibleVO">
+		INSERT INTO TB_RESERVATION_NOT_POSSIBLE
+		(
+			NOT_POSSIBLE_SEQ,
+			START_DATE,
+			END_DATE,
+			REASON,
+			REG_MNGR_ID,
+			REG_DATE
+		)VALUES(
+			#{notPossibleSeq},
+			STR_TO_DATE(#{startDate},'%Y-%m-%d %H:%i'),
+			STR_TO_DATE(#{endDate},'%Y-%m-%d %H:%i'),
+			#{reason},
+			#{regMngrId},
+			NOW()
+		)
+	</insert>
+	
+	<delete id="deleteReservationNotPossDel" parameterType="com.spiritgarage.www.admin.vo.ReservationNotPossibleVO">
+		DELETE FROM TB_RESERVATION_NOT_POSSIBLE WHERE NOT_POSSIBLE_SEQ = #{notPossibleSeq}
+	</delete>
+	
 </mapper>

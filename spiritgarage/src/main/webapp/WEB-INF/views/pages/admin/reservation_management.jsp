@@ -1,12 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.min.css' rel='stylesheet' />
+<link rel="stylesheet" href="/layout/styles/daterangepicker.css">
 <script src="/js/library/moment.min.js"></script>
+<script src="/js/library/daterangepicker.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/lang/ko.js'></script>
 
 <style type="text/css">
 .resManagementCalendar{background-color:white;}
 #reservation_list tr{cursor:pointer;}
+#reservation_not_poss_list tr td:nth-child(3) span{
+	display: inline-block; width: 700px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
 </style>
 
 <script src="/js/admin/reservation_management.js"></script>
@@ -93,6 +98,34 @@
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">예약불가일 설정</h3>
+						<div class="card-tools">
+							<button type="button" id="reservationNotPossAdd" class="btn btn-block btn-primary btn-sm">예약불가일 추가</button>
+						</div>
+					</div>
+					<div class="card-body table-responsive p-0">
+						<table class="table table-hover text-nowrap">
+							<thead>
+								<tr>
+									<th>시작일</th>
+									<th>종료일</th>
+									<th>사유</th>
+									<th>등록자</th>
+									<th>등록일</th>
+									<th>삭제</th>
+								</tr>
+							</thead>
+							<tbody id="reservation_not_poss_list">
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="row" id="reservationInfoDiv" style="display:none;">
 			<div class="col-md-12">
 				<div class="card card-outline card-info">
@@ -140,19 +173,61 @@
 	</div>
 </div>
 
+<div class="modal fade" id="reservationNotPossAdd-modal">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">예약불가일 추가</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			</div>
+			<div class="modal-body">
+				<div class="card-body">
+					<form id="reservationNotPossAddForm">
+						<div class="form-group">
+							<label for="reservationNotPossDateRange">예약 불가범위</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="far fa-clock"></i></span>
+								</div>
+								<input type="text" class="form-control float-right" id="reservationNotPossDateRange" readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="reservationNotPossReason">사유</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="reservationNotPossReason" maxlength="1000"/>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer justify-content-between">
+				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+				<button type="button" class="btn btn-primary" id="reservationNotPossAddBtn">추가</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 <script id="maintenance_area_list_template" type="text/x-jquery-tmpl">
+	
+</script>
+
+<script id="reservation_not_poss_list_template" type="text/x-jquery-tmpl">
 {{if list.length > 0}}
 	{{each(i,item) list}}
-		<tr data-maintenance-area-seq="\${item.maintenanceAreaSeq}">
-			<td>\${item.rnum}.</td>
-			<td>\${item.maintenanceName}</td>
+		<tr data-not-possible-seq="\${item.notPossibleSeq}">
+			<td>\${item.startDate}</td>
+			<td>\${item.endDate}</td>
+			<td><span>\${item.reason}</span></td>
+			<td>\${item.regMngrName}</td>
 			<td>\${item.regDate}</td>
-			<td><input type="button" class="btn btn-block btn-danger btn-xs" name="maintenanceAreaDel" value="삭제"/></td>
+			<td><input type="button" class="btn btn-block btn-danger btn-xs" name="reservationNotPossibleDel" value="삭제"></td>
 		</tr>
 	{{/each}}
 {{else}}
 	<tr style="text-align:center">
-		<td colspan="4">등록된 정비 영역이 없습니다.</td>
+		<td colspan="6">설정된 예약불가일이 없습니다.</td>
 	</tr>
 {{/if}}
 </script>

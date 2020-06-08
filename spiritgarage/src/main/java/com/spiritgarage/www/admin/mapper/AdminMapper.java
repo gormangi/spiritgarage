@@ -9,6 +9,7 @@ import com.spiritgarage.www.admin.vo.MaintenanceHistoryDetailVO;
 import com.spiritgarage.www.admin.vo.MaintenanceHistoryVO;
 import com.spiritgarage.www.admin.vo.MngrVO;
 import com.spiritgarage.www.admin.vo.NoticeVO;
+import com.spiritgarage.www.admin.vo.ReservationNotPossibleVO;
 import com.spiritgarage.www.category.vo.BlogCategoryVO;
 import com.spiritgarage.www.main.vo.MainFooterVO;
 import com.spiritgarage.www.reservation.vo.MaintenanceAreaVO;
@@ -145,5 +146,11 @@ public interface AdminMapper {
 	int deleteMaintenanceHistoryDetail(MaintenanceHistoryVO vo) throws Exception;
 	
 	int deleteMaintenanceHistory(MaintenanceHistoryVO vo) throws Exception;
+	
+	List<ReservationNotPossibleVO> selectReservationNotPossibleList() throws Exception;
+	
+	int insertReservationNotPossible(ReservationNotPossibleVO vo) throws Exception;
+	
+	int deleteReservationNotPossDel(ReservationNotPossibleVO vo) throws Exception;
 	
 }

@@ -8,6 +8,8 @@ $(document).ready(function(){
 	
 	fn.getLoadCalendar();
 	
+	fn.getReservationNotPossibleList();
+	
 	$("#maintenanceAreaAddBtn").on("click",function(){
 		$("#maintenanceAreaAdd-modal form")[0].reset();
 		$("#maintenanceAreaAdd-modal").modal('show');
@@ -51,8 +53,30 @@ $(document).ready(function(){
 			fn.reservationSearch();
 		}
 	});
+	
+	$("#reservationNotPossAdd").on("click",function(){
+		$("#reservationNotPossAdd-modal form")[0].reset();
+		$("#reservationNotPossAdd-modal").modal('show');
+	});
+	
+	$('#reservationNotPossDateRange').daterangepicker({
+		timePicker: true,
+		timePickerIncrement: 30,
+		locale: {
+			format : 'YYYY-MM-DD HH:mm'
+		},
+		ignoreReadonly:true,
+	});
+	
+	$("#reservationNotPossAddBtn").on("click",function(){
+		fn.reservationNotPossAdd();
+	});
+	
+	$("#reservation_not_poss_list").on("click","input[name=reservationNotPossibleDel]",function(){
+		fn.reservationNotPossDel($(this).closest('tr').data('notPossibleSeq'));
+	});
+	
 });
-
 var fn = {
 		blockPostCnt : '5',
 		reservationSearchWord : '',
@@ -315,5 +339,70 @@ var fn = {
 			fn.reservationSearchWord = $("#reservationSearchWord").val();
 			fn.getReservationList();
 			$("#calendar").fullCalendar('refetchEvents');
+		},
+		
+		getReservationNotPossibleList : function(){
+			
+			$.ajax({
+				url : '/admin/getReservationNotPossibleList',
+				dataType : 'json',
+				type : 'post',
+				success : function(res){
+					$("#reservation_not_poss_list").empty();
+					$('#reservation_not_poss_list_template').tmpl(res).appendTo('#reservation_not_poss_list');
+				}
+			});
+			
+		},
+		
+		reservationNotPossAdd : function(){
+			
+			var reservationNotPossDateRange = $("#reservationNotPossDateRange").val();
+			var reservationNotPossReason = $("#reservationNotPossReason").val();
+			
+			if(reservationNotPossDateRange == ''){
+				alert('예약불가범위를 선택하세요');
+				return false;
+			}
+			
+			if(reservationNotPossReason == ''){
+				alert('사유를 입력하세요');
+				return false;
+			}
+			
+			var dateRange = reservationNotPossDateRange.split(' - ');
+			
+			$.ajax({
+				url : '/admin/reservationNotPossAdd',
+				data : {startDate : dateRange[0] , endDate : dateRange[1] , reason : reservationNotPossReason},
+				dataType : 'json',
+				type : 'post',
+				success : function(res){
+					if(res.state == 'success'){
+						fn.getReservationNotPossibleList();
+						$("#reservationNotPossAdd-modal").modal('hide');
+					}
+				}
+			});
+			
+		},
+		
+		reservationNotPossDel : function(notPossibleSeq){
+			
+			if(confirm('해당 예약불가일을 삭제하시겠습니까?')){
+				$.ajax({
+					url : '/admin/reservationNotPossDel',
+					data : {notPossibleSeq : notPossibleSeq},
+					dataType : 'json',
+					type : 'post',
+					success : function(res){
+						if(res.state == 'success'){
+							alert('삭제되었습니다');
+							fn.getReservationNotPossibleList();
+						}
+					}
+				});
+			}
+			
 		}
 }

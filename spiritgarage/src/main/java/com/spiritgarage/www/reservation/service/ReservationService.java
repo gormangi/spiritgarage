@@ -12,7 +12,7 @@ public interface ReservationService {
 
 	Map<String, Object> reservationImageUpload(MultipartFile upload , String folderName , String imageUploadPath , String baseUrl) throws Exception;
 	
-	boolean doReservation(ReservationVO vo) throws Exception;
+	Map<String, Object> doReservation(ReservationVO vo) throws Exception;
 	
 	Map<String, Object> getMyResList(ReservationVO vo) throws Exception;
 	

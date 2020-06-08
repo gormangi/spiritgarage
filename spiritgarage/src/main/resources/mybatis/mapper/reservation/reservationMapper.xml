@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spiritgarage.www.reservation.mapper.ReservationMapper">
+
+	<select id="selectReservationNotPossible" parameterType="com.spiritgarage.www.reservation.vo.ReservationVO" resultType="com.spiritgarage.www.admin.vo.ReservationNotPossibleVO">
+		SELECT
+			NOT_POSSIBLE_SEQ,
+			DATE_FORMAT(START_DATE,'%Y-%m-%d %H:%i') START_DATE,
+			DATE_FORMAT(END_DATE,'%Y-%m-%d %H:%i') END_DATE,
+			REASON,
+			REG_MNGR_ID,
+			REG_DATE,
+			UPT_MNGR_ID,
+			UPT_DATE
+		FROM
+			TB_RESERVATION_NOT_POSSIBLE
+		WHERE
+			STR_TO_DATE(#{reservationDate},'%Y-%m-%d %H:%i') BETWEEN START_DATE AND END_DATE
+	</select>
 	
 	<insert id="insertReservation" parameterType="com.spiritgarage.www.reservation.vo.ReservationVO">
 		INSERT INTO TB_RESERVATION

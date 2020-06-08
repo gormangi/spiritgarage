@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.spiritgarage.www.admin.vo.ReservationNotPossibleVO;
 import com.spiritgarage.www.reservation.mapper.ReservationMapper;
 import com.spiritgarage.www.reservation.service.ReservationService;
 import com.spiritgarage.www.reservation.vo.MaintenanceAreaVO;
@@ -27,19 +28,31 @@ public class ReservationServiceImpl implements ReservationService{
 	}
 
 	@Override
-	public boolean doReservation(ReservationVO vo) throws Exception {
+	public Map<String, Object> doReservation(ReservationVO vo) throws Exception {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("state", "fail");
 		
 		vo.setReservationSeq(UUID.randomUUID().toString());
 		vo.setUseYn("Y");
 		
+		List<ReservationNotPossibleVO> notList = mapper.selectReservationNotPossible(vo);
+		if(notList.size() > 0) {
+			result.put("state", "notPossibleFail");
+			result.put("reason",notList.get(0).getReason());
+			result.put("startDate",notList.get(0).getStartDate());
+			result.put("endDate",notList.get(0).getEndDate());
+			return result;
+		}
+		
 		int res = mapper.insertReservation(vo);
 		
 		if(res > 0) {
-			return true;
-		}else {
-			return false;
+			result.put("state", "success");
+		} else {
+			result.put("state", "fail");
 		}
-		
+		return result;
 	}
 
 	@Override

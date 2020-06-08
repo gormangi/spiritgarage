@@ -462,11 +462,21 @@ var fn = {
 				dataType : 'json',
 				type : 'post',
 				success : function(res){
-					$("#footer_contact_location").val(res.location.content);
-					$("#footer_contact_mobile").val(res.mobile.content);
-					$("#footer_contact_phone").val(res.phone.content);
-					$("#footer_openhour").val(res.openhour.content);
-					$("#footer_mainfield").val(res.mainfield.content);
+					if(res.location){
+						$("#footer_contact_location").val(res.location.content);
+					}
+					if(res.mobile){
+						$("#footer_contact_mobile").val(res.mobile.content);
+					}
+					if(res.phone){
+						$("#footer_contact_phone").val(res.phone.content);
+					}
+					if(res.openhour){
+						$("#footer_openhour").val(res.openhour.content);
+					}
+					if(res.mainfield){
+						$("#footer_mainfield").val(res.mainfield.content);
+					}
 				}
 			});
 			

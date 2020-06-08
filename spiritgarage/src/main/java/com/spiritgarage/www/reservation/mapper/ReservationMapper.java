@@ -2,10 +2,13 @@ package com.spiritgarage.www.reservation.mapper;
 
 import java.util.List;
 
+import com.spiritgarage.www.admin.vo.ReservationNotPossibleVO;
 import com.spiritgarage.www.reservation.vo.MaintenanceAreaVO;
 import com.spiritgarage.www.reservation.vo.ReservationVO;
 
 public interface ReservationMapper {
+	
+	List<ReservationNotPossibleVO> selectReservationNotPossible(ReservationVO vo) throws Exception;
 
 	int insertReservation(ReservationVO vo) throws Exception;
 	

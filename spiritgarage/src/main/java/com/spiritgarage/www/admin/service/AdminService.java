@@ -12,6 +12,7 @@ import com.spiritgarage.www.admin.vo.MaintenanceHistoryDetailVO;
 import com.spiritgarage.www.admin.vo.MaintenanceHistoryVO;
 import com.spiritgarage.www.admin.vo.MngrVO;
 import com.spiritgarage.www.admin.vo.NoticeVO;
+import com.spiritgarage.www.admin.vo.ReservationNotPossibleVO;
 import com.spiritgarage.www.category.vo.BlogCategoryVO;
 import com.spiritgarage.www.main.vo.MainFooterVO;
 import com.spiritgarage.www.reservation.vo.MaintenanceAreaVO;
@@ -102,4 +103,10 @@ public interface AdminService {
 	Map<String, Object> delMaintenanceHistoryDetail(MaintenanceHistoryVO vo) throws Exception;
 	
 	Map<String, Object> maintenanceHistoryDelete(MaintenanceHistoryVO vo) throws Exception;
+	
+	Map<String, Object> getReservationNotPossibleList() throws Exception;
+	
+	Map<String, Object> reservationNotPossAdd(ReservationNotPossibleVO vo) throws Exception;
+	
+	Map<String, Object> reservationNotPossDel(ReservationNotPossibleVO vo) throws Exception;
 }

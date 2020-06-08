@@ -102,6 +102,12 @@ var fn = {
 				return false;
 			}
 			
+			var phoneExp = /^\d{3}\d{3,4}\d{4}$/;
+			if(!phoneExp.test(phone)){
+				alert('연락처를 올바르게 입력해주세요');
+				return false;
+			}
+			
 			if(carRegNum == ''){
 				alert('차량등록번호를 입력하세요');
 				return false;

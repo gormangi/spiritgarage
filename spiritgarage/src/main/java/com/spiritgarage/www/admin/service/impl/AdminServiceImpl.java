@@ -24,6 +24,7 @@ import com.spiritgarage.www.admin.vo.MaintenanceHistoryDetailVO;
 import com.spiritgarage.www.admin.vo.MaintenanceHistoryVO;
 import com.spiritgarage.www.admin.vo.MngrVO;
 import com.spiritgarage.www.admin.vo.NoticeVO;
+import com.spiritgarage.www.admin.vo.ReservationNotPossibleVO;
 import com.spiritgarage.www.category.vo.BlogCategoryVO;
 import com.spiritgarage.www.main.vo.MainFooterVO;
 import com.spiritgarage.www.reservation.vo.MaintenanceAreaVO;
@@ -984,6 +985,45 @@ public class AdminServiceImpl implements AdminService{
 		if(delHistory > 0) {
 			res = mapper.deleteMaintenanceHistoryDetail(vo);
 		}
+		
+		if(res > 0) {
+			result.put("state", "success");
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public Map<String, Object> getReservationNotPossibleList() throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("list", mapper.selectReservationNotPossibleList());
+		return result;
+	}
+
+	@Override
+	public Map<String, Object> reservationNotPossAdd(ReservationNotPossibleVO vo) throws Exception {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("state", "fail");
+		
+		vo.setNotPossibleSeq(UUID.randomUUID().toString());
+		
+		int res = mapper.insertReservationNotPossible(vo);
+		
+		if(res > 0) {
+			result.put("state", "success");
+		}
+		
+		return result;
+	}
+
+	@Override
+	public Map<String, Object> reservationNotPossDel(ReservationNotPossibleVO vo) throws Exception {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("state", "fail");
+		
+		int res = mapper.deleteReservationNotPossDel(vo);
 		
 		if(res > 0) {
 			result.put("state", "success");

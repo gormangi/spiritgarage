@@ -42,7 +42,7 @@ public class ReservationController {
 	
 	@RequestMapping(value = "/reservation/doReservation")
 	@ResponseBody
-	public boolean doReservation(ReservationVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
+	public Map<String, Object> doReservation(ReservationVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
 		return service.doReservation(vo);
 	}
 	

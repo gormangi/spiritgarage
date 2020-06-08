@@ -11,7 +11,6 @@ var footerFn = {
 				dataType : 'json',
 				type : 'post',
 				success : function(res){
-					console.log(res);
 					
 					if(!res.location){
 						$("#main_footer_location").text('(14961)경기도 시흥시 포동 20-19 스피릿개러지');

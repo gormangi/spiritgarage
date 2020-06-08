@@ -24,6 +24,7 @@ import com.spiritgarage.www.admin.vo.MaintenanceHistoryDetailVO;
 import com.spiritgarage.www.admin.vo.MaintenanceHistoryVO;
 import com.spiritgarage.www.admin.vo.MngrVO;
 import com.spiritgarage.www.admin.vo.NoticeVO;
+import com.spiritgarage.www.admin.vo.ReservationNotPossibleVO;
 import com.spiritgarage.www.category.vo.BlogCategoryVO;
 import com.spiritgarage.www.main.vo.MainFooterVO;
 import com.spiritgarage.www.reservation.vo.MaintenanceAreaVO;
@@ -409,5 +410,26 @@ public class AdminController {
 	@ResponseBody
 	public Map<String, Object> maintenanceHistoryDelete(MaintenanceHistoryVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
 		return service.maintenanceHistoryDelete(vo);
+	}
+	
+	@RequestMapping(value = "/admin/getReservationNotPossibleList")
+	@ResponseBody
+	public Map<String, Object> getReservationNotPossibleList(HttpServletRequest request , HttpServletResponse response) throws Exception{
+		return service.getReservationNotPossibleList();
+	}
+	
+	@RequestMapping(value = "/admin/reservationNotPossAdd")
+	@ResponseBody
+	public Map<String, Object> reservationNotPossAdd(ReservationNotPossibleVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
+		HttpSession session = request.getSession();
+		MngrVO mngrInfo = (MngrVO)session.getAttribute("mngrInfo");
+		vo.setRegMngrId(mngrInfo.getId());
+		return service.reservationNotPossAdd(vo);
+	}
+	
+	@RequestMapping(value = "/admin/reservationNotPossDel")
+	@ResponseBody
+	public Map<String, Object> reservationNotPossDel(ReservationNotPossibleVO vo , HttpServletRequest request , HttpServletResponse response) throws Exception{
+		return service.reservationNotPossDel(vo);
 	}
 }
