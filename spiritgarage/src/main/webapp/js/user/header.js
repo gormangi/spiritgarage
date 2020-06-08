@@ -59,6 +59,8 @@ var headerFn = {
 				$("#noticeMove").addClass('active');
 			}else if(viewDivision == 'maintenanceHistoryPage'){
 				$("#maintenanceHistoryMove").addClass('active');
+			}else if(viewDivision == 'wayToComePage'){
+				$("#wayToComeMove").addClass('active');
 			}
 			
 		},
@@ -112,6 +114,11 @@ var headerFn = {
 					html.push('<ul>');
 					html.push('<li><a href="javascript:void(0);">Spiritgarage</a></li>');
 					html.push('<li><a href="javascript:void(0);">정비이력</a></li>');
+					html.push('</ui>');
+				}else if(viewDivision == 'wayToComePage'){
+					html.push('<ul>');
+					html.push('<li><a href="javascript:void(0);">Spiritgarage</a></li>');
+					html.push('<li><a href="javascript:void(0);">오시는길</a></li>');
 					html.push('</ui>');
 				}
 				$("#breadcrumb").html(html.join(''));

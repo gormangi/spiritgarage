@@ -20,6 +20,7 @@
 						<ul id="categoryMenuList">
 						</ul>
 					</li>
+					<li id="wayToComeMove"><a href="/wayToCome">오시는길</a></li>
 				</ul>
 			</nav>
 		</header>

@@ -93,7 +93,7 @@ var fn = {
 						$("#p_reservation_phone").val(reservationPhone);
 						$("#reservationComplateForm").submit();
 					}else if(res.state = 'notPossibleFail'){
-						alert(res.startDate + ' 부터 ' + res.endDate + ' 까지는\n[' + res.reason + '] \n 의 사유로 예약할수 없습니다 \n 다른날짜를 선택해주세요');
+						alert('죄송합니다 ' + res.startDate + ' 부터 ' + res.endDate + ' 까지는\n[' + res.reason + '] \n 의 사유로 예약할수 없습니다 \n 다른날짜를 선택해주세요');
 						return false;
 					}else if(res.state == 'fail'){
 						alert("예약에 실패하였습니다 관리자에게 문의해주세요");
