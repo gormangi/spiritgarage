@@ -6,28 +6,28 @@ $(document).ready(function(){
 
 var fn = {
 		
-		map : null,
-		
-		marker : null,
-		
 		init : function(){
 			
-			map = new naver.maps.Map('map', {
+			var map = new naver.maps.Map('map', {
 				center: new naver.maps.LatLng(37.403016, 126.769350),
-				zoom: 16,
-				scaleControl : true,
-				zoomControl : true,
-				mapTypeControl : true
+				zoom: 13,
+				minZoom: 7,
+				zoomControl: true,
+				draggable: true,
+				pinchZoom: true,
+				scrollWheel: true,
+				keyboardShortcuts: true,
+				disableDoubleTapZoom: false,
+				disableDoubleClickZoom: false,
+				disableTwoFingerTapZoom: false
 			});
 			
-			marker = new naver.maps.Marker({
+			var marker = new naver.maps.Marker({
 				position: new naver.maps.LatLng(37.403016, 126.769350),
 				map: map,
 				icon: {
-					url: '/images/user/spiritgarage50.jpg',
-					size: new naver.maps.Size(50, 50),
-					origin: new naver.maps.Point(0, 0),
-					anchor: new naver.maps.Point(11, 35)
+					url: '/images/user/spiritgarage50.png',
+					size: new naver.maps.Size(50, 50)
 				}
 			});
 			
