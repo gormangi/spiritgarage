@@ -210,7 +210,20 @@
 </div>
 
 <script id="maintenance_area_list_template" type="text/x-jquery-tmpl">
-	
+{{if list.length > 0}}
+	{{each(i,item) list}}
+		<tr data-maintenance-area-seq="\${item.maintenanceAreaSeq}">
+			<td>\${item.rnum}.</td>
+			<td>\${item.maintenanceName}</td>
+			<td>\${item.regDate}</td>
+			<td><input type="button" class="btn btn-block btn-danger btn-xs" name="maintenanceAreaDel" value="삭제"/></td>
+		</tr>
+	{{/each}}
+{{else}}
+	<tr style="text-align:center">
+		<td colspan="4">등록된 정비 영역이 없습니다.</td>
+	</tr>
+{{/if}}
 </script>
 
 <script id="reservation_not_poss_list_template" type="text/x-jquery-tmpl">
