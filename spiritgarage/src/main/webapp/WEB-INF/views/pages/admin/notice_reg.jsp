@@ -49,6 +49,8 @@
 								</div>
 								<div class="form-group">
 									<label for="title">내용</label>
+									<button type="button" class="btn btn-primary btn-xs" style="margin-left:20px;" id="noticeImgFileBtn">이미지 등록</button>
+									<input type="file" id="noticeImgFile" accept="image/x-png,image/gif,image/jpeg" style="display:none"/>
 									<textarea id="content" name="content"></textarea>
 								</div>
 							</div>

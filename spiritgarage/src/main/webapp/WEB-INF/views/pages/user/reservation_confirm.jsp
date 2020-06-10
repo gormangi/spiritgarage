@@ -15,7 +15,7 @@
 		<div class="content">
 		
 			<h1><i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;내 예약내역</h1>
-			<div class="group btmspace-50 demo">
+			<div class="group btmspace-30 demo">
 				<div class="one_half first">
 					<div class="scrollable spirittable">
 						<table>
@@ -48,8 +48,10 @@
 						</table>
 					</div>
 				</div>
-				<a class="btn" href="javascript:void(0);" id="reservationConfirmBtn">확인</a>
 			</div>
+			<ul class="nospace inline pushright" style="margin-bottom:20px;">
+				<li><a class="btn" href="javascript:void(0);" id="reservationConfirmBtn">확인</a></li>
+			</ul>
 			
 			<div class="scrollable spirittable" id="myResList" style="display:none;">
 				<table>

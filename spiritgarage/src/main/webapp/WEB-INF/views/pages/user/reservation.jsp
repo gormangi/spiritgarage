@@ -94,7 +94,13 @@
 				<table>
 					<thead>
 						<tr>
-							<th><i class="fa fa-adjust"></i>&nbsp;예약 내용 (선택사항)</th>
+							<th>
+								<i class="fa fa-adjust"></i>&nbsp;예약 내용 (선택사항)
+								<span style="color:black; padding-left:30px;">
+									<input type="button" style="display:inline;" value="이미지 등록" id="reservationImgFileBtn"/>
+								</span>
+								<input type="file" id="reservationImgFile" accept="image/x-png,image/gif,image/jpeg" style="display:none"/>
+							</th>
 						</tr>
 					</thead>
 					<tbody>

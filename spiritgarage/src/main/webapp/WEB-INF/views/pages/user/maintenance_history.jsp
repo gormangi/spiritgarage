@@ -14,7 +14,7 @@
 		<div class="content">
 			
 			<h1><i class="fa fa-sticky-note" aria-hidden="true"></i>&nbsp;내 정비이력 검색</h1>
-			<div class="group btmspace-50 demo" id="maintenanceHistorySearchDiv">
+			<div class="group btmspace-30 demo" id="maintenanceHistorySearchDiv">
 				<div class="one_half first">
 					<div class="scrollable spirittable">
 						<table>
@@ -47,8 +47,10 @@
 						</table>
 					</div>
 				</div>
-				<a class="btn" href="javascript:void(0);" id="maintenanceHistoryConfirm">확인</a>
 			</div>
+			<ul class="nospace inline pushright" style="margin-bottom:20px;">
+				<li><a class="btn" href="javascript:void(0);" id="maintenanceHistoryConfirm">확인</a></li>
+			</ul>
 			
 			<div class="scrollable spirittable" id="myMaintenanceHistoryList" style="display:none;">
 				<table>

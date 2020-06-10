@@ -9,6 +9,14 @@ $(document).ready(function(){
 	$("#goReservationConfirm").on('click',function(){
 		document.location.href = "/reservationConfirm";
 	});
+	
+	$("#reservationImgFileBtn").on("click",function(){
+		$("#reservationImgFile").trigger('click');
+	});
+	
+	$("#reservationImgFile").on("change",function(){
+		fn.reservationImgUpload($(this));
+	});
 });
 
 var fn = {
@@ -152,6 +160,25 @@ var fn = {
 					case 'link' :
 						dialogDefinition.removeContents('upload');
 						dialogDefinition.removeContents('advanced');
+				}
+			});
+		},
+		
+		reservationImgUpload : function(me){
+			
+			var formData = new FormData();
+			formData.append("upload", $(me)[0].files[0]);
+			
+			$.ajax({
+				url : '/reservation/reservationImageUpload',
+				data : formData,
+				dataType : 'json',
+				type : 'post',
+				enctype : 'multipart/form-data',
+				processData : false, 
+				contentType : false,
+				success : function(res){
+					CKEDITOR.instances.reservation_content.insertHtml('<img src='+res.url+'/>');
 				}
 			});
 		}

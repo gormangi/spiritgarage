@@ -20,6 +20,14 @@ $(document).ready(function(){
 		fn.noticeModify();
 	});
 	
+	$('#noticeImgFileBtn').on("click",function(){
+		$("#noticeImgFile").trigger('click');
+	});
+	
+	$("#noticeImgFile").on("change",function(){
+		fn.noticeImgUpload($(this));
+	});
+	
 });
 
 var fn = {
@@ -207,6 +215,25 @@ var fn = {
 					case 'link' :
 						dialogDefinition.removeContents('upload');
 						dialogDefinition.removeContents('advanced');
+				}
+			});
+		},
+		
+		noticeImgUpload : function(me){
+			
+			var formData = new FormData();
+			formData.append("upload", $(me)[0].files[0]);
+			
+			$.ajax({
+				url : '/admin/noticeImageUpload',
+				data : formData,
+				dataType : 'json',
+				type : 'post',
+				enctype : 'multipart/form-data',
+				processData : false, 
+				contentType : false,
+				success : function(res){
+					CKEDITOR.instances.content.insertHtml('<img src='+res.url+'/>');
 				}
 			});
 		}

@@ -282,7 +282,7 @@ var fn = {
 			if(confirm('해당 예약을 취소 처리하시겠습니까?')){
 				$.ajax({
 					url : '/admin/reservationCancel',
-					data : {reservationSeq , reservationSeq},
+					data : {reservationSeq : reservationSeq},
 					dataType : 'json',
 					type : 'post',
 					success : function(res){
@@ -302,7 +302,7 @@ var fn = {
 		reservationRep : function(reservationSeq){
 			$.ajax({
 				url : '/admin/reservationRep',
-				data : {reservationSeq , reservationSeq},
+				data : {reservationSeq : reservationSeq},
 				dataType : 'json',
 				type : 'post',
 				success : function(res){
